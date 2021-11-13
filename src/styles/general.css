@@ -19,7 +19,7 @@
 }
 
 .btn-general {
-  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 text-gray-900 bg-green-300 hover:bg-green-500 
+  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 text-gray-900 bg-green-700 hover:bg-green-600 
   hover:text-white transition-all shadow-xl;
 }
 

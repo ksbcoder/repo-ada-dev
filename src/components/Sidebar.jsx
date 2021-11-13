@@ -50,7 +50,7 @@ const Dropdownuser = () => {
 
                     className={`${
                       active ? 'bg-indigo-600 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`} to="usuarios/perfil"
+                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`} to="perfil"
                   >
                     Perfil
                   </NavLink>
@@ -120,6 +120,7 @@ const ResponsiveSidebar = () => {
       >
         <div className="px-2 pr-8">
           <Logo />
+          <Dropdownuser/>
           <SidebarLinks />
         </div>
       </div>
