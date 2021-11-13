@@ -15,7 +15,7 @@ const Perfil = () => {
                                 <div className="text-center mt-12">
                                     <i class="fas fa-user fa-5x"></i>
                                     <h3 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                                        Nombre usuario
+                                        Pepito Pérez
                                     </h3>
                                     <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
                                         <i className="fas fa-user-graduate mr-2 text-lg text-gray-500"></i>{" "}
@@ -40,6 +40,7 @@ const Perfil = () => {
                                                     id="identificacion"
                                                     placeholder="Identificación"
                                                     disabled
+                                                    value="12312323"
                                                 />
                                             </div>
                                             <div className="m-4">
@@ -51,10 +52,11 @@ const Perfil = () => {
                                                 </label>
                                                 <input
                                                     className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-                                                    type="text"
+                                                    type="email"
                                                     id="correo"
                                                     placeholder="Correo"
                                                     disabled
+                                                    value="pepito@correo.com"
                                                 />
                                             </div>
                                             <div className="m-4">
@@ -70,6 +72,7 @@ const Perfil = () => {
                                                     id="estado"
                                                     placeholder="Estado"
                                                     disabled
+                                                    value="Autorizado"
                                                 />
                                             </div>
                                             <div class="flex items-center justify-between">
@@ -242,7 +245,7 @@ const Perfil = () => {
                                                                     </label>
                                                                     <input
                                                                         className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-                                                                        type="text"
+                                                                        type="email"
                                                                         id="correo"
                                                                         placeholder="Correo"
 

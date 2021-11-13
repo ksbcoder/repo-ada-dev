@@ -18,7 +18,12 @@ function App() {
   const [userData, setUserData] = useState({});
 
   return (
-    
+    <Auth0Provider
+      domain="misiontic-concesionario.us.auth0.com"
+      clientId="WsdhjjQzDLIZEHA6ouuxXGxFONFGAQ4g"
+      redirectUri="http://localhost:3000/admin"
+      audience="api-autenticacion-concesionario-mintic"
+    >
       <UserContext.Provider value={{ userData, setUserData }}>
         <BrowserRouter>
           <Routes>
@@ -36,7 +41,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
-    
+    </Auth0Provider>
   );
 }
 
