@@ -7,6 +7,9 @@ const Perfil = () => {
     const [confirmarcontraseña, setConfirmarContraseña]=useState('');
     return (
         <>
+            <nav className="navbar">
+                <h1>Perfil usuario</h1>
+            </nav>
             <div className="relative justify-center py-4  bg-gray-300">
                 <div className="container px-4 justify-center">
                     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
