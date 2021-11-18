@@ -12,6 +12,9 @@ import IndexAvances from "pages/avances/Index";
 import RegistrarAvance from "pages/avances/RegistrarAvance";
 import ActualizarAvance from "pages/avances/ActualizarAvance";
 import Perfil from "pages/usuarios/Perfil";
+import GestionUsuarios from "pages/usuarios/GestionUsuarios";
+
+
 // import PrivateRoute from 'components/PrivateRoute';
 
 function App() {
@@ -30,7 +33,11 @@ function App() {
             <Route path="/" element={<PrivateLayout />}>
               <Route path="" element={<Index />} />
               <Route path="usuarios" element={<IndexUsuarios />} />
+            
+              <Route path="usuarios/gestionUsuarios" element={<GestionUsuarios />} />
+
               <Route path="perfil" element={<Perfil />} />
+
               <Route path="proyectos" element={<IndexProyectos />} />
               <Route path="proyectos/page1" element={<Category1 />} />
               <Route path="inscripciones" element={<IndexInscripciones />} />
