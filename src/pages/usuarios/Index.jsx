@@ -39,6 +39,12 @@ const IndexUsuarios = () => {
       <input className="input-usuario" placeholder="Enter password"/>
     </div>
     <div className= "form-campo">
+      <div>
+        <label>Confirmar Password</label>
+      </div>    
+      <input className="input-usuario" placeholder="Enter password"/>
+    </div>
+    <div className= "form-campo">
     <button className="btn-general-usuario">Registrarse</button>
     </div>
     
