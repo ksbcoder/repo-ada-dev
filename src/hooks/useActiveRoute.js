@@ -15,5 +15,4 @@ const useActiveRoute = (ruta) => {
 
   return isActive;
 };
-
 export default useActiveRoute;
