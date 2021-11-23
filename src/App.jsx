@@ -13,7 +13,7 @@ import RegistrarAvance from "pages/avances/RegistrarAvance";
 import ActualizarAvance from "pages/avances/ActualizarAvance";
 import Perfil from "pages/usuarios/Perfil";
 import GestionUsuarios from "pages/usuarios/GestionUsuarios";
-
+import Login from "pages/login/Login";
 
 // import PrivateRoute from 'components/PrivateRoute';
 
@@ -30,6 +30,7 @@ function App() {
       <UserContext.Provider value={{ userData, setUserData }}>
         <BrowserRouter>
           <Routes>
+            <Route path="/login" element={<Login/>}/>
             <Route path="/" element={<PrivateLayout />}>
               <Route path="" element={<Index />} />
               <Route path="usuarios" element={<IndexUsuarios />} />
