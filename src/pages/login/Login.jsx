@@ -7,7 +7,7 @@ const Login = () => {
             <main>
                 <section className="absolute w-full h-full">
                     <div
-                        className="absolute top-0 w-full h-full bg-gray-900"
+                        className="absolute top-0 w-full h-full bg-blue-200"
                         style={{
                             backgroundImage:
                                 "url(" + require("./img/Fondo.png").default + ")",
@@ -18,7 +18,7 @@ const Login = () => {
                     <div className="container mx-auto px-4 h-full">
                         <div className="flex content-center items-center justify-center h-full">
                             <div className="w-full lg:w-4/12 px-4">
-                                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+                                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                                     <div className="rounded-t mb-0 px-6 py-6">
                                         <div class='flex items-center justify-center'>
                                             <img src={Logo} alt="..." className="text-center" />
