@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { OBTENER_AVANCES } from "graphql/avances/queries";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const IndexAvances = () => {
+  const { data, error, loading } = useQuery(OBTENER_AVANCES);
+
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Error consultando los avances");
+    }
+  }, [error]);
+
   return (
     <div>
       <div className="text-center mt-20">
@@ -29,22 +45,19 @@ const IndexAvances = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>a</td>
-                <td>b</td>
-                <td>c</td>
-                <td>d</td>
-                <td>e</td>
-                <td>f</td>
-              </tr>
-              <tr>
-                <td>a</td>
-                <td>b</td>
-                <td>c</td>
-                <td>d</td>
-                <td>e</td>
-                <td>f</td>
-              </tr>
+              {data &&
+                data.Avances.map((u) => {
+                  return (
+                    <tr key={u._id}>
+                      <td>{u._id}</td>
+                      <td>{u.proyecto.nombre}</td>
+                      <td>{u.fechaAvance}</td>
+                      <td>{u.descripcion}</td>
+                      <td>{u.observaciones}</td>
+                      <td>{u.creadoPor.nombre + " " + u.creadoPor.apellido}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

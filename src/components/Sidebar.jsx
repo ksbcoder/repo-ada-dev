@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, Transition  } from '@headlessui/react';
+import { Menu, Transition } from "@headlessui/react";
 import "../styles/general.css";
 
 const SidebarLinks = () => {
@@ -30,7 +30,10 @@ const Dropdownuser = () => {
         <div>
           <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-10 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             <i className="fas fa-user-cog"></i>
-            <i class="fas fa-caret-down w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100" aria-hidden="true"></i>
+            <i
+              className="fas fa-caret-down w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
+              aria-hidden="true"
+            ></i>
           </Menu.Button>
         </div>
         <Transition
@@ -47,10 +50,10 @@ const Dropdownuser = () => {
               <Menu.Item>
                 {({ active }) => (
                   <NavLink
-
                     className={`${
-                      active ? 'bg-indigo-600 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`} to="perfil"
+                      active ? "bg-indigo-600 text-white" : "text-gray-900"
+                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    to="perfil"
                   >
                     Perfil
                   </NavLink>
@@ -60,7 +63,7 @@ const Dropdownuser = () => {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+                      active ? "bg-indigo-600 text-white" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
                     Cerrar sesión
@@ -73,7 +76,7 @@ const Dropdownuser = () => {
       </Menu>
     </div>
   );
-}
+};
 const Logo = () => {
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
@@ -120,7 +123,7 @@ const ResponsiveSidebar = () => {
       >
         <div className="px-2 pr-8">
           <Logo />
-          <Dropdownuser/>
+          <Dropdownuser />
           <SidebarLinks />
         </div>
       </div>
