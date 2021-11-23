@@ -13,60 +13,57 @@
   @apply mt-9 flex flex-row items-center;
 }
 
-
-
 .input-general {
   @apply w-auto h-auto rounded-md px-1 py-1 border border-gray-400 placeholder-gray-500 text-gray-900 
   focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:z-10 transition-all;
 }
 
 .btn-general {
-  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 text-gray-900 bg-green-700 hover:bg-green-600 
-  hover:text-white transition-all shadow-xl;
+  @apply w-auto h-auto bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
-.navbar{
+.navbar {
   background-color: #3eeefb;
   @apply flex items-center justify-center flex-wrap p-6 text-4xl;
 }
 /* ESTILOS DE TABLAS INICIO */
-.formSubmitList{
+.formSubmitList {
   @apply text-center pb-5 mb-5;
 }
 
-.table-container{
+.table-container {
   width: 95%;
   @apply flex justify-center items-center text-center pt-10 pb-24;
 }
 
-#table-list{
+#table-list {
   width: 100%;
   @apply text-left border-collapse bg-gray-100;
 }
 
-th{
+th {
   @apply border border-solid border-gray-300 bg-green-500 bg-opacity-75 p-4 py-2 text-white;
 }
 
-td{
+td {
   @apply border border-solid border-gray-200 p-4;
 }
 
-tr:nth-child(even){
+tr:nth-child(even) {
   @apply bg-gray-200;
 }
 
-tr:hover{
-  background-color: #FB813E;
+tr:hover {
+  background-color: #fb813e;
   @apply bg-gray-400 hover:bg-opacity-30;
 }
 /* ESTILOS DE TABLAS FIN */
 
 /*ESTILOS DE USUARIO INICIO*/
-.form-usuario{
+.form-usuario {
   @apply mt-28 flex flex-col items-center;
 }
 
-.form-campo{
+.form-campo {
   @apply p-2;
 }
 
@@ -89,8 +86,5 @@ tr:hover{
   @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 text-gray-500 bg-red-500 hover:bg-red-700 
   hover:text-white transition-all shadow-xl;
 }
-
-
-
 
 /*ESTILOS DE USUARIO FIN*/
