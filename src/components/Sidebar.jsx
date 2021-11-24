@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
+import { Menu, Transition } from "@headlessui/react";
 import "../styles/general.css";
 
 import Logito_completo from "./img/Logito_completo.png"
@@ -25,6 +26,60 @@ const SidebarLinks = () => {
   );
 };
 
+const Dropdownuser = () => {
+  return (
+    <div className="w-56 flex justify-center top-16">
+      <Menu as="div" className="relative inline-block text-right">
+        <div>
+          <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-10 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            <i className="fas fa-user-cog"></i>
+            <i
+              className="fas fa-caret-down w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
+              aria-hidden="true"
+            ></i>
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="w-56 mt-2 origin-top-right bg-black bg-opacity-10 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 ">
+              <Menu.Item>
+                {({ active }) => (
+                  <NavLink
+                    className={`${
+                      active ? "bg-indigo-600 text-white" : "text-gray-900"
+                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    to="perfil"
+                  >
+                    Perfil
+                  </NavLink>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active ? "bg-indigo-600 text-white" : "text-gray-900"
+                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                  >
+                    Cerrar sesión
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    </div>
+  );
+};
 const Logo = () => {
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
@@ -44,6 +99,7 @@ const Sidebar = () => {
 
       <div className="sidebar hidden md:flex py-8">
         <Logo />
+        <Dropdownuser />
         <div className="px-2 pr-8">
           <SidebarLinks />
           
@@ -72,6 +128,7 @@ const ResponsiveSidebar = () => {
       >
         <div className="px-2 pr-8">
           <Logo />
+          <Dropdownuser />
           <SidebarLinks />
         </div>
       </div>
