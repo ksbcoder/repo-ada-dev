@@ -1,9 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const RegistrarAvance = () => {
   return (
     <div>
-      <div className="text-center mt-28">
+      <div className="text-center mt-20">
+        <div className="flex justify-start ml-10">
+          <Link to="/avances" className="btn-general">
+            <i className="fas fa-arrow-left"></i>
+          </Link>
+        </div>
         <span className="titulo-general">Registro de Avances</span>
       </div>
       <form className="flex flex-col items-center mt-10">

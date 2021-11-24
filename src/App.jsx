@@ -53,7 +53,10 @@ function App() {
               <Route path="inscripciones" element={<IndexInscripciones />} />
               <Route path="avances" element={<IndexAvances />} />
               <Route path="avances/registrar" element={<RegistrarAvance />} />
-              <Route path="avances/actualizar" element={<ActualizarAvance />} />
+              <Route
+                path="avances/actualizar/:_id"
+                element={<ActualizarAvance />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>

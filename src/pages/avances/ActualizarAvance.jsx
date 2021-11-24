@@ -1,87 +1,154 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { useQuery, useMutation } from "@apollo/client";
+import { OBTENER_AVANCE } from "graphql/avances/queries";
+import ReactLoading from "react-loading";
+import useFormData from "hooks/useFormData";
+import { EDITAR_AVANCE } from "graphql/avances/mutations";
+import { toast } from "react-toastify";
 
 const ActualizarAvance = () => {
+  const { form, formData, updateFormData } = useFormData(null);
+  const { _id } = useParams();
+  const {
+    data: queryData,
+    error: queryError,
+    loading: queryLoading,
+  } = useQuery(OBTENER_AVANCE, {
+    variables: {
+      _id,
+    },
+  });
+  console.log("data actualizar", queryData);
+
+  const [
+    editarAvance,
+    { data: mutationData, loading: mutationLoading, error: mutationError },
+  ] = useMutation(EDITAR_AVANCE);
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    console.log("fd", formData);
+    delete formData.proyecto;
+    delete formData.fechaAvance;
+    delete formData.creadoPor;
+    console.log("fd despues", formData);
+
+    editarAvance({
+      variables: {
+        _id,
+        ...formData,
+      },
+    });
+    toast.success("¡Avance actualizado!");
+  };
+
+  useEffect(() => {
+    console.log("mutacion edicion", mutationData);
+  }, [mutationData]);
+
+  useEffect(() => {
+    if (mutationError) {
+      toast.error("Error actualizando el avance");
+    } else {
+    }
+  }, [mutationError]);
+
+  if (queryLoading || mutationLoading) {
+    return (
+      <div className="w-full h-full flex flex-col justify-center items-center mt-24">
+        <ReactLoading
+          type="spinningBubbles"
+          color="#07f3eb"
+          height={667}
+          width={375}
+        />
+      </div>
+    );
+  }
+
   return (
     <div>
-      <div className="text-center mt-28">
+      <div className="text-center mt-20">
+        <div className="flex justify-start ml-10">
+          <Link to="/avances" className="btn-general">
+            <i className="fas fa-arrow-left"></i>
+          </Link>
+        </div>
         <span className="titulo-general">Actualización de Avances</span>
       </div>
-      <div className='text-center mt-10 bg-blue-200 p-6 mx-3'>
-        <span className="pr-2">Busca el proyecto que deseas actualizar</span>
-        <select
-          name=""
-          type="text"
-          defaultValue=""
-          className="input-general"
-        >
-          <option value="" disabled>
-            Seleccione...
-          </option>
-          <option value="En proceso">Proyecto 1</option>
-        </select>
-      </div>
-      <form className="flex flex-col items-center mt-5">
-        <div className="grid grid-cols-2 w-1/2">
+      <form
+        onSubmit={submitForm}
+        onChange={updateFormData}
+        ref={form}
+        className="flex flex-col items-center mt-5"
+      >
+        <div className="grid grid-cols-2 gap-2 w-auto">
           <div className="form-general">
             <span className="pr-2">Proyecto</span>
-            <select
-              name="proyecto"
+            <input
               type="text"
-              defaultValue=""
+              name="proyecto"
               className="input-general"
+              defaultValue={queryData.Avance.proyecto.nombre}
+              readOnly
               required
-            >
-              <option value="" disabled>
-                Seleccione...
-              </option>
-              <option value="En proceso">Proyecto 1</option>
-            </select>
+            />
           </div>
           <div className="form-general">
             <span className="pr-2">Fecha</span>
             <input
-              type="datetime-local"
-              name="fecha"
+              type="text"
+              name="fechaAvance"
               className="input-general"
+              defaultValue={queryData.Avance.fechaAvance}
               required
             />
           </div>
-          <div className="form-general">
-            <span className="pr-2">Descripción</span>
-            <input
-              type="text"
+          <div className="mt-9 flex flex-col items-center">
+            <span className="pb-2">Descripción</span>
+            <textarea
               name="descripcion"
+              cols="40"
+              rows="5"
+              placeholder="Escribe aquí tu descripción"
               className="input-general"
+              defaultValue={queryData.Avance.descripcion}
               required
-            />
+            ></textarea>
           </div>
-          <div className="form-general">
-            <span className="pr-2">Observaciones</span>
-            <input
-              type="text"
+          <div className="mt-9 flex flex-col items-center">
+            <span className="pb-2">Observaciones</span>
+            <textarea
               name="observaciones"
+              cols="40"
+              rows="5"
+              placeholder="Escribe aquí tus observaciones"
               className="input-general"
+              defaultValue={queryData.Avance.observaciones}
               required
-            />
+            ></textarea>
           </div>
         </div>
         <div className="form-general">
           <span className="pr-2">Creado por</span>
-          <select
-            name="creadoPor"
+          <input
             type="text"
-            defaultValue=""
+            name="creadoPor"
             className="input-general"
+            defaultValue={
+              queryData.Avance.creadoPor.nombre +
+              " " +
+              queryData.Avance.creadoPor.apellido
+            }
             required
-          >
-            <option value="" disabled>
-              Seleccione...
-            </option>
-            <option value="En proceso">Usuario 1</option>
-          </select>
+          />
         </div>
         <div className="form-general">
-          <button className="btn-general mt-4 text-xl">Actualizar</button>
+          <button className="btn-general mt-4 text-xl" type="submit">
+            Actualizar
+          </button>
         </div>
       </form>
     </div>
