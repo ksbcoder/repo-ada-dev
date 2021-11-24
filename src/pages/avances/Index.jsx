@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { OBTENER_AVANCES } from "graphql/avances/queries";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 
 const IndexAvances = () => {
   const { data, error, loading } = useQuery(OBTENER_AVANCES);
@@ -18,15 +19,25 @@ const IndexAvances = () => {
     }
   }, [error]);
 
+  if (loading) {
+    return (
+      <div className="w-full h-full flex flex-col justify-center items-center mt-24">
+        <ReactLoading
+          type="spinningBubbles"
+          color="#07f3eb"
+          height={667}
+          width={375}
+        />
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="text-center mt-20">
         <span className="titulo-general">Avances</span>
       </div>
       <div className="flex flex-row-reverse flex-nowrap mr-8 mt-5 gap-2">
-        <Link to="actualizar" className="btn-general">
-          Actualizar Avance
-        </Link>
         <Link to="registrar" className="btn-general">
           Registrar Avance
         </Link>
@@ -42,6 +53,7 @@ const IndexAvances = () => {
                 <th>Descripción</th>
                 <th>Observaciones</th>
                 <th>Creado por</th>
+                <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
@@ -49,12 +61,20 @@ const IndexAvances = () => {
                 data.Avances.map((u) => {
                   return (
                     <tr key={u._id}>
-                      <td>{u._id}</td>
+                      <td>{u._id.slice(19)}</td>
                       <td>{u.proyecto.nombre}</td>
                       <td>{u.fechaAvance}</td>
                       <td>{u.descripcion}</td>
                       <td>{u.observaciones}</td>
                       <td>{u.creadoPor.nombre + " " + u.creadoPor.apellido}</td>
+                      <td>
+                        <Link
+                          to={`actualizar/${u._id}`}
+                          className="btn-general-editar"
+                        >
+                          Actualizar
+                        </Link>
+                      </td>
                     </tr>
                   );
                 })}

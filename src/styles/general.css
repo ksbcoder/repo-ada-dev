@@ -10,7 +10,7 @@
 }
 
 .form-general {
-  @apply mt-9 flex flex-row items-center;
+  @apply mt-9 flex flex-row items-center justify-center;
 }
 
 .input-general {
@@ -21,6 +21,11 @@
 .btn-general {
   @apply w-auto h-auto bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
+
+.btn-general-editar {
+  @apply w-auto h-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
+}
+
 .navbar {
   background-color: #3eeefb;
   @apply flex items-center justify-center flex-wrap p-6 text-4xl;
