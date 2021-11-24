@@ -17,7 +17,7 @@ const Perfil = () => {
                             <div className="flex flex-wrap justify-center">
                                 <div className="text-center mt-12">
                                     <i class="fas fa-user fa-5x"></i>
-                                    <h3 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                                    <h3 className="text-2xl font-semibold leading-normal mb-2 text-gray-800">
                                         Pepito Pérez
                                     </h3>
                                     <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
