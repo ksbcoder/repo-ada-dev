@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/general.css";
 
+import Logito_completo from "./img/Logito_completo.png"
+import blanco_60 from "./img/blanco_60.png"
+
 const SidebarLinks = () => {
   return (
     <ul className="mt-12">
@@ -25,9 +28,9 @@ const SidebarLinks = () => {
 const Logo = () => {
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
-      <img src="logo.png" alt="Logo" className="h-16" />
-      <span className="my-3 text-xl font-bold text-center">
-        Título de Mi Aplicación
+      <img src={blanco_60} alt="Logo" className="h-16" />
+      <span className="my-3 text-xl text-white font-bold text-center">
+        AdaSoft Proyects
       </span>
     </div>
   );
@@ -43,9 +46,11 @@ const Sidebar = () => {
         <Logo />
         <div className="px-2 pr-8">
           <SidebarLinks />
+          
         </div>
       </div>
-      <div className="flex md:hidden w-full justify-between bg-blue-300 p-2 text-white">
+      
+      <div className="flex md:hidden w-full justify-between bg-p-2 ">
         <i
           className={`fas fa-${open ? "times" : "bars"}`}
           onClick={() => setOpen(!open)}
@@ -81,8 +86,8 @@ const SidebarRoute = ({ to, title, icon }) => {
         to={to}
         className={({ isActive }) =>
           isActive
-            ? "sidebar-route text-white bg-indigo-600"
-            : "sidebar-route text-gray-900 hover:text-white hover:bg-indigo-400"
+            ? "sidebar-route text-white bg-green-700"
+            : "sidebar-route text-white hover:text-gray-800 hover:bg-blue-200"
         }
       >
         <div className="flex items-center">
