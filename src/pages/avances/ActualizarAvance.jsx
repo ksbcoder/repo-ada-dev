@@ -29,7 +29,6 @@ const ActualizarAvance = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("fd", formData);
     delete formData.proyecto;
     delete formData.fechaAvance;
     delete formData.creadoPor;
@@ -41,7 +40,7 @@ const ActualizarAvance = () => {
         ...formData,
       },
     });
-    toast.success("¡Avance actualizado!");
+    toast.success("¡Avance Actualizado!");
   };
 
   useEffect(() => {
@@ -98,13 +97,15 @@ const ActualizarAvance = () => {
           </div>
           <div className="form-general">
             <span className="pr-2">Fecha</span>
-            <input
-              type="text"
+            <textarea
               name="fechaAvance"
+              cols="25"
+              rows="1"
               className="input-general"
               defaultValue={queryData.Avance.fechaAvance}
+              readOnly
               required
-            />
+            ></textarea>
           </div>
           <div className="mt-9 flex flex-col items-center">
             <span className="pb-2">Descripción</span>
