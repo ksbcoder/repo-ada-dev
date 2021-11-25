@@ -20,7 +20,12 @@ const ActualizarAvance = () => {
       _id,
     },
   });
-  console.log("data actualizar", queryData);
+
+  useEffect(() => {
+    if (queryError) {
+      toast.error("Error obteniendo el avance");
+    }
+  }, [queryError]);
 
   const [
     editarAvance,
@@ -32,7 +37,6 @@ const ActualizarAvance = () => {
     delete formData.proyecto;
     delete formData.fechaAvance;
     delete formData.creadoPor;
-    console.log("fd despues", formData);
 
     editarAvance({
       variables: {
@@ -40,19 +44,16 @@ const ActualizarAvance = () => {
         ...formData,
       },
     });
-    toast.success("¡Avance Actualizado!");
   };
 
   useEffect(() => {
-    console.log("mutacion edicion", mutationData);
-  }, [mutationData]);
-
-  useEffect(() => {
+    if (mutationData) {
+      toast.success("¡Avance Actualizado!");
+    }
     if (mutationError) {
       toast.error("Error actualizando el avance");
-    } else {
     }
-  }, [mutationError]);
+  }, [mutationData, mutationError]);
 
   if (queryLoading || mutationLoading) {
     return (

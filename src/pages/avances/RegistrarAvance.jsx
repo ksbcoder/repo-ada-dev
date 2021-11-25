@@ -1,11 +1,11 @@
 import { OBTENER_PROYECTOS } from "graphql/avances/queries";
+import { OBTENER_USUARIOS } from "graphql/avances/queries";
+import { CREAR_AVANCE } from "graphql/avances/mutations";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import { OBTENER_USUARIOS, OBTENER_AVANCES } from "graphql/avances/queries";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
-import { CREAR_AVANCE } from "graphql/avances/mutations";
 import useFormData from "hooks/useFormData";
 
 const RegistrarAvance = () => {
@@ -23,12 +23,13 @@ const RegistrarAvance = () => {
   } = useQuery(OBTENER_USUARIOS);
 
   useEffect(() => {
-    console.log("data proyectos", queryProyectosData);
-  }, [queryProyectosData]);
-
-  useEffect(() => {
-    console.log("data usuarios", queryUsuariosData);
-  }, [queryUsuariosData]);
+    if (queryProyectosError) {
+      toast.error("Error consultando los proyectos");
+    }
+    if (queryUsuariosError) {
+      toast.error("Error consultando los usuarios");
+    }
+  }, [queryProyectosError, queryUsuariosError]);
 
   const [
     crearAvance,
@@ -37,7 +38,6 @@ const RegistrarAvance = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("fd", formData);
     crearAvance({
       variables: {
         ...formData,
@@ -48,16 +48,11 @@ const RegistrarAvance = () => {
   useEffect(() => {
     if (mutationData) {
       toast.success("¡Avance Creado!");
-    } else {
     }
-  }, [mutationData]);
-
-  useEffect(() => {
     if (mutationError) {
       toast.error("Error creando el avance");
-    } else {
     }
-  }, [mutationError]);
+  }, [mutationData, mutationError]);
 
   if (queryProyectosLoading || queryUsuariosLoading || mutationLoading) {
     return (

@@ -7,11 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 
 const IndexAvances = () => {
-  const { data, error, loading } = useQuery(OBTENER_AVANCES);
+  const { data, error, loading, refetch } = useQuery(OBTENER_AVANCES);
 
   useEffect(() => {
-    console.log("data", data);
-  }, [data]);
+    refetch();
+  }, []);
 
   useEffect(() => {
     if (error) {
