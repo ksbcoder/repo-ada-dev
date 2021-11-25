@@ -7,11 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 
 const IndexAvances = () => {
-  const { data, error, loading } = useQuery(OBTENER_AVANCES);
+  const { data, error, loading, refetch } = useQuery(OBTENER_AVANCES);
 
   useEffect(() => {
-    console.log("data", data);
-  }, [data]);
+    refetch();
+  }, [refetch]);
 
   useEffect(() => {
     if (error) {
@@ -63,7 +63,7 @@ const IndexAvances = () => {
                     <tr key={u._id}>
                       <td>{u._id.slice(19)}</td>
                       <td>{u.proyecto.nombre}</td>
-                      <td>{u.fechaAvance}</td>
+                      <td>{u.fechaAvance.slice(0, 10)}</td>
                       <td>{u.descripcion}</td>
                       <td>{u.observaciones}</td>
                       <td>{u.creadoPor.nombre + " " + u.creadoPor.apellido}</td>

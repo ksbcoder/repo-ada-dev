@@ -43,6 +43,8 @@ const OBTENER_PROYECTOS = gql`
     Proyectos {
       _id
       nombre
+      fase
+      estado
     }
   }
 `;

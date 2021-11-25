@@ -5,7 +5,7 @@ import { UserContext } from "context/userContext";
 import {
   ApolloProvider,
   ApolloClient,
-  createHttpLink,
+  // createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
 import Index from "pages/Index";

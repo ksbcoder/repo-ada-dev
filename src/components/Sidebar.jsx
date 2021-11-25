@@ -2,8 +2,7 @@ import React, { useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import "../styles/general.css";
-
-import Logito_completo from "./img/Logito_completo.png";
+// import Logito_completo from "./img/Logito_completo.png";
 import blanco_60 from "./img/blanco_60.png";
 
 const SidebarLinks = () => {

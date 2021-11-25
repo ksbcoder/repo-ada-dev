@@ -1,11 +1,11 @@
 import { OBTENER_PROYECTOS } from "graphql/avances/queries";
+import { OBTENER_USUARIOS } from "graphql/avances/queries";
+import { CREAR_AVANCE } from "graphql/avances/mutations";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import { OBTENER_USUARIOS, OBTENER_AVANCES } from "graphql/avances/queries";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
-import { CREAR_AVANCE } from "graphql/avances/mutations";
 import useFormData from "hooks/useFormData";
 
 const RegistrarAvance = () => {
@@ -23,12 +23,13 @@ const RegistrarAvance = () => {
   } = useQuery(OBTENER_USUARIOS);
 
   useEffect(() => {
-    console.log("data proyectos", queryProyectosData);
-  }, [queryProyectosData]);
-
-  useEffect(() => {
-    console.log("data usuarios", queryUsuariosData);
-  }, [queryUsuariosData]);
+    if (queryProyectosError) {
+      toast.error("Error consultando los proyectos");
+    }
+    if (queryUsuariosError) {
+      toast.error("Error consultando los usuarios");
+    }
+  }, [queryProyectosError, queryUsuariosError]);
 
   const [
     crearAvance,
@@ -43,15 +44,20 @@ const RegistrarAvance = () => {
         ...formData,
       },
     });
-    toast.success("¡Avance Creado!");
   };
 
   useEffect(() => {
+    if (mutationData && mutationData.crearAvance === null) {
+      console.log("md terminado", mutationData.crearAvance);
+      toast.warning("¡Proyecto Terminado!");
+    } else if (mutationData && mutationData.crearAvance !== null) {
+      console.log("md desarrollo", mutationData.crearAvance);
+      toast.success("¡Avance Creado!");
+    }
     if (mutationError) {
       toast.error("Error creando el avance");
-    } else {
     }
-  }, [mutationError]);
+  }, [mutationData, mutationError]);
 
   if (queryProyectosLoading || queryUsuariosLoading || mutationLoading) {
     return (
@@ -82,7 +88,7 @@ const RegistrarAvance = () => {
         ref={form}
         className="flex flex-col items-center mt-5"
       >
-        <div className="grid grid-cols-2 gap-2 w-auto">
+        <div className="grid grid-cols-1 w-auto">
           <div className="form-general">
             <span className="pr-2">Proyecto</span>
             <select
@@ -105,7 +111,7 @@ const RegistrarAvance = () => {
                 })}
             </select>
           </div>
-          <div className="form-general">
+          {/* <div className="form-general">
             <span className="pr-2">Fecha</span>
             <input
               type="datetime-local"
@@ -113,28 +119,30 @@ const RegistrarAvance = () => {
               className="input-general"
               required
             />
-          </div>
-          <div className="mt-9 flex flex-col items-center">
-            <span className="pb-2">Descripción</span>
-            <textarea
-              name="descripcion"
-              cols="40"
-              rows="5"
-              placeholder="Escribe aquí tu descripción"
-              className="input-general"
-              required
-            ></textarea>
-          </div>
-          <div className="mt-9 flex flex-col items-center">
-            <span className="pb-2">Observaciones</span>
-            <textarea
-              name="observaciones"
-              cols="40"
-              rows="5"
-              placeholder="Escribe aquí tus observaciones"
-              className="input-general"
-              required
-            ></textarea>
+          </div> */}
+          <div className="grid grid-cols-2 gap-2 w-auto">
+            <div className="mt-9 flex flex-col items-center">
+              <span className="pb-2">Descripción</span>
+              <textarea
+                name="descripcion"
+                cols="40"
+                rows="5"
+                placeholder="Escribe aquí tu descripción"
+                className="input-general"
+                required
+              ></textarea>
+            </div>
+            <div className="mt-9 flex flex-col items-center">
+              <span className="pb-2">Observaciones</span>
+              <textarea
+                name="observaciones"
+                cols="40"
+                rows="5"
+                placeholder="Escribe aquí tus observaciones"
+                className="input-general"
+                required
+              ></textarea>
+            </div>
           </div>
         </div>
         <div className="form-general">
