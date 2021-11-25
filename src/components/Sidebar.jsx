@@ -1,7 +1,9 @@
 import React, { useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, Transition  } from '@headlessui/react';
+import { Menu, Transition } from "@headlessui/react";
 import "../styles/general.css";
+// import Logito_completo from "./img/Logito_completo.png";
+import blanco_60 from "./img/blanco_60.png";
 
 const SidebarLinks = () => {
   return (
@@ -30,7 +32,10 @@ const Dropdownuser = () => {
         <div>
           <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white color hover:bg-blue-300 rounded-md bg-opacity-10 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             <i className="fas fa-user-cog"></i>
-            <i className="fas fa-caret-down w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100" aria-hidden="true"></i>
+            <i
+              className="fas fa-caret-down w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
+              aria-hidden="true"
+            ></i>
           </Menu.Button>
         </div>
         <Transition
@@ -47,10 +52,10 @@ const Dropdownuser = () => {
               <Menu.Item>
                 {({ active }) => (
                   <NavLink
-
                     className={`${
-                      active ? 'bg-blue-300 text-black poppins' : 'text-white poppins'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`} to="perfil"
+                      active ? "bg-green-700 text-white" : "text-white"
+                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    to="perfil"
                   >
                     Perfil
                   </NavLink>
@@ -59,8 +64,8 @@ const Dropdownuser = () => {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    className= {`${
-                      active ? 'bg-blue-300 text-black poppins' : 'text-white poppins'
+                    className={`${
+                      active ? "bg-green-700 text-white" : "text-white"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
                     Cerrar sesión
@@ -73,13 +78,13 @@ const Dropdownuser = () => {
       </Menu>
     </div>
   );
-}
+};
 const Logo = () => {
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
-      <img src="logo.png" alt="Logo" className="h-16" />
-      <span className="my-3 text-xl font-bold text-center text-white poppins">
-        Título de Mi Aplicación
+      <img src={blanco_60} alt="Logo" className="h-16" />
+      <span className="my-3 text-xl text-white font-bold text-center">
+        AdaSoft Proyects
       </span>
     </div>
   );
@@ -98,7 +103,8 @@ const Sidebar = () => {
           <SidebarLinks />
         </div>
       </div>
-      <div className="flex md:hidden w-full justify-between bg-blue-300 p-2 text-white">
+
+      <div className="flex md:hidden w-full justify-between bg-p-2 ">
         <i
           className={`fas fa-${open ? "times" : "bars"}`}
           onClick={() => setOpen(!open)}
@@ -120,7 +126,7 @@ const ResponsiveSidebar = () => {
       >
         <div className="px-2 pr-8">
           <Logo />
-          <Dropdownuser/>
+          <Dropdownuser />
           <SidebarLinks />
         </div>
       </div>
@@ -135,8 +141,8 @@ const SidebarRoute = ({ to, title, icon }) => {
         to={to}
         className={({ isActive }) =>
           isActive
-            ? "sidebar-route text-gray-900 bg-blue-300 poppins"
-            : "sidebar-route color text-white hover:text-gray-900 hover:bg-blue-300 poppins"
+            ? "sidebar-route text-white bg-green-700"
+            : "sidebar-route text-white hover:text-gray-800 hover:bg-blue-200"
         }
       >
         <div className="flex items-center">
