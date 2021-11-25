@@ -1,10 +1,21 @@
 .sidebar {
-  @apply w-64 bg-blue-300 shadow flex-col;
+background-color: #003B46;
+width: 16rem;
+flex-direction: column;
+  @apply   shadow ;
 }
 .sidebar-route {
   @apply rounded-md flex w-full justify-between cursor-pointer items-center m-3 p-3;
 }
-
+.color{
+  background-color: #07575B;
+}
+.letra{
+  color: #07575B;
+}
+.poppins{
+  font-family: Poppins;
+}
 .titulo-general {
   @apply text-gray-900 text-4xl font-semibold;
 }
@@ -12,8 +23,6 @@
 .form-general {
   @apply mt-9 flex flex-row items-center;
 }
-
-
 
 .input-general {
   @apply w-auto h-auto rounded-md px-1 py-1 border border-gray-400 placeholder-gray-500 text-gray-900 
@@ -25,7 +34,7 @@
   hover:text-white transition-all shadow-xl;
 }
 .navbar{
-  background-color: #3eeefb;
+  background-color: rgba(85, 110, 230, 0.25);
   @apply flex items-center justify-center flex-wrap p-6 text-4xl;
 }
 /* ESTILOS DE TABLAS INICIO */
@@ -89,7 +98,6 @@ tr:hover{
   @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 text-gray-500 bg-red-500 hover:bg-red-700 
   hover:text-white transition-all shadow-xl;
 }
-
 
 
 
