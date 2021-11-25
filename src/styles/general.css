@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: #003B46;
+  background-color: #003b46;
   @apply w-64 shadow flex-col;
 }
 .sidebar-route {

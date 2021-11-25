@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import "../styles/general.css";
 
-import Logito_completo from "./img/Logito_completo.png"
-import blanco_60 from "./img/blanco_60.png"
+import Logito_completo from "./img/Logito_completo.png";
+import blanco_60 from "./img/blanco_60.png";
 
 const SidebarLinks = () => {
   return (
@@ -54,7 +54,7 @@ const Dropdownuser = () => {
                 {({ active }) => (
                   <NavLink
                     className={`${
-                      active ? "bg-indigo-600 text-white" : "text-gray-900"
+                      active ? "bg-green-700 text-white" : "text-white"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                     to="perfil"
                   >
@@ -66,7 +66,7 @@ const Dropdownuser = () => {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-indigo-600 text-white" : "text-gray-900"
+                      active ? "bg-green-700 text-white" : "text-white"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
                     Cerrar sesión
@@ -102,10 +102,9 @@ const Sidebar = () => {
         <Dropdownuser />
         <div className="px-2 pr-8">
           <SidebarLinks />
-          
         </div>
       </div>
-      
+
       <div className="flex md:hidden w-full justify-between bg-p-2 ">
         <i
           className={`fas fa-${open ? "times" : "bars"}`}

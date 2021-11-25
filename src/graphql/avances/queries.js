@@ -38,4 +38,24 @@ const OBTENER_AVANCE = gql`
   }
 `;
 
-export { OBTENER_AVANCES, OBTENER_AVANCE };
+const OBTENER_PROYECTOS = gql`
+  query QProyectos {
+    Proyectos {
+      _id
+      nombre
+    }
+  }
+`;
+
+const OBTENER_USUARIOS = gql`
+  query QUsuarios {
+    Usuarios {
+      _id
+      nombre
+      apellido
+      rol
+    }
+  }
+`;
+
+export { OBTENER_AVANCES, OBTENER_AVANCE, OBTENER_PROYECTOS, OBTENER_USUARIOS };
