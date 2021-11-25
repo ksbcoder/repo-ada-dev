@@ -43,8 +43,14 @@ const RegistrarAvance = () => {
         ...formData,
       },
     });
-    toast.success("¡Avance Creado!");
   };
+
+  useEffect(() => {
+    if (mutationData) {
+      toast.success("¡Avance Creado!");
+    } else {
+    }
+  }, [mutationData]);
 
   useEffect(() => {
     if (mutationError) {
