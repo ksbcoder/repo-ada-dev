@@ -27,14 +27,12 @@ const EDITAR_AVANCE = gql`
 
 const CREAR_AVANCE = gql`
   mutation crearAvance(
-    $fechaAvance: Date!
     $descripcion: String!
     $proyecto: String!
     $creadoPor: String!
     $observaciones: String
   ) {
     crearAvance(
-      fechaAvance: $fechaAvance
       descripcion: $descripcion
       proyecto: $proyecto
       creadoPor: $creadoPor

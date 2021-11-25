@@ -38,6 +38,7 @@ const RegistrarAvance = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    console.log("fd", formData);
     crearAvance({
       variables: {
         ...formData,
@@ -46,7 +47,11 @@ const RegistrarAvance = () => {
   };
 
   useEffect(() => {
-    if (mutationData) {
+    if (mutationData && mutationData.crearAvance === null) {
+      console.log("md terminado", mutationData.crearAvance);
+      toast.warning("¡Proyecto Terminado!");
+    } else if (mutationData && mutationData.crearAvance !== null) {
+      console.log("md desarrollo", mutationData.crearAvance);
       toast.success("¡Avance Creado!");
     }
     if (mutationError) {
@@ -83,7 +88,7 @@ const RegistrarAvance = () => {
         ref={form}
         className="flex flex-col items-center mt-5"
       >
-        <div className="grid grid-cols-2 gap-2 w-auto">
+        <div className="grid grid-cols-1 w-auto">
           <div className="form-general">
             <span className="pr-2">Proyecto</span>
             <select
@@ -106,7 +111,7 @@ const RegistrarAvance = () => {
                 })}
             </select>
           </div>
-          <div className="form-general">
+          {/* <div className="form-general">
             <span className="pr-2">Fecha</span>
             <input
               type="datetime-local"
@@ -114,28 +119,30 @@ const RegistrarAvance = () => {
               className="input-general"
               required
             />
-          </div>
-          <div className="mt-9 flex flex-col items-center">
-            <span className="pb-2">Descripción</span>
-            <textarea
-              name="descripcion"
-              cols="40"
-              rows="5"
-              placeholder="Escribe aquí tu descripción"
-              className="input-general"
-              required
-            ></textarea>
-          </div>
-          <div className="mt-9 flex flex-col items-center">
-            <span className="pb-2">Observaciones</span>
-            <textarea
-              name="observaciones"
-              cols="40"
-              rows="5"
-              placeholder="Escribe aquí tus observaciones"
-              className="input-general"
-              required
-            ></textarea>
+          </div> */}
+          <div className="grid grid-cols-2 gap-2 w-auto">
+            <div className="mt-9 flex flex-col items-center">
+              <span className="pb-2">Descripción</span>
+              <textarea
+                name="descripcion"
+                cols="40"
+                rows="5"
+                placeholder="Escribe aquí tu descripción"
+                className="input-general"
+                required
+              ></textarea>
+            </div>
+            <div className="mt-9 flex flex-col items-center">
+              <span className="pb-2">Observaciones</span>
+              <textarea
+                name="observaciones"
+                cols="40"
+                rows="5"
+                placeholder="Escribe aquí tus observaciones"
+                className="input-general"
+                required
+              ></textarea>
+            </div>
           </div>
         </div>
         <div className="form-general">

@@ -98,15 +98,14 @@ const ActualizarAvance = () => {
           </div>
           <div className="form-general">
             <span className="pr-2">Fecha</span>
-            <textarea
+            <input
+              type="text"
               name="fechaAvance"
-              cols="25"
-              rows="1"
               className="input-general"
-              defaultValue={queryData.Avance.fechaAvance}
+              defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
               readOnly
               required
-            ></textarea>
+            />
           </div>
           <div className="mt-9 flex flex-col items-center">
             <span className="pb-2">Descripción</span>
