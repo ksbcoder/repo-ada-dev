@@ -21,12 +21,12 @@ const IndexAvances = () => {
 
   if (loading) {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center mt-24">
+      <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
           type="spinningBubbles"
-          color="#07f3eb"
-          height={667}
-          width={375}
+          color="#7fffd4"
+          height={150}
+          width={150}
         />
       </div>
     );
