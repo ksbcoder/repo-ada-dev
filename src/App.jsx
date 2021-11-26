@@ -18,6 +18,7 @@ import ActualizarAvance from "pages/avances/ActualizarAvance";
 import Perfil from "pages/usuarios/Perfil";
 import GestionUsuarios from "pages/usuarios/GestionUsuarios";
 import Login from "pages/login/Login";
+import InfoProyectos from "pages/proyectos/InfoProyectos";
 
 // import PrivateRoute from 'components/PrivateRoute';
 /* const httpLink = createHttpLink({
@@ -28,6 +29,7 @@ const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
 });
+
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -50,6 +52,7 @@ function App() {
               <Route path="perfil" element={<Perfil />} />
 
               <Route path="proyectos" element={<IndexProyectos />} />
+              <Route path="proyectos/infoProyectos" element={<InfoProyectos />} />
               <Route path="inscripciones" element={<IndexInscripciones />} />
               <Route path="avances" element={<IndexAvances />} />
               <Route path="avances/registrar" element={<RegistrarAvance />} />
