@@ -16,7 +16,7 @@ const PrivateLayout = () => {
         position="bottom-right"
         autoClose={2500}
         closeOnClick
-        theme="colored"
+        theme="dark"
       />
     </div>
   );

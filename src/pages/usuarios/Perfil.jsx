@@ -17,7 +17,7 @@ const Perfil = () => {
               <div className="flex flex-wrap justify-center">
                 <div className="text-center mt-12">
                   <i className="fas fa-user fa-5x"></i>
-                  <h3 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                  <h3 className="text-2xl font-semibold leading-normal text-gray-800 mb-2">
                     Pepito Pérez
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
@@ -78,16 +78,16 @@ const Perfil = () => {
                           value="Autorizado"
                         />
                       </div>
-                      <div class="flex items-center justify-between">
+                      <div className="flex items-center justify-between">
                         <button
-                          class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                          className="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                           type="button"
                           onClick={() => setModalContraseña(true)}
                         >
                           Cambiar contraseña
                         </button>
                         <button
-                          class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                          className="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                           type="button"
                           onClick={() => setModalDatos(true)}
                         >

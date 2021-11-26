@@ -15,7 +15,7 @@ const IndexAvances = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error("Error consultando los avances");
+      toast.error("Error consultando los avances :(");
     }
   }, [error]);
 

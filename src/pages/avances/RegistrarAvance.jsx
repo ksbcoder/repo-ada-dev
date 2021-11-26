@@ -48,14 +48,14 @@ const RegistrarAvance = () => {
 
   useEffect(() => {
     if (mutationData && mutationData.crearAvance === null) {
-      console.log("md terminado", mutationData.crearAvance);
-      toast.warning("¡Proyecto Terminado!");
+      // console.log("md terminado", mutationData.crearAvance);
+      toast.warning("No se creó el avance :(");
     } else if (mutationData && mutationData.crearAvance !== null) {
-      console.log("md desarrollo", mutationData.crearAvance);
-      toast.success("¡Avance Creado!");
+      // console.log("md desarrollo", mutationData.crearAvance);
+      toast.success("Avance creado :)");
     }
     if (mutationError) {
-      toast.error("Error creando el avance");
+      toast.error("Error creando el avance :(");
     }
   }, [mutationData, mutationError]);
 
@@ -99,7 +99,7 @@ const RegistrarAvance = () => {
               required
             >
               <option value="" disabled>
-                Seleccione...
+                Seleccione una opción...
               </option>
               {queryProyectosData &&
                 queryProyectosData.Proyectos.map((el) => {
@@ -155,7 +155,7 @@ const RegistrarAvance = () => {
             required
           >
             <option value="" disabled>
-              Seleccione...
+              Seleccione un usuario...
             </option>
             {queryUsuariosData &&
               queryUsuariosData.Usuarios.map((el) => {
@@ -168,7 +168,9 @@ const RegistrarAvance = () => {
           </select>
         </div>
         <div className="form-general">
-          <button className="btn-general mt-4 text-xl">Registrar</button>
+          <button className="btn-general mt-4 text-xl" type="submit">
+            Registrar
+          </button>
         </div>
       </form>
     </div>
