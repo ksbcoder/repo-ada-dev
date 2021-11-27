@@ -48,10 +48,10 @@ const ActualizarAvance = () => {
 
   useEffect(() => {
     if (mutationData) {
-      toast.success("¡Avance Actualizado!");
+      toast.success(" Avance Actualizado ;)");
     }
     if (mutationError) {
-      toast.error("Error actualizando el avance");
+      toast.error("Error actualizando el avance :(");
     }
   }, [mutationData, mutationError]);
 

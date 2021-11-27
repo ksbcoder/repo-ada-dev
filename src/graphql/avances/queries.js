@@ -45,6 +45,13 @@ const OBTENER_PROYECTOS = gql`
       nombre
       fase
       estado
+      inscripciones {
+        _id
+        estado
+        estudiante {
+          _id
+        }
+      }
     }
   }
 `;
