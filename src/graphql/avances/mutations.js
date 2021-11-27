@@ -29,7 +29,7 @@ const CREAR_AVANCE = gql`
   mutation crearAvance(
     $descripcion: String!
     $proyecto: String!
-    $creadoPor: String!
+    $creadoPor: String
     $observaciones: String
   ) {
     crearAvance(
