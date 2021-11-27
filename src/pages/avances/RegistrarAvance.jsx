@@ -7,14 +7,41 @@ import { useQuery, useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import useFormData from "hooks/useFormData";
+import { useUser } from "../../context/userContext";
 
 const RegistrarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
+  const { userData } = useUser();
+
+  useEffect(() => {
+    console.log("userdata", userData);
+  }, [userData]);
+
   const {
     data: queryProyectosData,
     error: queryProyectosError,
     loading: queryProyectosLoading,
+    refetch,
   } = useQuery(OBTENER_PROYECTOS);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  let proyectosIncritos = [];
+
+  if (queryProyectosData) {
+    console.log("todos los proyectos", queryProyectosData);
+    queryProyectosData.Proyectos.forEach((proyecto) => {
+      proyecto.inscripciones.forEach((i) => {
+        proyectosIncritos = { ...proyectosIncritos, proyecto };
+      });
+    });
+  }
+
+  if (proyectosIncritos) {
+    console.log("proyectos incritos", proyectosIncritos.proyecto);
+  }
 
   const {
     data: queryUsuariosData,
@@ -140,12 +167,12 @@ const RegistrarAvance = () => {
                 rows="5"
                 placeholder="Escribe aquí tus observaciones"
                 className="input-general"
-                required
+                /* required */
               ></textarea>
             </div>
           </div>
         </div>
-        <div className="form-general">
+        {/* <div className="form-general">
           <span className="pr-2">Creado por</span>
           <select
             name="creadoPor"
@@ -166,7 +193,7 @@ const RegistrarAvance = () => {
                 );
               })}
           </select>
-        </div>
+        </div> */}
         <div className="form-general">
           <button className="btn-general mt-4 text-xl" type="submit">
             Registrar

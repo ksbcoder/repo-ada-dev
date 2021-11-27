@@ -5,9 +5,15 @@ import { OBTENER_AVANCES } from "graphql/avances/queries";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import { useUser } from "../../context/userContext";
 
 const IndexAvances = () => {
   const { data, error, loading, refetch } = useQuery(OBTENER_AVANCES);
+  const { userData } = useUser();
+
+  useEffect(() => {
+    console.log("userdata", userData);
+  }, [userData]);
 
   useEffect(() => {
     refetch();
