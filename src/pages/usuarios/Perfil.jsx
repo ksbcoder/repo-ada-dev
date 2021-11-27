@@ -124,6 +124,18 @@ const Perfil = () => {
                                     className="block text-gray-700 text-sm font-bold mb-2"
                                     htmlFor="contraseña"
                                   >
+                                    Contraseña actual
+                                  </label>
+                                  <input
+                                    className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+                                    type="password"
+                                    id="nuevacontraseña"
+                                    placeholder="Constraseña"
+                                  />
+                                  <label
+                                    className="block text-gray-700 text-sm font-bold mb-2"
+                                    htmlFor="contraseña"
+                                  >
                                     Nueva contraseña
                                   </label>
                                   <input
@@ -147,7 +159,7 @@ const Perfil = () => {
                                   <input
                                     className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
                                     type="password"
-                                    id="Confircontraseña"
+                                    id="confircontraseña"
                                     placeholder="Confirmar contraseña"
                                     onChange={(e) =>
                                       setConfirmarContraseña(e.target.value)
