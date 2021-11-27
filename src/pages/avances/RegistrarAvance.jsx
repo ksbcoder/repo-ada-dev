@@ -14,7 +14,7 @@ const RegistrarAvance = () => {
   const { userData } = useUser();
 
   useEffect(() => {
-    console.log("userdata", userData);
+    // console.log("userdata", userData);
   }, [userData]);
 
   const {
@@ -31,7 +31,6 @@ const RegistrarAvance = () => {
   let proyectosIncritos = [];
 
   if (queryProyectosData) {
-    console.log("todos los proyectos", queryProyectosData);
     queryProyectosData.Proyectos.forEach((proyecto) => {
       proyecto.inscripciones.forEach((i) => {
         proyectosIncritos = { ...proyectosIncritos, proyecto };
@@ -65,7 +64,6 @@ const RegistrarAvance = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("fd", formData);
     crearAvance({
       variables: {
         ...formData,
