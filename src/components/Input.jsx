@@ -8,7 +8,7 @@ const Input = ({label, name, defaultValue, type, required}) => {
                 required={required}
                 type={type}
                 name={name}
-                className='input'
+                className='input-usuario'
                 defaultValue={defaultValue}
             />
         </label>

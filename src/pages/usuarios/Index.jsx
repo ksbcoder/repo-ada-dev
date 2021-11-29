@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+
+
 const IndexUsuarios = () => {
   return(
     <><nav className="navbar">
@@ -35,9 +37,9 @@ const IndexUsuarios = () => {
             <label>Tipo de usuario</label>
           </div>
           <select className= "input-usuario" id="usuario-tipo">
-            <option value = "ADMINISTRADOR">Administrador</option>
-            <option value = "LIDER">Lider</option>
-            <option value = "ESTUDIANTE">Estudiante</option>
+            <option value = "ADMINISTRADOR">ADMINISTRADOR</option>
+            <option value = "LIDER">LIDER</option>
+            <option value = "ESTUDIANTE">ESTUDIANTE</option>
           </select>          
         </div>
         <div className="form-campo">
@@ -56,7 +58,7 @@ const IndexUsuarios = () => {
           <div>
             <label>Confirmar Password</label>
           </div>
-          <input className="input-usuario" type="password" placeholder="Enter password" />
+          <input className="input-usuario" type="password" id="usuario-confirPassword" placeholder="Enter password" />
         </div>
         <div className="form-campo">
           <button className="btn-general-usuario" id="usuario-registro">Registrarse</button>

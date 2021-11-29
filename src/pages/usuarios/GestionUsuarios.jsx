@@ -28,6 +28,10 @@ const GestionUsuarios = () => {
         <><nav className="navbar">
             <h1>Gestión de Usuarios</h1>
         </nav>
+            <div className='flew flex-col w-full h-full items-center justify-center p-10'>
+            <Link to='../usuarios'>
+                <i className='fas fa-chevron-circle-left text-blue-400 cursor-pointer font-bold text-xl hover:text-green-400' />
+            </Link>
             <div className="table-container">
                 <table className="table-list">
                     <thead>
@@ -49,7 +53,7 @@ const GestionUsuarios = () => {
                                     <td>{u.identificacion}</td>
                                     <td>{u.rol}</td>
                                     <td>{u.correo}</td>                                  
-                                    <td>PENDIENTE</td>
+                                    <td>{u.estado}</td>
                                     <td>
                                         <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-user-edit"></i></Link>
                                         <button className="btn-eliminar"><i className="fas fa-user-minus"></i></button> 
@@ -61,6 +65,7 @@ const GestionUsuarios = () => {
 
                 </table>
 
+            </div>
             </div></>
       
     );
