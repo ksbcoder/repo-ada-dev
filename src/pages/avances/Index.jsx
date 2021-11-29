@@ -1,19 +1,26 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { OBTENER_AVANCES } from "graphql/avances/queries";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { useUser } from "../../context/userContext";
+import { OBTENER_AVANCES_POR_USUARIO } from "graphql/avances/queries";
 
 const IndexAvances = () => {
-  const { data, error, loading, refetch } = useQuery(OBTENER_AVANCES);
   const { userData } = useUser();
+  const { data, error, loading, refetch } = useQuery(
+    OBTENER_AVANCES_POR_USUARIO,
+    {
+      variables: {
+        _id: userData._id,
+      },
+    }
+  );
 
   useEffect(() => {
-    // console.log("userdata", userData);
-  }, [userData]);
+    console.log("data", data);
+  }, [data]);
 
   useEffect(() => {
     refetch();
@@ -64,7 +71,7 @@ const IndexAvances = () => {
             </thead>
             <tbody>
               {data &&
-                data.Avances.map((u) => {
+                data.AvancePorUsuario.map((u) => {
                   return (
                     <tr key={u._id}>
                       <td>{u._id.slice(19)}</td>
