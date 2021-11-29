@@ -38,6 +38,26 @@ const OBTENER_AVANCE = gql`
   }
 `;
 
+const OBTENER_AVANCES_POR_USUARIO = gql`
+  query AvancePorUsuario($_id: String!) {
+    AvancePorUsuario(_id: $_id) {
+      _id
+      descripcion
+      observaciones
+      fechaAvance
+      proyecto {
+        _id
+        nombre
+      }
+      creadoPor {
+        _id
+        nombre
+        apellido
+      }
+    }
+  }
+`;
+
 const OBTENER_PROYECTOS = gql`
   query QProyectos {
     Proyectos {
@@ -56,15 +76,9 @@ const OBTENER_PROYECTOS = gql`
   }
 `;
 
-const OBTENER_USUARIOS = gql`
-  query QUsuarios {
-    Usuarios {
-      _id
-      nombre
-      apellido
-      rol
-    }
-  }
-`;
-
-export { OBTENER_AVANCES, OBTENER_AVANCE, OBTENER_PROYECTOS, OBTENER_USUARIOS };
+export {
+  OBTENER_AVANCES,
+  OBTENER_AVANCE,
+  OBTENER_AVANCES_POR_USUARIO,
+  OBTENER_PROYECTOS,
+};
