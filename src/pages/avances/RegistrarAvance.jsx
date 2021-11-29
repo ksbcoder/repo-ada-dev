@@ -1,5 +1,4 @@
 import { OBTENER_PROYECTOS } from "graphql/avances/queries";
-import { OBTENER_USUARIOS } from "graphql/avances/queries";
 import { CREAR_AVANCE } from "graphql/avances/mutations";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -28,34 +27,28 @@ const RegistrarAvance = () => {
     refetch();
   }, [refetch]);
 
-  let proyectosIncritos = [];
+  /* let proyectoEliminar = [];
 
   if (queryProyectosData) {
+    console.log("querydata", queryProyectosData);
     queryProyectosData.Proyectos.forEach((proyecto) => {
       proyecto.inscripciones.forEach((i) => {
-        proyectosIncritos = { ...proyectosIncritos, proyecto };
+        console.log("i.estudiante._id", i.estudiante._id);
+        if (i.estudiante._id !== userData._id) {
+          proyectoEliminar = proyecto._id;
+          console.log("proyectoEliminar", proyectoEliminar);
+          delete queryProyectosData.Proyectos.proyecto;
+        }
       });
+      console.log("quetysinp", queryProyectosData);
     });
-  }
-
-  if (proyectosIncritos) {
-    console.log("proyectos incritos", proyectosIncritos.proyecto);
-  }
-
-  const {
-    data: queryUsuariosData,
-    error: queryUsuariosError,
-    loading: queryUsuariosLoading,
-  } = useQuery(OBTENER_USUARIOS);
+  } */
 
   useEffect(() => {
     if (queryProyectosError) {
       toast.error("Error consultando los proyectos");
     }
-    if (queryUsuariosError) {
-      toast.error("Error consultando los usuarios");
-    }
-  }, [queryProyectosError, queryUsuariosError]);
+  }, [queryProyectosError]);
 
   const [
     crearAvance,
@@ -84,7 +77,7 @@ const RegistrarAvance = () => {
     }
   }, [mutationData, mutationError]);
 
-  if (queryProyectosLoading || queryUsuariosLoading || mutationLoading) {
+  if (queryProyectosLoading || mutationLoading) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
