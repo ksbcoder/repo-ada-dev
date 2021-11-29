@@ -10,6 +10,7 @@ const GET_USUARIOS = gql`
       estado
       identificacion
       rol
+      estado
     }
   }
 `;
@@ -24,6 +25,7 @@ const GET_USUARIO = gql`
       estado
       identificacion
       rol
+      estado
     }
   }
 `;

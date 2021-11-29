@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Link } from "react-router-dom";
 import useFormData from 'hooks/useFormData';
 import { useMutation } from '@apollo/client';
@@ -6,12 +6,11 @@ import { LOGIN } from 'graphql/auth/mutations';
 import { useAuth } from 'context/authContext';
 import { useNavigate } from 'react-router-dom';
 import Logo from './img/Logito_completo.png';
-
 const Login = () => {
     const navigate = useNavigate();
     const { setToken } = useAuth();
     const { form, formData, updateFormData } = useFormData();
-
+    const [loginError, setLoginError]=useState('');
     const [login, { data: dataMutation, loading: mutationLoading, error: mutationError }] =
         useMutation(LOGIN);
 
@@ -24,13 +23,17 @@ const Login = () => {
     };
 
     useEffect(() => {
+        setLoginError('');
         if (dataMutation) {
-            if (dataMutation.login.token) {
+            if (dataMutation.login.token!=null) {
                 setToken(dataMutation.login.token);
                 navigate('/');
+            }else if(dataMutation.login.error!=null)
+            {
+                setLoginError(dataMutation.login.error);
             }
         }
-    }, [dataMutation, setToken, navigate]);
+    }, [dataMutation, setToken, navigate, form, formData, updateFormData]);
     return (
         <>
             <main>
@@ -57,6 +60,10 @@ const Login = () => {
                                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                                         <form onSubmit={submitForm} onChange={updateFormData} ref={form}>
                                             <div className="relative w-full mb-3">
+                                                {loginError !== '' ? <label
+                                                    className="block text-red-600 text-xs font-bold mb-2 text-center"
+                                                >  {loginError}
+                                                </label> : <></>}
                                                 <label
                                                     className="block text-gray-700 text-xs font-bold mb-2"
                                                 >

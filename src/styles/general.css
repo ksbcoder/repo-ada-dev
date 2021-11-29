@@ -28,8 +28,7 @@
 }
 
 .navbar {
-  background-color: #3eeefb;
-  @apply flex items-center justify-center flex-wrap p-6 text-4xl;
+  @apply flex items-center bg-green-700 justify-center flex-wrap p-6 text-4xl text-white font-bold;
 }
 /* ESTILOS DE TABLAS INICIO */
 .formSubmitList {
