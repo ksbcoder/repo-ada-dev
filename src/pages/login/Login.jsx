@@ -14,13 +14,13 @@ const Login = () => {
     const [login, { data: dataMutation, loading: mutationLoading, error: mutationError }] =
         useMutation(LOGIN);
 
-    const submitForm = (e) => {
-        e.preventDefault();
+  const submitForm = (e) => {
+    e.preventDefault();
 
-        login({
-            variables: formData,
-        });
-    };
+    login({
+      variables: formData,
+    });
+  };
 
     useEffect(() => {
         setLoginError('');
@@ -78,49 +78,44 @@ const Login = () => {
                                                 />
                                             </div>
 
-                                            <div className="relative w-full mb-3">
-                                                <label
-                                                    className="block text-gray-700 text-xs font-bold mb-2"
-                                                >
-                                                    Contraseña
-                                                </label>
-                                                <input
-                                                    name="password"
-                                                    type="password"
-                                                    className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                                                    placeholder="Contraseña"
-                                                    style={{ transition: "all .15s ease" }}
-                                                />
-                                            </div>
-                                            <div className="text-center mt-6">
-                                                <button
-                                                    className="bg-green-700 text-white hover:bg-green-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                                                    type="submit"
-                                                    style={{ transition: "all .15s ease" }}
-                                                >
-                                                    Iniciar sesión
-                                                </button>
-                                            </div>
-                                        </form>
-                                        <div className="flex flex-wrap mt-6 items-center justify-center">
-                                            <div className="w-1/2 text-center">
-                                                <Link
-                                                    className="text-blue-500"
-                                                    to="/usuarios"
-                                                >
-                                                    <small className="text-base">Registrarse</small>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      <div className="relative w-full mb-3">
+                        <label className="block text-gray-700 text-xs font-bold mb-2">
+                          Contraseña
+                        </label>
+                        <input
+                          name="password"
+                          type="password"
+                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="Contraseña"
+                          style={{ transition: "all .15s ease" }}
+                        />
+                      </div>
+                      <div className="text-center mt-6">
+                        <button
+                          className="bg-green-700 text-white hover:bg-green-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                          type="submit"
+                          style={{ transition: "all .15s ease" }}
+                        >
+                          Iniciar sesión
+                        </button>
+                      </div>
+                    </form>
+                    <div className="flex flex-wrap mt-6 items-center justify-center">
+                      <div className="w-1/2 text-center">
+                        <Link className="text-blue-500" to="/usuarios">
+                          <small className="text-base">Registrarse</small>
+                        </Link>
+                      </div>
                     </div>
-                </section>
-            </main>
-        </>
-    )
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
+  );
 };
 
 export default Login;

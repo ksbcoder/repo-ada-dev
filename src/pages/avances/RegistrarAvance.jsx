@@ -1,5 +1,4 @@
 import { OBTENER_PROYECTOS } from "graphql/avances/queries";
-import { OBTENER_USUARIOS } from "graphql/avances/queries";
 import { CREAR_AVANCE } from "graphql/avances/mutations";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -7,29 +6,49 @@ import { useQuery, useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import useFormData from "hooks/useFormData";
+import { useUser } from "../../context/userContext";
 
 const RegistrarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
+  const { userData } = useUser();
+
+  useEffect(() => {
+    // console.log("userdata", userData);
+  }, [userData]);
+
   const {
     data: queryProyectosData,
     error: queryProyectosError,
     loading: queryProyectosLoading,
+    refetch,
   } = useQuery(OBTENER_PROYECTOS);
 
-  const {
-    data: queryUsuariosData,
-    error: queryUsuariosError,
-    loading: queryUsuariosLoading,
-  } = useQuery(OBTENER_USUARIOS);
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  /* let proyectoEliminar = [];
+
+  if (queryProyectosData) {
+    console.log("querydata", queryProyectosData);
+    queryProyectosData.Proyectos.forEach((proyecto) => {
+      proyecto.inscripciones.forEach((i) => {
+        console.log("i.estudiante._id", i.estudiante._id);
+        if (i.estudiante._id !== userData._id) {
+          proyectoEliminar = proyecto._id;
+          console.log("proyectoEliminar", proyectoEliminar);
+          delete queryProyectosData.Proyectos.proyecto;
+        }
+      });
+      console.log("quetysinp", queryProyectosData);
+    });
+  } */
 
   useEffect(() => {
     if (queryProyectosError) {
       toast.error("Error consultando los proyectos");
     }
-    if (queryUsuariosError) {
-      toast.error("Error consultando los usuarios");
-    }
-  }, [queryProyectosError, queryUsuariosError]);
+  }, [queryProyectosError]);
 
   const [
     crearAvance,
@@ -38,7 +57,6 @@ const RegistrarAvance = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("fd", formData);
     crearAvance({
       variables: {
         ...formData,
@@ -48,18 +66,18 @@ const RegistrarAvance = () => {
 
   useEffect(() => {
     if (mutationData && mutationData.crearAvance === null) {
-      console.log("md terminado", mutationData.crearAvance);
-      toast.warning("¡Proyecto Terminado!");
+      // console.log("md terminado", mutationData.crearAvance);
+      toast.warning("No se creó el avance :(");
     } else if (mutationData && mutationData.crearAvance !== null) {
-      console.log("md desarrollo", mutationData.crearAvance);
-      toast.success("¡Avance Creado!");
+      // console.log("md desarrollo", mutationData.crearAvance);
+      toast.success("Avance creado :)");
     }
     if (mutationError) {
-      toast.error("Error creando el avance");
+      toast.error("Error creando el avance :(");
     }
   }, [mutationData, mutationError]);
 
-  if (queryProyectosLoading || queryUsuariosLoading || mutationLoading) {
+  if (queryProyectosLoading || mutationLoading) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
@@ -99,7 +117,7 @@ const RegistrarAvance = () => {
               required
             >
               <option value="" disabled>
-                Seleccione...
+                Seleccione una opción...
               </option>
               {queryProyectosData &&
                 queryProyectosData.Proyectos.map((el) => {
@@ -140,12 +158,12 @@ const RegistrarAvance = () => {
                 rows="5"
                 placeholder="Escribe aquí tus observaciones"
                 className="input-general"
-                required
+                /* required */
               ></textarea>
             </div>
           </div>
         </div>
-        <div className="form-general">
+        {/* <div className="form-general">
           <span className="pr-2">Creado por</span>
           <select
             name="creadoPor"
@@ -155,7 +173,7 @@ const RegistrarAvance = () => {
             required
           >
             <option value="" disabled>
-              Seleccione...
+              Seleccione un usuario...
             </option>
             {queryUsuariosData &&
               queryUsuariosData.Usuarios.map((el) => {
@@ -166,9 +184,11 @@ const RegistrarAvance = () => {
                 );
               })}
           </select>
-        </div>
+        </div> */}
         <div className="form-general">
-          <button className="btn-general mt-4 text-xl">Registrar</button>
+          <button className="btn-general mt-4 text-xl" type="submit">
+            Registrar
+          </button>
         </div>
       </form>
     </div>
