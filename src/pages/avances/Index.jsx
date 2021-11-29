@@ -5,28 +5,34 @@ import { OBTENER_AVANCES } from "graphql/avances/queries";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import { useUser } from "../../context/userContext";
 
 const IndexAvances = () => {
-  const { data, error, loading } = useQuery(OBTENER_AVANCES);
+  const { data, error, loading, refetch } = useQuery(OBTENER_AVANCES);
+  const { userData } = useUser();
 
   useEffect(() => {
-    console.log("data", data);
-  }, [data]);
+    // console.log("userdata", userData);
+  }, [userData]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   useEffect(() => {
     if (error) {
-      toast.error("Error consultando los avances");
+      toast.error("Error consultando los avances :(");
     }
   }, [error]);
 
   if (loading) {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center mt-24">
+      <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
           type="spinningBubbles"
-          color="#07f3eb"
-          height={667}
-          width={375}
+          color="#7fffd4"
+          height={150}
+          width={150}
         />
       </div>
     );
@@ -63,7 +69,7 @@ const IndexAvances = () => {
                     <tr key={u._id}>
                       <td>{u._id.slice(19)}</td>
                       <td>{u.proyecto.nombre}</td>
-                      <td>{u.fechaAvance}</td>
+                      <td>{u.fechaAvance.slice(0, 10)}</td>
                       <td>{u.descripcion}</td>
                       <td>{u.observaciones}</td>
                       <td>{u.creadoPor.nombre + " " + u.creadoPor.apellido}</td>

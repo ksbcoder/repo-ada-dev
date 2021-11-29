@@ -25,4 +25,22 @@ const EDITAR_AVANCE = gql`
   }
 `;
 
-export { EDITAR_AVANCE };
+const CREAR_AVANCE = gql`
+  mutation crearAvance(
+    $descripcion: String!
+    $proyecto: String!
+    $creadoPor: String
+    $observaciones: String
+  ) {
+    crearAvance(
+      descripcion: $descripcion
+      proyecto: $proyecto
+      creadoPor: $creadoPor
+      observaciones: $observaciones
+    ) {
+      _id
+    }
+  }
+`;
+
+export { EDITAR_AVANCE, CREAR_AVANCE };

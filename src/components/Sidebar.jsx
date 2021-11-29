@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
+import { useAuth } from 'context/authContext';
 import "../styles/general.css";
-
-import Logito_completo from "./img/Logito_completo.png"
-import blanco_60 from "./img/blanco_60.png"
+// import Logito_completo from "./img/Logito_completo.png";
+import blanco_60 from "./img/blanco_60.png";
 
 const SidebarLinks = () => {
   return (
@@ -26,7 +26,14 @@ const SidebarLinks = () => {
   );
 };
 
+
+
 const Dropdownuser = () => {
+  const { setToken } = useAuth();
+  const deleteToken = () => {
+    console.log('eliminar token');
+    setToken(null);
+  };
   return (
     <div className="w-56 flex justify-center top-16">
       <Menu as="div" className="relative inline-block text-right">
@@ -53,24 +60,28 @@ const Dropdownuser = () => {
               <Menu.Item>
                 {({ active }) => (
                   <NavLink
-                    className={`${
-                      active ? "bg-indigo-600 text-white" : "text-gray-900"
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    className={`${active ? "bg-green-700 text-white" : "text-white"
+                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                     to="perfil"
                   >
-                    Perfil
+                    <div className='flex items-center'>
+                        <i className='fas fa-user' />
+                        <span className='text-sm  ml-2'>Perfil</span>
+                      </div>
                   </NavLink>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <button
-                    className={`${
-                      active ? "bg-indigo-600 text-white" : "text-gray-900"
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                  >
-                    Cerrar sesión
-                  </button>
+                  
+                    <NavLink to='/login' className={`${active ? "bg-green-700 text-white" : "text-white"
+                      } group flex rounded-md items-center w-full px-2 py-2 text-sm`} onClick={() => deleteToken()}>
+                      <div className='flex items-center'>
+                        <i className='fas fa-sign-out-alt' />
+                        <span className='text-sm  ml-2'>Cerrar Sesión</span>
+                      </div>
+                    </NavLink>
+                  
                 )}
               </Menu.Item>
             </div>
@@ -102,10 +113,9 @@ const Sidebar = () => {
         <Dropdownuser />
         <div className="px-2 pr-8">
           <SidebarLinks />
-          
         </div>
       </div>
-      
+
       <div className="flex md:hidden w-full justify-between bg-p-2 ">
         <i
           className={`fas fa-${open ? "times" : "bars"}`}

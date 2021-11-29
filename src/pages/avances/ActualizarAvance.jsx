@@ -20,7 +20,12 @@ const ActualizarAvance = () => {
       _id,
     },
   });
-  console.log("data actualizar", queryData);
+
+  useEffect(() => {
+    if (queryError) {
+      toast.error("Error obteniendo el avance");
+    }
+  }, [queryError]);
 
   const [
     editarAvance,
@@ -29,11 +34,9 @@ const ActualizarAvance = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("fd", formData);
     delete formData.proyecto;
     delete formData.fechaAvance;
     delete formData.creadoPor;
-    console.log("fd despues", formData);
 
     editarAvance({
       variables: {
@@ -41,28 +44,25 @@ const ActualizarAvance = () => {
         ...formData,
       },
     });
-    toast.success("¡Avance actualizado!");
   };
 
   useEffect(() => {
-    console.log("mutacion edicion", mutationData);
-  }, [mutationData]);
-
-  useEffect(() => {
-    if (mutationError) {
-      toast.error("Error actualizando el avance");
-    } else {
+    if (mutationData) {
+      toast.success(" Avance Actualizado ;)");
     }
-  }, [mutationError]);
+    if (mutationError) {
+      toast.error("Error actualizando el avance :(");
+    }
+  }, [mutationData, mutationError]);
 
   if (queryLoading || mutationLoading) {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center mt-24">
+      <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
           type="spinningBubbles"
-          color="#07f3eb"
-          height={667}
-          width={375}
+          color="#7fffd4"
+          height={150}
+          width={150}
         />
       </div>
     );
@@ -102,7 +102,8 @@ const ActualizarAvance = () => {
               type="text"
               name="fechaAvance"
               className="input-general"
-              defaultValue={queryData.Avance.fechaAvance}
+              defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
+              readOnly
               required
             />
           </div>
