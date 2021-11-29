@@ -19,7 +19,7 @@ const IndexAvances = () => {
   );
 
   useEffect(() => {
-    // console.log("data", data);
+    console.log("data", data);
   }, [data]);
 
   useEffect(() => {

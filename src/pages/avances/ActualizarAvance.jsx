@@ -34,10 +34,9 @@ const ActualizarAvance = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    delete formData.proyecto;
     delete formData.fechaAvance;
     delete formData.creadoPor;
-
+    console.log("fd", formData);
     editarAvance({
       variables: {
         _id,
@@ -47,7 +46,11 @@ const ActualizarAvance = () => {
   };
 
   useEffect(() => {
-    if (mutationData) {
+    if (mutationData && mutationData.editarAvance === null) {
+      // console.log("md terminado", mutationData.editarAvance);
+      toast.warning("No se editó el avance :(");
+    } else if (mutationData && mutationData.editarAvance !== null) {
+      // console.log("md desarrollo", mutationData.editarAvance);
       toast.success(" Avance Actualizado ;)");
     }
     if (mutationError) {
