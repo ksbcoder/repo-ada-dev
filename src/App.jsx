@@ -46,7 +46,6 @@ function App() {
   const [authToken, setAuthToken] = useState('');
 
   const setToken = (token) => {
-    console.log('set token', token);
     setAuthToken(token);
     if (token) {
       localStorage.setItem('token', JSON.stringify(token));
@@ -64,6 +63,7 @@ function App() {
         apellido: decoded.apellido,
         identificacion: decoded.identificacion,
         correo: decoded.correo,
+        estado: decoded.estado,
         rol: decoded.rol,
       });
     }
