@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import useFormData from "hooks/useFormData";
 import { useUser } from "../../context/userContext";
+import PrivateComponent from "components/PrivateComponent";
 
 const RegistrarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
@@ -129,16 +130,7 @@ const RegistrarAvance = () => {
                 })}
             </select>
           </div>
-          {/* <div className="form-general">
-            <span className="pr-2">Fecha</span>
-            <input
-              type="datetime-local"
-              name="fechaAvance"
-              className="input-general"
-              required
-            />
-          </div> */}
-          <div className="grid grid-cols-2 gap-2 w-auto">
+          <div className="grid grid-cols-1 w-auto">
             <div className="mt-9 flex flex-col items-center">
               <span className="pb-2">Descripción</span>
               <textarea
@@ -150,41 +142,20 @@ const RegistrarAvance = () => {
                 required
               ></textarea>
             </div>
-            <div className="mt-9 flex flex-col items-center">
-              <span className="pb-2">Observaciones</span>
-              <textarea
-                name="observaciones"
-                cols="40"
-                rows="5"
-                placeholder="Escribe aquí tus observaciones"
-                className="input-general"
-                /* required */
-              ></textarea>
-            </div>
+            <PrivateComponent roleList={["LIDER"]}>
+              <div className="mt-9 flex flex-col items-center">
+                <span className="pb-2">Observaciones</span>
+                <textarea
+                  name="observaciones"
+                  cols="40"
+                  rows="5"
+                  placeholder="Escribe aquí tus observaciones"
+                  className="input-general"
+                ></textarea>
+              </div>
+            </PrivateComponent>
           </div>
         </div>
-        {/* <div className="form-general">
-          <span className="pr-2">Creado por</span>
-          <select
-            name="creadoPor"
-            type="text"
-            defaultValue=""
-            className="input-general"
-            required
-          >
-            <option value="" disabled>
-              Seleccione un usuario...
-            </option>
-            {queryUsuariosData &&
-              queryUsuariosData.Usuarios.map((el) => {
-                return (
-                  <option key={el._id} value={el._id}>
-                    {el.nombre + " " + el.apellido}
-                  </option>
-                );
-              })}
-          </select>
-        </div> */}
         <div className="form-general">
           <button className="btn-general mt-4 text-xl" type="submit">
             Registrar

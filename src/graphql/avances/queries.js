@@ -58,6 +58,26 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
   }
 `;
 
+const OBTENER_AVANCES_POR_LIDER = gql`
+  query AvancePorUsuario($_id: String!) {
+    AvancePorUsuario(_id: $_id) {
+      _id
+      descripcion
+      observaciones
+      fechaAvance
+      proyecto {
+        _id
+        nombre
+      }
+      creadoPor {
+        _id
+        nombre
+        apellido
+      }
+    }
+  }
+`;
+
 const OBTENER_PROYECTOS = gql`
   query QProyectos {
     Proyectos {

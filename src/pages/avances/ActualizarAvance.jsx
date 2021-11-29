@@ -7,6 +7,7 @@ import ReactLoading from "react-loading";
 import useFormData from "hooks/useFormData";
 import { EDITAR_AVANCE } from "graphql/avances/mutations";
 import { toast } from "react-toastify";
+import PrivateComponent from "components/PrivateComponent";
 
 const ActualizarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
@@ -87,7 +88,7 @@ const ActualizarAvance = () => {
         ref={form}
         className="flex flex-col items-center mt-5"
       >
-        <div className="grid grid-cols-2 gap-2 w-auto">
+        <div className="grid grid-cols-3 gap-1 w-auto">
           <div className="form-general">
             <span className="pr-2">Proyecto</span>
             <input
@@ -110,19 +111,35 @@ const ActualizarAvance = () => {
               required
             />
           </div>
-          <div className="mt-9 flex flex-col items-center">
-            <span className="pb-2">Descripción</span>
-            <textarea
-              name="descripcion"
-              cols="40"
-              rows="5"
-              placeholder="Escribe aquí tu descripción"
+          <div className="form-general">
+            <span className="pr-2">Creado por</span>
+            <input
+              type="text"
+              name="creadoPor"
               className="input-general"
-              defaultValue={queryData.Avance.descripcion}
+              defaultValue={
+                queryData.Avance.creadoPor.nombre +
+                " " +
+                queryData.Avance.creadoPor.apellido
+              }
               required
-            ></textarea>
+            />
           </div>
-          <div className="mt-9 flex flex-col items-center">
+        </div>
+        <div className="mt-7 flex flex-col items-center">
+          <span className="pb-2">Descripción</span>
+          <textarea
+            name="descripcion"
+            cols="40"
+            rows="5"
+            placeholder="Escribe aquí tu descripción"
+            className="input-general"
+            defaultValue={queryData.Avance.descripcion}
+            required
+          ></textarea>
+        </div>
+        <PrivateComponent roleList={["LIDER"]}>
+          <div className="mt-7 flex flex-col items-center">
             <span className="pb-2">Observaciones</span>
             <textarea
               name="observaciones"
@@ -131,24 +148,11 @@ const ActualizarAvance = () => {
               placeholder="Escribe aquí tus observaciones"
               className="input-general"
               defaultValue={queryData.Avance.observaciones}
-              required
+              /* required */
             ></textarea>
           </div>
-        </div>
-        <div className="form-general">
-          <span className="pr-2">Creado por</span>
-          <input
-            type="text"
-            name="creadoPor"
-            className="input-general"
-            defaultValue={
-              queryData.Avance.creadoPor.nombre +
-              " " +
-              queryData.Avance.creadoPor.apellido
-            }
-            required
-          />
-        </div>
+        </PrivateComponent>
+
         <div className="form-general">
           <button className="btn-general mt-4 text-xl" type="submit">
             Actualizar
