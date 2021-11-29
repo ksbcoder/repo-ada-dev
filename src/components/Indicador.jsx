@@ -1,5 +1,5 @@
-import React from 'react'
-import zxcvbn from 'zxcvbn'
+import React from 'react';
+import zxcvbn from 'zxcvbn';
 const Indicador=({password})=> {
     const testResult=zxcvbn(password);
     const num = testResult.score*100/4;

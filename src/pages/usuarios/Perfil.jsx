@@ -1,10 +1,85 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import { useUser } from "context/userContext";
 import Indicador from "../../components/Indicador";
+import { UserContext } from "context/userContext";
+import { Enum_Rol, Enum_EstadoUsuario } from 'utils/enums';
+import { GET_USUARIO } from 'graphql/usuarios/queries';
+import { useQuery, useMutation } from '@apollo/client';
+import useFormData from 'hooks/useFormData';
+import { EDITAR_USUARIO, ACTUALIZAR_PASSWORD } from 'graphql/usuarios/mutations';
+import { toast } from 'react-toastify';
+import { data } from "autoprefixer";
+import zxcvbn from 'zxcvbn'
+
 const Perfil = () => {
   const [modalContraseña, setModalContraseña] = useState(false);
   const [modalDatos, setModalDatos] = useState(false);
   const [contraseña, setContraseña] = useState("");
   const [confirmarcontraseña, setConfirmarContraseña] = useState("");
+  const { form, formData, updateFormData } = useFormData(null);
+  const { form: passwordForm, formData: passwordData, updateFormData: updatePasswordData } = useFormData(null);
+  const testResult=zxcvbn(contraseña);
+  const { userData } = useUser();
+  const _id = userData._id;
+  const {
+    data: queryData,
+    error: queryError,
+    loading: queryLoading,
+  } = useQuery(GET_USUARIO, {
+    variables: { _id },
+  });
+  let correo;
+  if (queryData) {
+    correo = queryData.Usuario.correo;
+  } else {
+    correo = ""
+  }
+
+  const [editarUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] =
+    useMutation(EDITAR_USUARIO);
+
+  const [actualizarPassword, { data: dataPassword, loading: loadingPassword, error: errorPassword }] =
+    useMutation(ACTUALIZAR_PASSWORD);
+
+  const submitPassword = (e) => {
+    e.preventDefault();
+    actualizarPassword({
+      variables: { correo, ...passwordData }
+    });
+  }
+  const submitForm = (e) => {
+    e.preventDefault();
+    delete formData.rol;
+    if (formData.identificacion === "") {
+      delete formData.identificacion
+    }
+    if (formData.nombre === "") {
+      delete formData.nombre
+    }
+    if (formData.apellido === "") {
+      delete formData.apellido
+    }
+    if (formData.correo === "") {
+      delete formData.correo
+    }
+    editarUsuario({
+      variables: { _id, ...formData },
+    });
+    setModalDatos(false)
+  };
+  
+  useEffect(() => {
+    if (dataPassword) {
+      if (dataPassword.actualizarPassword.mensaje === true) {
+        toast.success("Contraseña actualizada")
+        setModalContraseña(false);
+        dataPassword.actualizarPassword.mensaje = false;
+      } else {
+        toast.error("La contraseña actual no coincide")
+      }
+    }
+  }, [dataPassword]);
+
   return (
     <>
       <nav className="navbar">
@@ -17,12 +92,12 @@ const Perfil = () => {
               <div className="flex flex-wrap justify-center">
                 <div className="text-center mt-12">
                   <i className="fas fa-user fa-5x"></i>
-                  <h3 className="text-2xl font-semibold leading-normal text-gray-800 mb-2">
-                    Pepito Pérez
+                  <h3 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                    {queryData ? queryData.Usuario.nombre + " " + queryData.Usuario.apellido : ""}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
                     <i className="fas fa-user-graduate mr-2 text-lg text-gray-500"></i>{" "}
-                    Rol: Estudiante
+                    Rol: {queryData ? Enum_Rol[queryData.Usuario.rol] : ""}
                   </div>
                 </div>
               </div>
@@ -43,7 +118,7 @@ const Perfil = () => {
                           id="identificacion"
                           placeholder="Identificación"
                           disabled
-                          value="12312323"
+                          value={queryData ? queryData.Usuario.identificacion : ""}
                         />
                       </div>
                       <div className="m-4">
@@ -59,13 +134,13 @@ const Perfil = () => {
                           id="correo"
                           placeholder="Correo"
                           disabled
-                          value="pepito@correo.com"
+                          value={queryData ? queryData.Usuario.correo : ""}
                         />
                       </div>
                       <div className="m-4">
                         <label
                           className="block text-gray-700 text-sm font-bold mb-2"
-                          htmlFor="estado"
+
                         >
                           Estado
                         </label>
@@ -75,7 +150,7 @@ const Perfil = () => {
                           id="estado"
                           placeholder="Estado"
                           disabled
-                          value="Autorizado"
+                          value={queryData ? Enum_EstadoUsuario[queryData.Usuario.estado] : ""}
                         />
                       </div>
                       <div className="flex items-center justify-between">
@@ -118,7 +193,10 @@ const Perfil = () => {
                               </div>
                               {/*body*/}
 
-                              <form className="rounded px-8 pt-6 pb-8 mb-4 max-w-md mx-auto sm:max-w-xl">
+                              <form className="rounded px-8 pt-6 pb-8 mb-4 max-w-md mx-auto sm:max-w-xl"
+                                onSubmit={submitPassword}
+                                onChange={updatePasswordData}
+                                ref={passwordForm}>
                                 <div className="m-4">
                                   <label
                                     className="block text-gray-700 text-sm font-bold mb-2"
@@ -131,7 +209,12 @@ const Perfil = () => {
                                     type="password"
                                     id="nuevacontraseña"
                                     placeholder="Constraseña"
+                                    name="password"
                                   />
+                                  {contraseña !== confirmarcontraseña ? <label
+                                    className="block text-red-600 text-xs font-bold mb-2 text-center"
+                                  >  Las contraseñas no coinciden
+                                  </label> : <></>}
                                   <label
                                     className="block text-gray-700 text-sm font-bold mb-2"
                                     htmlFor="contraseña"
@@ -143,6 +226,7 @@ const Perfil = () => {
                                     type="password"
                                     id="nuevacontraseña"
                                     placeholder="Constraseña"
+                                    name="nuevapassword"
                                     onChange={(e) =>
                                       setContraseña(e.target.value)
                                     }
@@ -176,9 +260,9 @@ const Perfil = () => {
                                     Cancelar
                                   </button>
                                   <button
-                                    className="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 ml-4 rounded focus:outline-none focus:shadow-outline"
-                                    type="button"
-                                    onClick={() => setModalContraseña(false)}
+                                    className={((testResult.score<3)||((contraseña !== confirmarcontraseña) || (contraseña === "" && confirmarcontraseña === ""))) ? "bg-gray-700 text-white font-bold py-2 px-4 ml-4 rounded focus:outline-none focus:shadow-outline cursor-not-allowed" : "bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 ml-4 rounded focus:outline-none focus:shadow-outline"}
+                                    type="submit"
+                                    disabled={((testResult.score<3)||((contraseña !== confirmarcontraseña) || (contraseña === "" && confirmarcontraseña === ""))) ? true : false}                               
                                   >
                                     Actualizar
                                   </button>
@@ -213,7 +297,10 @@ const Perfil = () => {
                               </div>
                               {/*body*/}
 
-                              <form className="rounded px-8 pt-6 pb-8 mb-4 max-w-md mx-auto sm:max-w-xl">
+                              <form className="rounded px-8 pt-6 pb-8 mb-4 max-w-md mx-auto sm:max-w-xl"
+                                onSubmit={submitForm}
+                                onChange={updateFormData}
+                                ref={form}>
                                 <div className="m-4">
                                   <label
                                     className="block text-gray-700 text-sm font-bold mb-2"
@@ -225,7 +312,8 @@ const Perfil = () => {
                                     className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
                                     type="text"
                                     id="identificacion"
-                                    placeholder="Identificación"
+                                    name="identificacion"
+                                    placeholder={queryData ? queryData.Usuario.identificacion : ""}
                                   />
                                 </div>
                                 <div className="m-4">
@@ -239,7 +327,8 @@ const Perfil = () => {
                                     className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
                                     type="text"
                                     id="nombre"
-                                    placeholder="Nombre"
+                                    name="nombre"
+                                    placeholder={queryData ? queryData.Usuario.nombre : ""}
                                   />
                                 </div>
                                 <div className="m-4">
@@ -253,7 +342,8 @@ const Perfil = () => {
                                     className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
                                     type="text"
                                     id="apellido"
-                                    placeholder="Apellido"
+                                    name="apellido"
+                                    placeholder={queryData ? queryData.Usuario.apellido : ""}
                                   />
                                 </div>
                                 <div className="m-4">
@@ -267,7 +357,8 @@ const Perfil = () => {
                                     className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
                                     type="email"
                                     id="correo"
-                                    placeholder="Correo"
+                                    name="correo"
+                                    placeholder={queryData ? queryData.Usuario.correo : ""}
                                   />
                                 </div>
                                 {/*footer*/}
@@ -281,8 +372,7 @@ const Perfil = () => {
                                   </button>
                                   <button
                                     className="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 ml-4 rounded focus:outline-none focus:shadow-outline"
-                                    type="button"
-                                    onClick={() => setModalDatos(false)}
+                                    type="submit"
                                   >
                                     Actualizar
                                   </button>
