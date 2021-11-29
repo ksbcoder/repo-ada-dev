@@ -17,16 +17,18 @@ import RegistrarAvance from "pages/avances/RegistrarAvance";
 import ActualizarAvance from "pages/avances/ActualizarAvance";
 import Perfil from "pages/usuarios/Perfil";
 import GestionUsuarios from "pages/usuarios/GestionUsuarios";
+import EditarUsuario from "pages/usuarios/Editar";
 import Login from "pages/login/Login";
 
 // import PrivateRoute from 'components/PrivateRoute';
-/* const httpLink = createHttpLink({
-  uri: "https://adasoft-server.herokuapp.com/graphql" ,
-}); */
+const httpLink = createHttpLink({
+  uri: "https://adasoft-server.herokuapp.com/graphql"  
+}); 
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-  cache: new InMemoryCache(),
+  //uri: "http://localhost:4000/graphql",
+  uri: "https://adasoft-server.herokuapp.com/graphql",
+  cache: new InMemoryCache()
 });
 
 function App() {
@@ -41,11 +43,11 @@ function App() {
             <Route path="/" element={<PrivateLayout />}>
               <Route path="" element={<Index />} />
               <Route path="usuarios" element={<IndexUsuarios />} />
-
               <Route
                 path="usuarios/gestionUsuarios"
                 element={<GestionUsuarios />}
               />
+              <Route path="usuarios/editar/:_id" element={<EditarUsuario/>}/>
 
               <Route path="perfil" element={<Perfil />} />
 

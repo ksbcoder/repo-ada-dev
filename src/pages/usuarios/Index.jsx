@@ -1,10 +1,16 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const IndexUsuarios = () => {
   return(
     <><nav className="navbar">
       <h1>Registro de Usuario</h1>
     </nav>
+      <div className="flex flex-row-reverse flex-nowrap mr-8 mt-5 gap-2">
+        <Link to="GestionUsuarios" className="btn-general">
+          Gestionar Usuarios
+        </Link>
+      </div>
         <div className="form-usuario">
         <div className="form-campo">
           <div>
