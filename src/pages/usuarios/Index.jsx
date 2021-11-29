@@ -1,56 +1,70 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
+
 
 const IndexUsuarios = () => {
-  return( 
-  <div>
-  <h1>Página de Registro</h1>
-  <h2>Ingreso al sistema de información</h2>
-  
-  </div>,
-  <div className="form-usuario">
-    <div className= "form-campo">
-      <div>
-        <label>Nombre Completo</label>
-      </div>    
-      <input className="input-usuario" placeholder="Enter username"/>
-    </div>
-    <div className= "form-campo">
-      <div>
-        <label>Identificación</label>
-      </div>    
-      <input className="input-usuario" placeholder="Enter id"/>
-    </div>
-    <div className= "form-campo">
-      <div>
-        <label>Tipo de usuario</label>
-      </div>    
-      <input className="input-usuario" placeholder="Enter user"/>
-    </div>
-    <div className= "form-campo">
-      <div>
-        <label>Correo</label>
-      </div>    
-      <input className="input-usuario" placeholder="Enter mail"/>
-    </div>
-    <div className= "form-campo">
-      <div>
-        <label>Password</label>
-      </div>    
-      <input className="input-usuario" placeholder="Enter password"/>
-    </div>
-    <div className= "form-campo">
-      <div>
-        <label>Confirmar Password</label>
-      </div>    
-      <input className="input-usuario" placeholder="Enter password"/>
-    </div>
-    <div className= "form-campo">
-    <button className="btn-general-usuario">Registrarse</button>
-    </div>
-    
-  </div>
-  
-
-  )};
+  return(
+    <><nav className="navbar">
+      <h1>Registro de Usuario</h1>
+    </nav>
+      <div className="flex flex-row-reverse flex-nowrap mr-8 mt-5 gap-2">
+        <Link to="GestionUsuarios" className="btn-general">
+          Gestionar Usuarios
+        </Link>
+      </div>
+        <div className="form-usuario">
+        <div className="form-campo">
+          <div>
+            <label>Nombre</label>
+          </div>
+          <input className="input-usuario" id="usuario-nombre"placeholder="Enter username" />
+        </div>
+        <div className="form-campo">
+          <div>
+            <label>Apellido</label>
+          </div>
+          <input className="input-usuario" id="usuario-apellido" placeholder="Enter lastname" />
+        </div>
+        <div className="form-campo">
+          <div>
+            <label>Identificación</label>
+          </div>
+          <input className="input-usuario" id="usuario-id" placeholder="Enter id" />
+        </div>
+        <div className="form-campo">
+          <div>
+            <label>Tipo de usuario</label>
+          </div>
+          <select className= "input-usuario" id="usuario-tipo">
+            <option value = "ADMINISTRADOR">ADMINISTRADOR</option>
+            <option value = "LIDER">LIDER</option>
+            <option value = "ESTUDIANTE">ESTUDIANTE</option>
+          </select>          
+        </div>
+        <div className="form-campo">
+          <div>
+            <label>Correo</label>
+          </div>
+          <input className="input-usuario" type="email" id="usuario-correo" placeholder="Enter mail" />
+        </div>
+        <div className="form-campo">
+          <div>
+            <label>Password</label>
+          </div>
+          <input className="input-usuario" type="password" id="usuario-password"  placeholder="Enter password" />
+        </div>
+        <div className="form-campo">
+          <div>
+            <label>Confirmar Password</label>
+          </div>
+          <input className="input-usuario" type="password" id="usuario-confirPassword" placeholder="Enter password" />
+        </div>
+        <div className="form-campo">
+          <button className="btn-general-usuario" id="usuario-registro">Registrarse</button>
+        </div>
+      </div></>
+  );
+};
 
 export default IndexUsuarios;

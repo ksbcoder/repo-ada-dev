@@ -49,8 +49,8 @@ th {
   @apply border border-solid border-gray-300 bg-green-500 bg-opacity-75 p-4 py-2 text-white;
 }
 
-td {
-  @apply border border-solid border-gray-200 p-4;
+td{
+  @apply border border-solid border-gray-200 p-4 py-2;
 }
 
 tr:nth-child(even) {
@@ -64,8 +64,8 @@ tr:hover {
 /* ESTILOS DE TABLAS FIN */
 
 /*ESTILOS DE USUARIO INICIO*/
-.form-usuario {
-  @apply mt-28 flex flex-col items-center;
+.form-usuario{
+  @apply mt-9 flex flex-col items-center;
 }
 
 .form-campo {
@@ -83,12 +83,12 @@ tr:hover {
 }
 
 .btn-editar {
-  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 text-gray-500 bg-blue-500 hover:bg-blue-700 
+  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 mx-2 text-gray-500 bg-blue-400 hover:bg-blue-700 
   hover:text-white transition-all shadow-xl;
 }
 
 .btn-eliminar {
-  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 text-gray-500 bg-red-500 hover:bg-red-700 
+  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 mx-2 text-gray-500 bg-red-500 hover:bg-red-700 
   hover:text-white transition-all shadow-xl;
 }
 
