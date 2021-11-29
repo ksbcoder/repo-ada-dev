@@ -31,7 +31,6 @@ const SidebarLinks = () => {
 const Dropdownuser = () => {
   const { setToken } = useAuth();
   const deleteToken = () => {
-    console.log('eliminar token');
     setToken(null);
   };
   return (

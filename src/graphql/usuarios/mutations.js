@@ -28,4 +28,19 @@ const EDITAR_USUARIO = gql`
   }
 `;
 
-export { EDITAR_USUARIO };
+const ACTUALIZAR_PASSWORD = gql`
+mutation ActualizarPassword(
+  $correo: String!, 
+  $password: String!, 
+  $nuevapassword: String!) {
+  actualizarPassword(
+    correo: $correo, 
+    password: $password, 
+    nuevapassword: $nuevapassword) {
+
+    mensaje
+    
+  }
+}
+`;
+export { EDITAR_USUARIO, ACTUALIZAR_PASSWORD };
