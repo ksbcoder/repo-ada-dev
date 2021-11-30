@@ -46,11 +46,11 @@
 }
 
 th {
-  @apply border border-solid border-gray-300 bg-green-500 bg-opacity-75 p-4 py-2 text-white;
+  @apply border border-solid border-gray-300 bg-green-500 bg-opacity-75 p-4 py-2 text-white rounded-sm;
 }
 
-td{
-  @apply border border-solid border-gray-200 p-4 py-2;
+td {
+  @apply border border-solid border-gray-200 p-4 py-2 rounded-sm;
 }
 
 tr:nth-child(even) {
@@ -64,7 +64,7 @@ tr:hover {
 /* ESTILOS DE TABLAS FIN */
 
 /*ESTILOS DE USUARIO INICIO*/
-.form-usuario{
+.form-usuario {
   @apply mt-9 flex flex-col items-center;
 }
 

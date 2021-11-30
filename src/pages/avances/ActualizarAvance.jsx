@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { useUser } from "../../context/userContext";
@@ -23,6 +23,7 @@ const ActualizarAvance = () => {
       _id,
     },
   });
+  const [aviso, setAviso] = useState(true);
 
   useEffect(() => {
     if (queryError) {
@@ -76,36 +77,43 @@ const ActualizarAvance = () => {
 
   return (
     <div>
-      <div className="text-center mt-20">
-        <div className="flex justify-start ml-10">
+      <div className="text-center">
+        <div className="navbar p-12">
+          <span>Actualización de Avances</span>
+        </div>
+        <div className="flex justify-start items-center ml-10 mt-10">
           <Link to="/avances" className="btn-general">
             <i className="fas fa-arrow-left"></i>
           </Link>
+          {aviso == true && (
+            <span className="ml-8 mt-2 bg-blue-300 bg-opacity-50 p-2 rounded-md text-blue-700 animate-bounce">
+              Si no actualizaste algo, haz clic en el botón atrás
+            </span>
+          )}
         </div>
-        <span className="titulo-general">Actualización de Avances</span>
       </div>
       <form
         onSubmit={submitForm}
         onChange={updateFormData}
         ref={form}
-        className="flex flex-col items-center mt-5"
+        className="flex flex-col items-center mt-8"
       >
         {userData.rol === "ESTUDIANTE" && (
           <>
             <div className="grid grid-cols-3 gap-1 w-auto">
               <div className="form-general">
-                <span className="pr-2">Proyecto</span>
+                <span className="pr-2 text-lg">Proyecto</span>
                 <input
                   type="text"
                   name="proyecto"
-                  className="input-general"
+                  className="input-general "
                   defaultValue={queryData.Avance.proyecto.nombre}
                   readOnly
                   required
                 />
               </div>
               <div className="form-general">
-                <span className="pr-2">Fecha</span>
+                <span className="pr-2 text-lg">Fecha</span>
                 <input
                   type="text"
                   name="fechaAvance"
@@ -116,7 +124,7 @@ const ActualizarAvance = () => {
                 />
               </div>
               <div className="form-general">
-                <span className="pr-2">Creado por</span>
+                <span className="pr-2 text-lg">Creado por</span>
                 <input
                   type="text"
                   name="creadoPor"
@@ -131,25 +139,41 @@ const ActualizarAvance = () => {
                 />
               </div>
             </div>
-            <div className="mt-7 flex flex-col items-center">
-              <span className="pb-2">Descripción</span>
+            <div className="mt-10 flex flex-col items-center">
+              <span className="pb-2 text-lg">Descripción</span>
               <textarea
                 name="descripcion"
                 cols="40"
                 rows="5"
                 placeholder="Escribe aquí tu descripción"
-                className="input-general"
+                className="input-general text-lg"
                 defaultValue={queryData.Avance.descripcion}
+                onClick={() => setAviso(false)}
                 required
               ></textarea>
             </div>
+            <PrivateComponent roleList={["LIDER", "ADMINISTRADOR"]}>
+              <div className="mt-7 flex flex-col items-center">
+                <span className="pb-2 text-lg">Observaciones</span>
+                <textarea
+                  name="observaciones"
+                  cols="40"
+                  rows="5"
+                  placeholder="Escribe aquí tus observaciones"
+                  className="input-general text-lg"
+                  defaultValue={queryData.Avance.observaciones}
+                  onClick={() => setAviso(false)}
+                  required
+                ></textarea>
+              </div>
+            </PrivateComponent>
           </>
         )}
         {userData.rol === "LIDER" && (
           <>
             <div className="grid grid-cols-3 gap-1 w-auto">
               <div className="form-general">
-                <span className="pr-2">Proyecto</span>
+                <span className="pr-2 text-lg">Proyecto</span>
                 <input
                   type="text"
                   name="proyecto"
@@ -160,7 +184,7 @@ const ActualizarAvance = () => {
                 />
               </div>
               <div className="form-general">
-                <span className="pr-2">Fecha</span>
+                <span className="pr-2 text-lg">Fecha</span>
                 <input
                   type="text"
                   name="fechaAvance"
@@ -171,7 +195,7 @@ const ActualizarAvance = () => {
                 />
               </div>
               <div className="form-general">
-                <span className="pr-2">Creado por</span>
+                <span className="pr-2 text-lg">Creado por</span>
                 <input
                   type="text"
                   name="creadoPor"
@@ -186,17 +210,35 @@ const ActualizarAvance = () => {
                 />
               </div>
             </div>
-            <div className="mt-7 flex flex-col items-center">
-              <span className="pb-2">Descripción</span>
-              <textarea
-                name="descripcion"
-                cols="40"
-                rows="5"
-                placeholder="Escribe aquí tu descripción"
-                className="input-general"
-                defaultValue={queryData.Avance.descripcion}
-                readOnly
-              ></textarea>
+            <div className="grid grid-cols-2 gap-3 w-auto">
+              <div className="mt-10 flex flex-col items-center">
+                <span className="pb-2 text-lg">Descripción</span>
+                <textarea
+                  name="descripcion"
+                  cols="40"
+                  rows="5"
+                  placeholder="Escribe aquí tu descripción"
+                  className="input-general text-lg"
+                  defaultValue={queryData.Avance.descripcion}
+                  onClick={() => setAviso(false)}
+                  readOnly
+                ></textarea>
+              </div>
+              <PrivateComponent roleList={["LIDER", "ADMINISTRADOR"]}>
+                <div className="mt-10 flex flex-col items-center">
+                  <span className="pb-2 text-lg">Observaciones</span>
+                  <textarea
+                    name="observaciones"
+                    cols="40"
+                    rows="5"
+                    placeholder="Escribe aquí tus observaciones"
+                    className="input-general text-lg"
+                    defaultValue={queryData.Avance.observaciones}
+                    onClick={() => setAviso(false)}
+                    required
+                  ></textarea>
+                </div>
+              </PrivateComponent>
             </div>
           </>
         )}
@@ -204,7 +246,7 @@ const ActualizarAvance = () => {
           <>
             <div className="grid grid-cols-3 gap-1 w-auto">
               <div className="form-general">
-                <span className="pr-2">Proyecto</span>
+                <span className="pr-2 text-lg">Proyecto</span>
                 <input
                   type="text"
                   name="proyecto"
@@ -214,7 +256,7 @@ const ActualizarAvance = () => {
                 />
               </div>
               <div className="form-general">
-                <span className="pr-2">Fecha</span>
+                <span className="pr-2 text-lg">Fecha</span>
                 <input
                   type="text"
                   name="fechaAvance"
@@ -224,7 +266,7 @@ const ActualizarAvance = () => {
                 />
               </div>
               <div className="form-general">
-                <span className="pr-2">Creado por</span>
+                <span className="pr-2 text-lg">Creado por</span>
                 <input
                   type="text"
                   name="creadoPor"
@@ -238,36 +280,41 @@ const ActualizarAvance = () => {
                 />
               </div>
             </div>
-            <div className="mt-7 flex flex-col items-center">
-              <span className="pb-2">Descripción</span>
-              <textarea
-                name="descripcion"
-                cols="40"
-                rows="5"
-                placeholder="Escribe aquí tu descripción"
-                className="input-general"
-                defaultValue={queryData.Avance.descripcion}
-              ></textarea>
+            <div className="grid grid-cols-2 gap-3 w-auto">
+              <div className="mt-10 flex flex-col items-center">
+                <span className="pb-2 text-lg">Descripción</span>
+                <textarea
+                  name="descripcion"
+                  cols="40"
+                  rows="5"
+                  placeholder="Escribe aquí tu descripción"
+                  className="input-general text-lg"
+                  defaultValue={queryData.Avance.descripcion}
+                  onClick={() => setAviso(false)}
+                  required
+                ></textarea>
+              </div>
+              <PrivateComponent roleList={["LIDER", "ADMINISTRADOR"]}>
+                <div className="mt-10 flex flex-col items-center">
+                  <span className="pb-2 text-lg">Observaciones</span>
+                  <textarea
+                    name="observaciones"
+                    cols="40"
+                    rows="5"
+                    placeholder="Escribe aquí tus observaciones"
+                    className="input-general text-lg"
+                    defaultValue={queryData.Avance.observaciones}
+                    onClick={() => setAviso(false)}
+                    required
+                  ></textarea>
+                </div>
+              </PrivateComponent>
             </div>
           </>
         )}
-        <PrivateComponent roleList={["LIDER", "ADMINISTRADOR"]}>
-          <div className="mt-7 flex flex-col items-center">
-            <span className="pb-2">Observaciones</span>
-            <textarea
-              name="observaciones"
-              cols="40"
-              rows="5"
-              placeholder="Escribe aquí tus observaciones"
-              className="input-general"
-              defaultValue={queryData.Avance.observaciones}
-              required
-            ></textarea>
-          </div>
-        </PrivateComponent>
 
         <div className="form-general">
-          <button className="btn-general mt-4 text-xl" type="submit">
+          <button className="btn-general mt-6 text-2xl" type="submit">
             Actualizar
           </button>
         </div>
