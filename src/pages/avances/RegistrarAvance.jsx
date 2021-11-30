@@ -76,13 +76,15 @@ const RegistrarAvance = () => {
 
   return (
     <div>
-      <div className="text-center mt-20">
-        <div className="flex justify-start ml-10">
+      <div className="text-center">
+        <div className="navbar">
+          <span>Registro de Avances</span>
+        </div>
+        <div className="flex justify-start ml-10 mt-10">
           <Link to="/avances" className="btn-general">
             <i className="fas fa-arrow-left"></i>
           </Link>
         </div>
-        <span className="titulo-general">Registro de Avances</span>
       </div>
       <form
         onSubmit={submitForm}
@@ -92,12 +94,12 @@ const RegistrarAvance = () => {
       >
         <div className="grid grid-cols-1 w-auto">
           <div className="form-general">
-            <span className="pr-2">Proyecto</span>
+            <span className="pr-2 text-lg">Proyecto</span>
             <select
               name="proyecto"
               type="text"
               defaultValue=""
-              className="input-general"
+              className="input-general text-lg"
               required
             >
               <option value="" disabled>
@@ -113,15 +115,15 @@ const RegistrarAvance = () => {
                 })}
             </select>
           </div>
-          <div className="grid grid-cols-1 w-auto">
+          <div className="grid grid-cols-1 w-auto mt-4">
             <div className="mt-9 flex flex-col items-center">
-              <span className="pb-2">Descripción</span>
+              <span className="pb-2 text-lg">Descripción</span>
               <textarea
                 name="descripcion"
                 cols="40"
                 rows="5"
                 placeholder="Escribe aquí tu descripción"
-                className="input-general"
+                className="input-general text-lg"
                 required
               ></textarea>
             </div>
@@ -140,7 +142,7 @@ const RegistrarAvance = () => {
           </div>
         </div>
         <div className="form-general">
-          <button className="btn-general mt-4 text-xl" type="submit">
+          <button className="btn-general mt-6 text-2xl" type="submit">
             Registrar
           </button>
         </div>

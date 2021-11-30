@@ -6,19 +6,18 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { useUser } from "../../context/userContext";
 import { OBTENER_AVANCES_POR_USUARIO } from "graphql/avances/queries";
-import { OBTENER_AVANCES_POR_LIDER } from "graphql/avances/queries";
 import { OBTENER_AVANCES } from "graphql/avances/queries";
 import PrivateComponent from "components/PrivateComponent";
 
 const IndexAvances = () => {
   const { userData } = useUser();
-
   const {
     data: queryAvances,
     error: errorAvances,
     loading: loadingAvances,
     refetch: refetchAvances,
   } = useQuery(OBTENER_AVANCES);
+
   const {
     data: queryAvanceUsuarios,
     error: errorAvanceUsuarios,
@@ -60,17 +59,17 @@ const IndexAvances = () => {
 
   return (
     <div>
-      <div className="text-center mt-20">
-        <span className="titulo-general">Avances</span>
+      <div className="navbar">
+        <span>Avances</span>
       </div>
-      <div className="flex flex-row-reverse flex-nowrap mr-8 mt-5 gap-2">
+      <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
         <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
-          <Link to="registrar" className="btn-general">
+          <Link to="registrar" className="btn-general text-xl">
             Registrar Avance
           </Link>
         </PrivateComponent>
       </div>
-      <div className="flex flex-col justify-center items-center mt-2">
+      <div className="flex flex-col justify-center items-center">
         <div className="table-container">
           {userData.rol === "ADMINISTRADOR" && (
             <>

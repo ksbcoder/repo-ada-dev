@@ -64,30 +64,6 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
   }
 `;
 
-const OBTENER_AVANCES_POR_LIDER = gql`
-  query AvancePorLider($_id: String!) {
-    AvancePorLider(_id: $_id) {
-      _id
-      descripcion
-      observaciones
-      fechaAvance
-      proyecto {
-        _id
-        nombre
-        lider {
-          _id
-          nombre
-        }
-      }
-      creadoPor {
-        _id
-        nombre
-        apellido
-      }
-    }
-  }
-`;
-
 const OBTENER_PROYECTOS = gql`
   query QProyectos {
     Proyectos {
@@ -110,6 +86,5 @@ export {
   OBTENER_AVANCES,
   OBTENER_AVANCE,
   OBTENER_AVANCES_POR_USUARIO,
-  OBTENER_AVANCES_POR_LIDER,
   OBTENER_PROYECTOS,
 };
