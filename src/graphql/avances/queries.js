@@ -59,15 +59,18 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
 `;
 
 const OBTENER_AVANCES_POR_LIDER = gql`
-  query AvancePorUsuario($_id: String!) {
-    AvancePorUsuario(_id: $_id) {
+  query AvancePorLider($_id: String!) {
+    AvancePorLider(_id: $_id) {
       _id
       descripcion
       observaciones
       fechaAvance
       proyecto {
         _id
-        nombre
+        lider {
+          _id
+          nombre
+        }
       }
       creadoPor {
         _id
@@ -100,5 +103,6 @@ export {
   OBTENER_AVANCES,
   OBTENER_AVANCE,
   OBTENER_AVANCES_POR_USUARIO,
+  OBTENER_AVANCES_POR_LIDER,
   OBTENER_PROYECTOS,
 };
