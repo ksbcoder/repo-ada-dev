@@ -8,9 +8,15 @@ const OBTENER_AVANCES = gql`
       observaciones
       fechaAvance
       proyecto {
+        _id
         nombre
+        lider {
+          _id
+          nombre
+        }
       }
       creadoPor {
+        _id
         nombre
         apellido
       }
@@ -67,6 +73,7 @@ const OBTENER_AVANCES_POR_LIDER = gql`
       fechaAvance
       proyecto {
         _id
+        nombre
         lider {
           _id
           nombre

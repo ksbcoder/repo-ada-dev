@@ -13,10 +13,6 @@ const RegistrarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
   const { userData } = useUser();
 
-  useEffect(() => {
-    // console.log("userdata", userData);
-  }, [userData]);
-
   const {
     data: queryProyectosData,
     error: queryProyectosError,
@@ -28,22 +24,9 @@ const RegistrarAvance = () => {
     refetch();
   }, [refetch]);
 
-  /* let proyectoEliminar = [];
-
-  if (queryProyectosData) {
-    console.log("querydata", queryProyectosData);
-    queryProyectosData.Proyectos.forEach((proyecto) => {
-      proyecto.inscripciones.forEach((i) => {
-        console.log("i.estudiante._id", i.estudiante._id);
-        if (i.estudiante._id !== userData._id) {
-          proyectoEliminar = proyecto._id;
-          console.log("proyectoEliminar", proyectoEliminar);
-          delete queryProyectosData.Proyectos.proyecto;
-        }
-      });
-      console.log("quetysinp", queryProyectosData);
-    });
-  } */
+  useEffect(() => {
+    // console.log("queryProyectosData", queryProyectosData);
+  }, [queryProyectosData]);
 
   useEffect(() => {
     if (queryProyectosError) {

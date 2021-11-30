@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router";
+import { useUser } from "../../context/userContext";
+import useFormData from "hooks/useFormData";
 import { useQuery, useMutation } from "@apollo/client";
 import { OBTENER_AVANCE } from "graphql/avances/queries";
-import ReactLoading from "react-loading";
-import useFormData from "hooks/useFormData";
 import { EDITAR_AVANCE } from "graphql/avances/mutations";
-import { toast } from "react-toastify";
 import PrivateComponent from "components/PrivateComponent";
+import { toast } from "react-toastify";
+import ReactLoading from "react-loading";
 
 const ActualizarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
+  const { userData } = useUser();
   const { _id } = useParams();
   const {
     data: queryData,
@@ -88,57 +90,168 @@ const ActualizarAvance = () => {
         ref={form}
         className="flex flex-col items-center mt-5"
       >
-        <div className="grid grid-cols-3 gap-1 w-auto">
-          <div className="form-general">
-            <span className="pr-2">Proyecto</span>
-            <input
-              type="text"
-              name="proyecto"
-              className="input-general"
-              defaultValue={queryData.Avance.proyecto.nombre}
-              readOnly
-              required
-            />
-          </div>
-          <div className="form-general">
-            <span className="pr-2">Fecha</span>
-            <input
-              type="text"
-              name="fechaAvance"
-              className="input-general"
-              defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
-              readOnly
-              required
-            />
-          </div>
-          <div className="form-general">
-            <span className="pr-2">Creado por</span>
-            <input
-              type="text"
-              name="creadoPor"
-              className="input-general"
-              defaultValue={
-                queryData.Avance.creadoPor.nombre +
-                " " +
-                queryData.Avance.creadoPor.apellido
-              }
-              required
-            />
-          </div>
-        </div>
-        <div className="mt-7 flex flex-col items-center">
-          <span className="pb-2">Descripción</span>
-          <textarea
-            name="descripcion"
-            cols="40"
-            rows="5"
-            placeholder="Escribe aquí tu descripción"
-            className="input-general"
-            defaultValue={queryData.Avance.descripcion}
-            required
-          ></textarea>
-        </div>
-        <PrivateComponent roleList={["LIDER"]}>
+        {userData.rol === "ESTUDIANTE" && (
+          <>
+            <div className="grid grid-cols-3 gap-1 w-auto">
+              <div className="form-general">
+                <span className="pr-2">Proyecto</span>
+                <input
+                  type="text"
+                  name="proyecto"
+                  className="input-general"
+                  defaultValue={queryData.Avance.proyecto.nombre}
+                  readOnly
+                  required
+                />
+              </div>
+              <div className="form-general">
+                <span className="pr-2">Fecha</span>
+                <input
+                  type="text"
+                  name="fechaAvance"
+                  className="input-general"
+                  defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
+                  readOnly
+                  required
+                />
+              </div>
+              <div className="form-general">
+                <span className="pr-2">Creado por</span>
+                <input
+                  type="text"
+                  name="creadoPor"
+                  className="input-general"
+                  defaultValue={
+                    queryData.Avance.creadoPor.nombre +
+                    " " +
+                    queryData.Avance.creadoPor.apellido
+                  }
+                  readOnly
+                  required
+                />
+              </div>
+            </div>
+            <div className="mt-7 flex flex-col items-center">
+              <span className="pb-2">Descripción</span>
+              <textarea
+                name="descripcion"
+                cols="40"
+                rows="5"
+                placeholder="Escribe aquí tu descripción"
+                className="input-general"
+                defaultValue={queryData.Avance.descripcion}
+                required
+              ></textarea>
+            </div>
+          </>
+        )}
+        {userData.rol === "LIDER" && (
+          <>
+            <div className="grid grid-cols-3 gap-1 w-auto">
+              <div className="form-general">
+                <span className="pr-2">Proyecto</span>
+                <input
+                  type="text"
+                  name="proyecto"
+                  className="input-general"
+                  defaultValue={queryData.Avance.proyecto.nombre}
+                  readOnly
+                  required
+                />
+              </div>
+              <div className="form-general">
+                <span className="pr-2">Fecha</span>
+                <input
+                  type="text"
+                  name="fechaAvance"
+                  className="input-general"
+                  defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
+                  disabled
+                  required
+                />
+              </div>
+              <div className="form-general">
+                <span className="pr-2">Creado por</span>
+                <input
+                  type="text"
+                  name="creadoPor"
+                  className="input-general"
+                  defaultValue={
+                    queryData.Avance.creadoPor.nombre +
+                    " " +
+                    queryData.Avance.creadoPor.apellido
+                  }
+                  disabled
+                  required
+                />
+              </div>
+            </div>
+            <div className="mt-7 flex flex-col items-center">
+              <span className="pb-2">Descripción</span>
+              <textarea
+                name="descripcion"
+                cols="40"
+                rows="5"
+                placeholder="Escribe aquí tu descripción"
+                className="input-general"
+                defaultValue={queryData.Avance.descripcion}
+                readOnly
+              ></textarea>
+            </div>
+          </>
+        )}
+        {userData.rol === "ADMINISTRADOR" && (
+          <>
+            <div className="grid grid-cols-3 gap-1 w-auto">
+              <div className="form-general">
+                <span className="pr-2">Proyecto</span>
+                <input
+                  type="text"
+                  name="proyecto"
+                  className="input-general"
+                  defaultValue={queryData.Avance.proyecto.nombre}
+                  required
+                />
+              </div>
+              <div className="form-general">
+                <span className="pr-2">Fecha</span>
+                <input
+                  type="text"
+                  name="fechaAvance"
+                  className="input-general"
+                  defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
+                  required
+                />
+              </div>
+              <div className="form-general">
+                <span className="pr-2">Creado por</span>
+                <input
+                  type="text"
+                  name="creadoPor"
+                  className="input-general"
+                  defaultValue={
+                    queryData.Avance.creadoPor.nombre +
+                    " " +
+                    queryData.Avance.creadoPor.apellido
+                  }
+                  required
+                />
+              </div>
+            </div>
+            <div className="mt-7 flex flex-col items-center">
+              <span className="pb-2">Descripción</span>
+              <textarea
+                name="descripcion"
+                cols="40"
+                rows="5"
+                placeholder="Escribe aquí tu descripción"
+                className="input-general"
+                defaultValue={queryData.Avance.descripcion}
+              ></textarea>
+            </div>
+          </>
+        )}
+        <PrivateComponent roleList={["LIDER", "ADMINISTRADOR"]}>
           <div className="mt-7 flex flex-col items-center">
             <span className="pb-2">Observaciones</span>
             <textarea
@@ -148,7 +261,7 @@ const ActualizarAvance = () => {
               placeholder="Escribe aquí tus observaciones"
               className="input-general"
               defaultValue={queryData.Avance.observaciones}
-              /* required */
+              required
             ></textarea>
           </div>
         </PrivateComponent>
