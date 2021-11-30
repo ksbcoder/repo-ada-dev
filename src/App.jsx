@@ -13,15 +13,16 @@ import RegistrarAvance from "pages/avances/RegistrarAvance";
 import ActualizarAvance from "pages/avances/ActualizarAvance";
 import Perfil from "pages/usuarios/Perfil";
 import GestionUsuarios from "pages/usuarios/GestionUsuarios";
+import EditarUsuario from "pages/usuarios/Editar";
 import Login from "pages/login/Login";
 import InfoProyectos from "pages/proyectos/InfoProyectos";
 import { AuthContext } from 'context/authContext';
 import jwt_decode from 'jwt-decode';
 
 
-
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  //uri: "https://adasoft-server.herokuapp.com/graphql", 
+  uri: 'http://localhost:4000/graphql',  
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -54,6 +55,7 @@ function App() {
     }
   };
 
+  
   useEffect(() => {
     if (authToken) {
       const decoded = jwt_decode(authToken);
@@ -83,6 +85,7 @@ function App() {
                   path="usuarios/gestionUsuarios"
                   element={<GestionUsuarios />}
                 />
+                <Route path="usuarios/editar/:_id" element={<EditarUsuario/>}/>
 
                 <Route path="perfil" element={<Perfil />} />
 

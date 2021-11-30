@@ -6,33 +6,45 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { useUser } from "../../context/userContext";
 import { OBTENER_AVANCES_POR_USUARIO } from "graphql/avances/queries";
+import { OBTENER_AVANCES } from "graphql/avances/queries";
+import PrivateComponent from "components/PrivateComponent";
 
 const IndexAvances = () => {
   const { userData } = useUser();
-  const { data, error, loading, refetch } = useQuery(
-    OBTENER_AVANCES_POR_USUARIO,
-    {
-      variables: {
-        _id: userData._id,
-      },
-    }
-  );
+  const {
+    data: queryAvances,
+    error: errorAvances,
+    loading: loadingAvances,
+    refetch: refetchAvances,
+  } = useQuery(OBTENER_AVANCES);
+
+  const {
+    data: queryAvanceUsuarios,
+    error: errorAvanceUsuarios,
+    loading: loadingAvanceUsuarios,
+    refetch: refetchAvaceUsuarios,
+  } = useQuery(OBTENER_AVANCES_POR_USUARIO, {
+    variables: {
+      _id: userData._id,
+    },
+  });
 
   useEffect(() => {
-    console.log("data", data);
-  }, [data]);
+    // console.log("data", queryAvances);
+  }, [queryAvances]);
 
   useEffect(() => {
-    refetch();
-  }, [refetch]);
+    refetchAvances();
+    refetchAvaceUsuarios();
+  }, [refetchAvances, refetchAvaceUsuarios]);
 
   useEffect(() => {
-    if (error) {
+    if (errorAvances || errorAvanceUsuarios) {
       toast.error("Error consultando los avances :(");
     }
-  }, [error]);
+  }, [errorAvances, errorAvanceUsuarios]);
 
-  if (loading) {
+  if (loadingAvances || loadingAvanceUsuarios) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
@@ -47,52 +59,146 @@ const IndexAvances = () => {
 
   return (
     <div>
-      <div className="text-center mt-20">
-        <span className="titulo-general">Avances</span>
+      <div className="navbar">
+        <span>Avances</span>
       </div>
-      <div className="flex flex-row-reverse flex-nowrap mr-8 mt-5 gap-2">
-        <Link to="registrar" className="btn-general">
-          Registrar Avance
-        </Link>
+      <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
+        <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
+          <Link to="registrar" className="btn-general text-xl">
+            Registrar Avance
+          </Link>
+        </PrivateComponent>
       </div>
-      <div className="flex flex-col justify-center items-center mt-2">
+      <div className="flex flex-col justify-center items-center">
         <div className="table-container">
-          <table id="table-list">
-            <thead>
-              <tr>
-                <th>Id Avance</th>
-                <th>Proyecto</th>
-                <th>Fecha</th>
-                <th>Descripción</th>
-                <th>Observaciones</th>
-                <th>Creado por</th>
-                <th>Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data &&
-                data.AvancePorUsuario.map((u) => {
-                  return (
-                    <tr key={u._id}>
-                      <td>{u._id.slice(19)}</td>
-                      <td>{u.proyecto.nombre}</td>
-                      <td>{u.fechaAvance.slice(0, 10)}</td>
-                      <td>{u.descripcion}</td>
-                      <td>{u.observaciones}</td>
-                      <td>{u.creadoPor.nombre + " " + u.creadoPor.apellido}</td>
-                      <td>
-                        <Link
-                          to={`actualizar/${u._id}`}
-                          className="btn-general-editar"
-                        >
-                          Actualizar
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+          {userData.rol === "ADMINISTRADOR" && (
+            <>
+              <table id="table-list">
+                <thead>
+                  <tr>
+                    <th>Id Avance</th>
+                    <th>Proyecto</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Observaciones</th>
+                    <th>Creado por</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {queryAvances &&
+                    queryAvances.Avances.map((u) => {
+                      return (
+                        <tr key={u._id}>
+                          <td>{u._id.slice(19)}</td>
+                          <td>{u.proyecto.nombre}</td>
+                          <td>{u.fechaAvance.slice(0, 10)}</td>
+                          <td>{u.descripcion}</td>
+                          <td>{u.observaciones}</td>
+                          <td>
+                            {u.creadoPor.nombre + " " + u.creadoPor.apellido}
+                          </td>
+                          <td>
+                            <Link
+                              to={`actualizar/${u._id}`}
+                              className="btn-general-editar"
+                            >
+                              Actualizar
+                            </Link>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </>
+          )}
+          {userData.rol === "LIDER" && (
+            <>
+              <table id="table-list">
+                <thead>
+                  <tr>
+                    <th>Id Avance</th>
+                    <th>Proyecto</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Observaciones</th>
+                    <th>Creado por</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {queryAvances &&
+                    queryAvances.Avances.map((u) => {
+                      if (u.proyecto.lider._id === userData._id) {
+                        return (
+                          <tr key={u._id}>
+                            <td>{u._id.slice(19)}</td>
+                            <td>{u.proyecto.nombre}</td>
+                            <td>{u.fechaAvance.slice(0, 10)}</td>
+                            <td>{u.descripcion}</td>
+                            <td>{u.observaciones}</td>
+                            <td>
+                              {u.creadoPor.nombre + " " + u.creadoPor.apellido}
+                            </td>
+                            <td>
+                              <Link
+                                to={`actualizar/${u._id}`}
+                                className="btn-general-editar"
+                              >
+                                Actualizar
+                              </Link>
+                            </td>
+                          </tr>
+                        );
+                      }
+                    })}
+                </tbody>
+              </table>
+            </>
+          )}
+          {userData.rol === "ESTUDIANTE" && (
+            <>
+              <table id="table-list">
+                <thead>
+                  <tr>
+                    <th>Id Avance</th>
+                    <th>Proyecto</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Observaciones</th>
+                    <th>Creado por</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {queryAvanceUsuarios &&
+                    queryAvanceUsuarios.AvancePorUsuario.map((u) => {
+                      return (
+                        <tr key={u._id}>
+                          <td>{u._id.slice(19)}</td>
+                          <td>{u.proyecto.nombre}</td>
+                          <td>{u.fechaAvance.slice(0, 10)}</td>
+                          <td>{u.descripcion}</td>
+                          <td>{u.observaciones}</td>
+                          <td>
+                            {u.creadoPor.nombre + " " + u.creadoPor.apellido}
+                          </td>
+                          <td>
+                            <Link
+                              to={`actualizar/${u._id}`}
+                              className="btn-general-editar"
+                            >
+                              Actualizar
+                            </Link>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       </div>
     </div>

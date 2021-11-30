@@ -8,9 +8,15 @@ const OBTENER_AVANCES = gql`
       observaciones
       fechaAvance
       proyecto {
+        _id
         nombre
+        lider {
+          _id
+          nombre
+        }
       }
       creadoPor {
+        _id
         nombre
         apellido
       }
