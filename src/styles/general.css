@@ -11,7 +11,7 @@
 }
 
 .form-general {
-  @apply mt-9 flex flex-row items-center justify-center;
+  @apply mt-7 flex flex-row items-center justify-center;
 }
 
 .input-general {
