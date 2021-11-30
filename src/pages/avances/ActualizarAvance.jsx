@@ -52,13 +52,13 @@ const ActualizarAvance = () => {
   useEffect(() => {
     if (mutationData && mutationData.editarAvance === null) {
       // console.log("md terminado", mutationData.editarAvance);
-      toast.warning("No se editó el avance :(");
+      toast.warning("No se editó el avance 🙁");
     } else if (mutationData && mutationData.editarAvance !== null) {
       // console.log("md desarrollo", mutationData.editarAvance);
-      toast.success(" Avance Actualizado ;)");
+      toast.success(" Avance Actualizado 😊");
     }
     if (mutationError) {
-      toast.error("Error actualizando el avance :(");
+      toast.error("Error actualizando el avance 😔");
     }
   }, [mutationData, mutationError]);
 
@@ -85,9 +85,9 @@ const ActualizarAvance = () => {
           <Link to="/avances" className="btn-general">
             <i className="fas fa-arrow-left"></i>
           </Link>
-          {aviso == true && (
-            <span className="ml-8 mt-2 bg-blue-300 bg-opacity-50 p-2 rounded-md text-blue-700 animate-bounce">
-              Si no actualizaste algo, haz clic en el botón atrás
+          {aviso === true && (
+            <span className="ml-8 bg-blue-300 bg-opacity-60 p-2 rounded-md text-blue-700 animate-bounce">
+              Si no actualizaste algo, haz clic en el botón atrás o de cancelar
             </span>
           )}
         </div>
@@ -96,7 +96,7 @@ const ActualizarAvance = () => {
         onSubmit={submitForm}
         onChange={updateFormData}
         ref={form}
-        className="flex flex-col items-center mt-8"
+        className="flex flex-col items-center mt-12 w-auto"
       >
         {userData.rol === "ESTUDIANTE" && (
           <>
@@ -171,43 +171,49 @@ const ActualizarAvance = () => {
         )}
         {userData.rol === "LIDER" && (
           <>
-            <div className="grid grid-cols-3 gap-1 w-auto">
-              <div className="form-general">
+            <div className="grid grid-cols-3 gap-6 w-auto">
+              <div className="flex flex-col justify-center items-center">
                 <span className="pr-2 text-lg">Proyecto</span>
-                <input
-                  type="text"
-                  name="proyecto"
-                  className="input-general"
-                  defaultValue={queryData.Avance.proyecto.nombre}
-                  readOnly
-                  required
-                />
+                <div className="form-general">
+                  <input
+                    type="text"
+                    name="proyecto"
+                    className="input-general"
+                    defaultValue={queryData.Avance.proyecto.nombre}
+                    readOnly
+                    required
+                  />
+                </div>
               </div>
-              <div className="form-general">
+              <div className="flex flex-col justify-center items-center">
                 <span className="pr-2 text-lg">Fecha</span>
-                <input
-                  type="text"
-                  name="fechaAvance"
-                  className="input-general"
-                  defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
-                  disabled
-                  required
-                />
+                <div className="form-general">
+                  <input
+                    type="text"
+                    name="fechaAvance"
+                    className="input-general"
+                    defaultValue={queryData.Avance.fechaAvance.slice(0, 10)}
+                    disabled
+                    required
+                  />
+                </div>
               </div>
-              <div className="form-general">
+              <div className="flex flex-col justify-center items-center">
                 <span className="pr-2 text-lg">Creado por</span>
-                <input
-                  type="text"
-                  name="creadoPor"
-                  className="input-general"
-                  defaultValue={
-                    queryData.Avance.creadoPor.nombre +
-                    " " +
-                    queryData.Avance.creadoPor.apellido
-                  }
-                  disabled
-                  required
-                />
+                <div className="form-general">
+                  <input
+                    type="text"
+                    name="creadoPor"
+                    className="input-general"
+                    defaultValue={
+                      queryData.Avance.creadoPor.nombre +
+                      " " +
+                      queryData.Avance.creadoPor.apellido
+                    }
+                    disabled
+                    required
+                  />
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 w-auto">
@@ -220,7 +226,7 @@ const ActualizarAvance = () => {
                   placeholder="Escribe aquí tu descripción"
                   className="input-general text-lg"
                   defaultValue={queryData.Avance.descripcion}
-                  onClick={() => setAviso(false)}
+                  onChange={() => setAviso(false)}
                   readOnly
                 ></textarea>
               </div>
@@ -234,7 +240,7 @@ const ActualizarAvance = () => {
                     placeholder="Escribe aquí tus observaciones"
                     className="input-general text-lg"
                     defaultValue={queryData.Avance.observaciones}
-                    onClick={() => setAviso(false)}
+                    onChange={() => setAviso(false)}
                     required
                   ></textarea>
                 </div>
@@ -314,9 +320,14 @@ const ActualizarAvance = () => {
         )}
 
         <div className="form-general">
-          <button className="btn-general mt-6 text-2xl" type="submit">
-            Actualizar
-          </button>
+          <div className="grid grid-cols-2 gap-6 mt-5 text-center">
+            <Link to="/avances" className="btn-general-cancelar mt-6 text-2xl">
+              Cancelar
+            </Link>
+            <button className="btn-general mt-6 text-2xl" type="submit">
+              Actualizar
+            </button>
+          </div>
         </div>
       </form>
     </div>

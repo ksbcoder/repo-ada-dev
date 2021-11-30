@@ -6,12 +6,10 @@ import { useQuery, useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import useFormData from "hooks/useFormData";
-import { useUser } from "../../context/userContext";
 import PrivateComponent from "components/PrivateComponent";
 
 const RegistrarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
-  const { userData } = useUser();
 
   const {
     data: queryProyectosData,
@@ -51,13 +49,13 @@ const RegistrarAvance = () => {
   useEffect(() => {
     if (mutationData && mutationData.crearAvance === null) {
       // console.log("md terminado", mutationData.crearAvance);
-      toast.warning("No se creó el avance :(");
+      toast.warning("No se creó el avance 🙁");
     } else if (mutationData && mutationData.crearAvance !== null) {
       // console.log("md desarrollo", mutationData.crearAvance);
-      toast.success("Avance creado :)");
+      toast.success("Avance creado 😊");
     }
     if (mutationError) {
-      toast.error("Error creando el avance :(");
+      toast.error("Error creando el avance 😔");
     }
   }, [mutationData, mutationError]);
 
@@ -142,9 +140,14 @@ const RegistrarAvance = () => {
           </div>
         </div>
         <div className="form-general">
-          <button className="btn-general mt-6 text-2xl" type="submit">
-            Registrar
-          </button>
+          <div className="grid grid-cols-2 gap-6 mt-5 text-center">
+            <Link to="/avances" className="btn-general-cancelar mt-6 text-2xl">
+              Cancelar
+            </Link>
+            <button className="btn-general mt-6 text-2xl" type="submit">
+              Registrar
+            </button>
+          </div>
         </div>
       </form>
     </div>

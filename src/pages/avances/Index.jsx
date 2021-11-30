@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ReactLoading from "react-loading";
 import { useUser } from "../../context/userContext";
 import { OBTENER_AVANCES_POR_USUARIO } from "graphql/avances/queries";
 import { OBTENER_AVANCES } from "graphql/avances/queries";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 import PrivateComponent from "components/PrivateComponent";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 
 const IndexAvances = () => {
   const { userData } = useUser();
@@ -94,7 +98,26 @@ const IndexAvances = () => {
                           <td>{u.proyecto.nombre}</td>
                           <td>{u.fechaAvance.slice(0, 10)}</td>
                           <td>{u.descripcion}</td>
-                          <td>{u.observaciones}</td>
+                          <td>
+                            <Accordion
+                              TransitionProps={{ unmountOnExit: true }}
+                            >
+                              <AccordionSummary
+                                expandIcon={
+                                  <i className="fas fa-chevron-down"></i>
+                                }
+                                aria-controls="accordion"
+                                id="accordion"
+                              >
+                                <Typography className="pr-2">
+                                  Observaciones
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Typography>{u.observaciones}</Typography>
+                              </AccordionDetails>
+                            </Accordion>
+                          </td>
                           <td>
                             {u.creadoPor.nombre + " " + u.creadoPor.apellido}
                           </td>
@@ -137,7 +160,26 @@ const IndexAvances = () => {
                             <td>{u.proyecto.nombre}</td>
                             <td>{u.fechaAvance.slice(0, 10)}</td>
                             <td>{u.descripcion}</td>
-                            <td>{u.observaciones}</td>
+                            <td>
+                              <Accordion
+                                TransitionProps={{ unmountOnExit: true }}
+                              >
+                                <AccordionSummary
+                                  expandIcon={
+                                    <i className="fas fa-chevron-down"></i>
+                                  }
+                                  aria-controls="accordion"
+                                  id="accordion"
+                                >
+                                  <Typography className="pr-2">
+                                    Observaciones
+                                  </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                  <Typography>{u.observaciones}</Typography>
+                                </AccordionDetails>
+                              </Accordion>
+                            </td>
                             <td>
                               {u.creadoPor.nombre + " " + u.creadoPor.apellido}
                             </td>
@@ -146,7 +188,7 @@ const IndexAvances = () => {
                                 to={`actualizar/${u._id}`}
                                 className="btn-general-editar"
                               >
-                                Actualizar
+                                Modificar
                               </Link>
                             </td>
                           </tr>
@@ -180,7 +222,26 @@ const IndexAvances = () => {
                           <td>{u.proyecto.nombre}</td>
                           <td>{u.fechaAvance.slice(0, 10)}</td>
                           <td>{u.descripcion}</td>
-                          <td>{u.observaciones}</td>
+                          <td>
+                            <Accordion
+                              TransitionProps={{ unmountOnExit: true }}
+                            >
+                              <AccordionSummary
+                                expandIcon={
+                                  <i className="fas fa-chevron-down"></i>
+                                }
+                                aria-controls="accordion"
+                                id="accordion"
+                              >
+                                <Typography className="pr-2">
+                                  Observaciones
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Typography>{u.observaciones}</Typography>
+                              </AccordionDetails>
+                            </Accordion>
+                          </td>
                           <td>
                             {u.creadoPor.nombre + " " + u.creadoPor.apellido}
                           </td>
