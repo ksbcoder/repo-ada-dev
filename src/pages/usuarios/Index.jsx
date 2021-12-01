@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 
 
+
 const IndexUsuarios = () => {
 
   const { form, formData, updateFormData } = useFormData(null); 
@@ -21,11 +22,20 @@ const IndexUsuarios = () => {
   const submitForm = (e) => {
     e.preventDefault(); 
     
-    delete formData.confirmPassword;     
-    console.log(formData);
-    crearUsuario({
-     variables: {...formData },
-    });
+    if( formData.password !== formData.confirmPassword){
+      toast.warning('Las contraseñas no coiciden')
+      console.log('las contraseñas no coinciden'+ formData.password + ' -- ' + formData.confirmPassword)     
+    }else{
+      toast.success('las contraseñas coinciden');
+      console.log('las contraseñas coinciden'+ formData.password + ' -- ' + formData.confirmPassword);
+      crearUsuario({
+        variables: {...formData },
+      });
+      document.getElementById("formularioRegistro").reset();
+      
+    }   
+    
+    
   };
 
   useEffect(() => {
@@ -58,6 +68,7 @@ const IndexUsuarios = () => {
         onSubmit={submitForm}
         onChange={updateFormData}
         ref={form}
+        id= "formularioRegistro"
         className='flex flex-col items-center justify-center'>
         <Input
           label='Nombre:'
@@ -87,12 +98,14 @@ const IndexUsuarios = () => {
         <Input
           label='Contraseña:'
           type='password'
-          name='password'                        
+          name='password'
+          id='password'                        
           required={true} />
         <Input
           label='Confirmar Contraseña:'
           type='password'
-          name='confirmPassword'                        
+          name='confirmPassword'
+          id='confirmPassword'                        
           required={true} />
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}
