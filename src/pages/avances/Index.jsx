@@ -15,6 +15,10 @@ import Typography from "@mui/material/Typography";
 
 const IndexAvances = () => {
   const { userData } = useUser();
+  useEffect(() => {
+    console.log("data", userData);
+  }, [userData]);
+
   const {
     data: queryAvances,
     error: errorAvances,
@@ -32,10 +36,6 @@ const IndexAvances = () => {
       _id: userData._id,
     },
   });
-
-  useEffect(() => {
-    // console.log("data", queryAvances);
-  }, [queryAvances]);
 
   useEffect(() => {
     refetchAvances();

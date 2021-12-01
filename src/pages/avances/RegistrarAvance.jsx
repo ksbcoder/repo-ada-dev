@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import useFormData from "hooks/useFormData";
 import PrivateComponent from "components/PrivateComponent";
+import { OBTENER_PROYECTOS_LITE } from "graphql/avances/queries";
 
 const RegistrarAvance = () => {
   const { form, formData, updateFormData } = useFormData(null);
@@ -16,7 +17,7 @@ const RegistrarAvance = () => {
     error: queryProyectosError,
     loading: queryProyectosLoading,
     refetch,
-  } = useQuery(OBTENER_PROYECTOS);
+  } = useQuery(OBTENER_PROYECTOS_LITE);
 
   useEffect(() => {
     refetch();
@@ -104,7 +105,7 @@ const RegistrarAvance = () => {
                 Seleccione una opción...
               </option>
               {queryProyectosData &&
-                queryProyectosData.Proyectos.map((el) => {
+                queryProyectosData.ProyectosRegistrar.map((el) => {
                   return (
                     <option key={el._id} value={el._id}>
                       {el.nombre}

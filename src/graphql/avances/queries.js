@@ -82,9 +82,19 @@ const OBTENER_PROYECTOS = gql`
   }
 `;
 
+const OBTENER_PROYECTOS_LITE = gql`
+  query ProyectosRegistrar {
+    ProyectosRegistrar {
+      _id
+      nombre
+    }
+  }
+`;
+
 export {
   OBTENER_AVANCES,
   OBTENER_AVANCE,
   OBTENER_AVANCES_POR_USUARIO,
   OBTENER_PROYECTOS,
+  OBTENER_PROYECTOS_LITE,
 };
