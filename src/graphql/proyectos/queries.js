@@ -7,7 +7,17 @@ const GET_PROYECTOS = gql`
             nombre
             presupuesto
             fechaInicio
-            
+            estado
+            fase
+            lider {
+              _id  
+              }
+            objetivos {
+              _id
+            }
+            avances {
+              _id
+            }
             
         }
     }
