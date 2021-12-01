@@ -91,12 +91,12 @@ tr:hover {
 }
 
 .btn-editar {
-  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 mx-2 text-gray-500 bg-blue-400 hover:bg-blue-700 
+  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 m-2 text-gray-500 bg-blue-400 hover:bg-blue-700 
   hover:text-white transition-all shadow-xl;
 }
 
 .btn-eliminar {
-  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 mx-2 text-gray-500 bg-red-500 hover:bg-red-700 
+  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 m-2 text-gray-500 bg-red-500 hover:bg-red-700 
   hover:text-white transition-all shadow-xl;
 }
 
