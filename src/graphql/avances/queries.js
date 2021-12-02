@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const OBTENER_AVANCES = gql`
-  query QAvances {
+  query Avances {
     Avances {
       _id
       descripcion
@@ -65,7 +65,7 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
 `;
 
 const OBTENER_PROYECTOS = gql`
-  query QProyectos {
+  query Proyectos {
     Proyectos {
       _id
       nombre

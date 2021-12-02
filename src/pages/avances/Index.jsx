@@ -59,99 +59,38 @@ const IndexAvances = () => {
   }
 
   if (userData.rol === "LIDER" || userData.rol === "ADMINISTRADOR") {
-    return (
-      <div>
-        <div className="navbar">
-          <span>Avances</span>
-        </div>
-        <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
-          <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
-            <Link to="registrar" className="btn-general text-xl">
-              Registrar Avance
-            </Link>
-          </PrivateComponent>
-        </div>
-        <div className="flex flex-col justify-center items-center">
-          <div className="table-container">
-            {userData.rol === "ADMINISTRADOR" && (
-              <>
-                <table id="table-list">
-                  <thead>
-                    <tr>
-                      <th>Id Avance</th>
-                      <th>Proyecto</th>
-                      <th>Fecha</th>
-                      <th>Descripción</th>
-                      <th>Observaciones</th>
-                      <th>Creado por</th>
-                      <th>Opciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {queryAvances &&
-                      queryAvances.Avances.map((u) => {
-                        return (
-                          <tr key={u._id}>
-                            <td>{u._id.slice(19)}</td>
-                            <td>{u.proyecto.nombre}</td>
-                            <td>{u.fechaAvance.slice(0, 10)}</td>
-                            <td>{u.descripcion}</td>
-                            <td>
-                              <Accordion
-                                TransitionProps={{ unmountOnExit: true }}
-                              >
-                                <AccordionSummary
-                                  expandIcon={
-                                    <i className="fas fa-chevron-down"></i>
-                                  }
-                                  aria-controls="accordion"
-                                  id="accordion"
-                                >
-                                  <Typography className="pr-2">
-                                    Observaciones
-                                  </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                  <Typography>{u.observaciones}</Typography>
-                                </AccordionDetails>
-                              </Accordion>
-                            </td>
-                            <td>
-                              {u.creadoPor.nombre + " " + u.creadoPor.apellido}
-                            </td>
-                            <td>
-                              <Link
-                                to={`actualizar/${u._id}`}
-                                className="btn-general-editar"
-                              >
-                                Actualizar
-                              </Link>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </>
-            )}
-            {userData.rol === "LIDER" && (
-              <>
-                <table id="table-list">
-                  <thead>
-                    <tr>
-                      <th>Id Avance</th>
-                      <th>Proyecto</th>
-                      <th>Fecha</th>
-                      <th>Descripción</th>
-                      <th>Observaciones</th>
-                      <th>Creado por</th>
-                      <th>Opciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {queryAvances &&
-                      queryAvances.Avances.map((u) => {
-                        if (u.proyecto.lider._id === userData._id) {
+    if (!loadingAvances) {
+      return (
+        <div>
+          <div className="navbar">
+            <span>Avances</span>
+          </div>
+          <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
+            <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
+              <Link to="registrar" className="btn-general text-xl">
+                Registrar Avance
+              </Link>
+            </PrivateComponent>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <div className="table-container">
+              {userData.rol === "ADMINISTRADOR" && (
+                <>
+                  <table id="table-list">
+                    <thead>
+                      <tr>
+                        <th>Id Avance</th>
+                        <th>Proyecto</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Observaciones</th>
+                        <th>Creado por</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {queryAvances &&
+                        queryAvances.Avances.map((u) => {
                           return (
                             <tr key={u._id}>
                               <td>{u._id.slice(19)}</td>
@@ -188,101 +127,170 @@ const IndexAvances = () => {
                                   to={`actualizar/${u._id}`}
                                   className="btn-general-editar"
                                 >
-                                  Modificar
+                                  Actualizar
                                 </Link>
                               </td>
                             </tr>
                           );
-                        }
-                      })}
-                  </tbody>
-                </table>
-              </>
-            )}
+                        })}
+                    </tbody>
+                  </table>
+                </>
+              )}
+              {userData.rol === "LIDER" && (
+                <>
+                  <table id="table-list">
+                    <thead>
+                      <tr>
+                        <th>Id Avance</th>
+                        <th>Proyecto</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Observaciones</th>
+                        <th>Creado por</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {queryAvances &&
+                        queryAvances.Avances.map((u) => {
+                          if (u.proyecto.lider._id === userData._id) {
+                            return (
+                              <tr key={u._id}>
+                                <td>{u._id.slice(19)}</td>
+                                <td>{u.proyecto.nombre}</td>
+                                <td>{u.fechaAvance.slice(0, 10)}</td>
+                                <td>{u.descripcion}</td>
+                                <td>
+                                  <Accordion
+                                    TransitionProps={{ unmountOnExit: true }}
+                                  >
+                                    <AccordionSummary
+                                      expandIcon={
+                                        <i className="fas fa-chevron-down"></i>
+                                      }
+                                      aria-controls="accordion"
+                                      id="accordion"
+                                    >
+                                      <Typography className="pr-2">
+                                        Observaciones
+                                      </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                      <Typography>{u.observaciones}</Typography>
+                                    </AccordionDetails>
+                                  </Accordion>
+                                </td>
+                                <td>
+                                  {u.creadoPor.nombre +
+                                    " " +
+                                    u.creadoPor.apellido}
+                                </td>
+                                <td>
+                                  <Link
+                                    to={`actualizar/${u._id}`}
+                                    className="btn-general-editar"
+                                  >
+                                    Modificar
+                                  </Link>
+                                </td>
+                              </tr>
+                            );
+                          }
+                        })}
+                    </tbody>
+                  </table>
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   } else if (userData.rol === "ESTUDIANTE") {
-    return (
-      <div>
-        <div className="navbar">
-          <span>Avances</span>
-        </div>
-        <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
-          <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
-            <Link to="registrar" className="btn-general-submit text-xl">
-              Registrar Avance
-            </Link>
-          </PrivateComponent>
-        </div>
-        <div className="flex flex-col justify-center items-center">
-          <div className="table-container">
-            {userData.rol === "ESTUDIANTE" && (
-              <>
-                <table id="table-list">
-                  <thead>
-                    <tr>
-                      <th>Id Avance</th>
-                      <th>Proyecto</th>
-                      <th>Fecha</th>
-                      <th>Descripción</th>
-                      <th>Observaciones</th>
-                      <th>Creado por</th>
-                      <th>Opciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {queryAvanceUsuarios &&
-                      queryAvanceUsuarios.AvancePorUsuario.map((u) => {
-                        return (
-                          <tr key={u._id}>
-                            <td>{u._id.slice(19)}</td>
-                            <td>{u.proyecto.nombre}</td>
-                            <td>{u.fechaAvance.slice(0, 10)}</td>
-                            <td>{u.descripcion}</td>
-                            <td>
-                              <Accordion
-                                TransitionProps={{ unmountOnExit: true }}
-                              >
-                                <AccordionSummary
-                                  expandIcon={
-                                    <i className="fas fa-chevron-down"></i>
-                                  }
-                                  aria-controls="accordion"
-                                  id="accordion"
+    if (!loadingAvances) {
+      return (
+        <div>
+          <div className="navbar">
+            <span>Avances</span>
+          </div>
+          <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
+            <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
+              <Link to="registrar" className="btn-general-submit text-xl">
+                Registrar Avance
+              </Link>
+            </PrivateComponent>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <div className="table-container">
+              {userData.rol === "ESTUDIANTE" && (
+                <>
+                  <table id="table-list">
+                    <thead>
+                      <tr>
+                        <th>Id Avance</th>
+                        <th>Proyecto</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Observaciones</th>
+                        <th>Creado por</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {queryAvanceUsuarios &&
+                        queryAvanceUsuarios.AvancePorUsuario.map((u) => {
+                          return (
+                            <tr key={u._id}>
+                              <td>{u._id.slice(19)}</td>
+                              <td>{u.proyecto.nombre}</td>
+                              <td>{u.fechaAvance.slice(0, 10)}</td>
+                              <td>{u.descripcion}</td>
+                              <td>
+                                <Accordion
+                                  TransitionProps={{ unmountOnExit: true }}
                                 >
-                                  <Typography className="pr-2">
-                                    Observaciones
-                                  </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                  <Typography>{u.observaciones}</Typography>
-                                </AccordionDetails>
-                              </Accordion>
-                            </td>
-                            <td>
-                              {u.creadoPor.nombre + " " + u.creadoPor.apellido}
-                            </td>
-                            <td>
-                              <Link
-                                to={`actualizar/${u._id}`}
-                                className="btn-general-editar"
-                              >
-                                Actualizar
-                              </Link>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </>
-            )}
+                                  <AccordionSummary
+                                    expandIcon={
+                                      <i className="fas fa-chevron-down"></i>
+                                    }
+                                    aria-controls="accordion"
+                                    id="accordion"
+                                  >
+                                    <Typography className="pr-2">
+                                      Observaciones
+                                    </Typography>
+                                  </AccordionSummary>
+                                  <AccordionDetails>
+                                    <Typography>{u.observaciones}</Typography>
+                                  </AccordionDetails>
+                                </Accordion>
+                              </td>
+                              <td>
+                                {u.creadoPor.nombre +
+                                  " " +
+                                  u.creadoPor.apellido}
+                              </td>
+                              <td>
+                                <Link
+                                  to={`actualizar/${u._id}`}
+                                  className="btn-general-editar"
+                                >
+                                  Actualizar
+                                </Link>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 };
 

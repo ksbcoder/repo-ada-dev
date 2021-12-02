@@ -23,7 +23,7 @@ const RegistrarAvance = () => {
   }, [refetch]);
 
   useEffect(() => {
-    // console.log("queryProyectosData", queryProyectosData);
+    console.log("queryProyectosData", queryProyectosData);
   }, [queryProyectosData]);
 
   useEffect(() => {
@@ -72,86 +72,94 @@ const RegistrarAvance = () => {
     );
   }
 
-  return (
-    <div>
-      <div className="text-center">
-        <div className="navbar">
-          <span>Registro de Avances</span>
-        </div>
-        <div className="flex justify-start ml-10 mt-10">
-          <Link to="/avances" className="btn-general">
-            <i className="fas fa-arrow-left"></i>
-          </Link>
-        </div>
-      </div>
-      <form
-        onSubmit={submitForm}
-        onChange={updateFormData}
-        ref={form}
-        className="flex flex-col items-center mt-5"
-      >
-        <div className="grid grid-cols-1 w-auto">
-          <div className="form-general">
-            <span className="pr-2 text-lg">Proyecto</span>
-            <select
-              name="proyecto"
-              type="text"
-              defaultValue=""
-              className="input-general text-lg"
-              required
-            >
-              <option value="" disabled>
-                Seleccione una opción...
-              </option>
-              {queryProyectosData &&
-                queryProyectosData.ProyectosRegistrar.map((el) => {
-                  return (
-                    <option key={el._id} value={el._id}>
-                      {el.nombre}
-                    </option>
-                  );
-                })}
-            </select>
+  if (!queryProyectosLoading) {
+    return (
+      <div>
+        <div className="text-center">
+          <div className="navbar">
+            <span>Registro de Avances</span>
           </div>
-          <div className="grid grid-cols-1 w-auto mt-4">
-            <div className="mt-9 flex flex-col items-center">
-              <span className="pb-2 text-lg">Descripción</span>
-              <textarea
-                name="descripcion"
-                cols="40"
-                rows="5"
-                placeholder="Escribe aquí tu descripción"
+          <div className="flex justify-start ml-10 mt-10">
+            <Link to="/avances" className="btn-general">
+              <i className="fas fa-arrow-left"></i>
+            </Link>
+          </div>
+        </div>
+        <form
+          onSubmit={submitForm}
+          onChange={updateFormData}
+          ref={form}
+          className="flex flex-col items-center mt-5"
+        >
+          <div className="grid grid-cols-1 w-auto">
+            <div className="form-general">
+              <span className="pr-2 text-lg">Proyecto</span>
+              <select
+                name="proyecto"
+                type="text"
+                defaultValue=""
                 className="input-general text-lg"
                 required
-              ></textarea>
+              >
+                <option value="" disabled>
+                  Seleccione una opción...
+                </option>
+                {queryProyectosData &&
+                  queryProyectosData.ProyectosRegistrar.map((el) => {
+                    return (
+                      <option key={el._id} value={el._id}>
+                        {el.nombre}
+                      </option>
+                    );
+                  })}
+              </select>
             </div>
-            <PrivateComponent roleList={["LIDER"]}>
+            <div className="grid grid-cols-1 w-auto mt-4">
               <div className="mt-9 flex flex-col items-center">
-                <span className="pb-2">Observaciones</span>
+                <span className="pb-2 text-lg">Descripción</span>
                 <textarea
-                  name="observaciones"
+                  name="descripcion"
                   cols="40"
                   rows="5"
-                  placeholder="Escribe aquí tus observaciones"
-                  className="input-general"
+                  placeholder="Escribe aquí tu descripción"
+                  className="input-general text-lg"
+                  required
                 ></textarea>
               </div>
-            </PrivateComponent>
+              <PrivateComponent roleList={["LIDER"]}>
+                <div className="mt-9 flex flex-col items-center">
+                  <span className="pb-2">Observaciones</span>
+                  <textarea
+                    name="observaciones"
+                    cols="40"
+                    rows="5"
+                    placeholder="Escribe aquí tus observaciones"
+                    className="input-general"
+                  ></textarea>
+                </div>
+              </PrivateComponent>
+            </div>
           </div>
-        </div>
-        <div className="form-general">
-          <div className="grid grid-cols-2 gap-6 mt-5 text-center">
-            <Link to="/avances" className="btn-general-cancelar mt-6 text-2xl">
-              Cancelar
-            </Link>
-            <button className="btn-general-submit mt-6 text-2xl" type="submit">
-              Registrar
-            </button>
+          <div className="form-general">
+            <div className="grid grid-cols-2 gap-6 mt-5 text-center">
+              <Link
+                to="/avances"
+                className="btn-general-cancelar mt-6 text-2xl"
+              >
+                Cancelar
+              </Link>
+              <button
+                className="btn-general-submit mt-6 text-2xl"
+                type="submit"
+              >
+                Registrar
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
-  );
+        </form>
+      </div>
+    );
+  }
 };
 
 export default RegistrarAvance;
