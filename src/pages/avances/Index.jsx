@@ -133,7 +133,7 @@ const IndexAvances = () => {
                                     id="accordion"
                                   >
                                     <Typography className="pr-2">
-                                      Observaciones
+                                      Ver
                                     </Typography>
                                   </AccordionSummary>
 
@@ -222,7 +222,7 @@ const IndexAvances = () => {
                                       id="accordion"
                                     >
                                       <Typography className="pr-2">
-                                        Observaciones
+                                        Ver
                                       </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>

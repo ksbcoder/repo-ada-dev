@@ -6,8 +6,8 @@ import useFormData from "hooks/useFormData";
 import { useQuery, useMutation } from "@apollo/client";
 import { OBTENER_AVANCE } from "graphql/avances/queries";
 import { EDITAR_AVANCE } from "graphql/avances/mutations";
-import PrivateComponent from "components/PrivateComponent";
 import { toast } from "react-toastify";
+import PrivateComponent from "components/PrivateComponent";
 import ReactLoading from "react-loading";
 
 const ActualizarAvance = () => {
