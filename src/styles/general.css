@@ -23,6 +23,10 @@
   @apply w-auto h-auto bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
 
+.btn-general-submit {
+  @apply w-auto h-auto bg-indigo-700 hover:bg-indigo-900 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
+}
+
 .btn-general-cancelar {
   @apply w-auto h-auto bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
@@ -38,6 +42,7 @@
 #accordion {
   @apply bg-green-300 bg-opacity-20 hover:bg-green-300 hover:bg-opacity-40 rounded-md transition-all;
 }
+
 /* ESTILOS DE TABLAS INICIO */
 .formSubmitList {
   @apply text-center pb-5 mb-5;
