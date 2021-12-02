@@ -1,11 +1,11 @@
-import { CREAR_AVANCE } from "graphql/avances/mutations";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import useFormData from "hooks/useFormData";
 import PrivateComponent from "components/PrivateComponent";
+import { CREAR_AVANCE } from "graphql/avances/mutations";
 import { OBTENER_PROYECTOS_LITE } from "graphql/avances/queries";
 
 const RegistrarAvance = () => {
@@ -17,6 +17,7 @@ const RegistrarAvance = () => {
     loading: queryProyectosLoading,
     refetch,
   } = useQuery(OBTENER_PROYECTOS_LITE);
+  const [aviso, setAviso] = useState(true);
 
   useEffect(() => {
     refetch();
@@ -83,13 +84,19 @@ const RegistrarAvance = () => {
             <Link to="/avances" className="btn-general">
               <i className="fas fa-arrow-left"></i>
             </Link>
+            {aviso === true && (
+              <span className="ml-8 bg-yellow-300 bg-opacity-60 p-2 rounded-md text-yellow-700 animate-bounce">
+                ¡Recuerda que solo puedes agregar avances en los proyectos que
+                estés inscrito!
+              </span>
+            )}
           </div>
         </div>
         <form
           onSubmit={submitForm}
           onChange={updateFormData}
           ref={form}
-          className="flex flex-col items-center mt-5"
+          className="flex flex-col items-center mt-14"
         >
           <div className="grid grid-cols-1 w-auto">
             <div className="form-general">
@@ -123,6 +130,7 @@ const RegistrarAvance = () => {
                   rows="5"
                   placeholder="Escribe aquí tu descripción"
                   className="input-general text-lg"
+                  onClick={() => setAviso(false)}
                   required
                 ></textarea>
               </div>
@@ -135,6 +143,7 @@ const RegistrarAvance = () => {
                     rows="5"
                     placeholder="Escribe aquí tus observaciones"
                     className="input-general"
+                    onClick={() => setAviso(false)}
                   ></textarea>
                 </div>
               </PrivateComponent>

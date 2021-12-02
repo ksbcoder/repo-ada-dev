@@ -10,6 +10,8 @@ const OBTENER_AVANCES = gql`
       proyecto {
         _id
         nombre
+        fase
+        estado
         lider {
           _id
           nombre
@@ -34,6 +36,8 @@ const OBTENER_AVANCE = gql`
       proyecto {
         _id
         nombre
+        fase
+        estado
       }
       creadoPor {
         _id
@@ -54,6 +58,8 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
       proyecto {
         _id
         nombre
+        fase
+        estado
       }
       creadoPor {
         _id

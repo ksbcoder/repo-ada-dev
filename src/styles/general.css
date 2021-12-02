@@ -42,6 +42,7 @@
 #accordion {
   @apply bg-green-300 bg-opacity-20 hover:bg-green-300 hover:bg-opacity-40 rounded-md transition-all;
 }
+
 /* ESTILOS DE TABLAS INICIO */
 .formSubmitList {
   @apply text-center pb-5 mb-5;

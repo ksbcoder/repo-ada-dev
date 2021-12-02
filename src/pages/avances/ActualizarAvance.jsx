@@ -24,6 +24,7 @@ const ActualizarAvance = () => {
     },
   });
   const [aviso, setAviso] = useState(true);
+  const [cambios, setCambios] = useState(false);
 
   useEffect(() => {
     if (queryError) {
@@ -151,6 +152,7 @@ const ActualizarAvance = () => {
                   className="input-general text-lg"
                   defaultValue={queryData.Avance.descripcion}
                   onClick={() => setAviso(false)}
+                  onChange={() => setCambios(true)}
                   required
                 ></textarea>
               </div>
@@ -165,6 +167,7 @@ const ActualizarAvance = () => {
                     className="input-general text-lg"
                     defaultValue={queryData.Avance.observaciones}
                     onClick={() => setAviso(false)}
+                    onChange={() => setCambios(true)}
                     required
                   ></textarea>
                 </div>
@@ -228,7 +231,8 @@ const ActualizarAvance = () => {
                     placeholder="Escribe aquí tu descripción"
                     className="input-general text-lg"
                     defaultValue={queryData.Avance.descripcion}
-                    onChange={() => setAviso(false)}
+                    onClick={() => setAviso(false)}
+                    onChange={() => setCambios(true)}
                     readOnly
                   ></textarea>
                 </div>
@@ -242,7 +246,8 @@ const ActualizarAvance = () => {
                       placeholder="Escribe aquí tus observaciones"
                       className="input-general text-lg"
                       defaultValue={queryData.Avance.observaciones}
-                      onChange={() => setAviso(false)}
+                      onClick={() => setAviso(false)}
+                      onChange={() => setCambios(true)}
                       required
                     ></textarea>
                   </div>
@@ -299,6 +304,7 @@ const ActualizarAvance = () => {
                     className="input-general text-lg"
                     defaultValue={queryData.Avance.descripcion}
                     onClick={() => setAviso(false)}
+                    onChange={() => setCambios(true)}
                     required
                   ></textarea>
                 </div>
@@ -313,6 +319,7 @@ const ActualizarAvance = () => {
                       className="input-general text-lg"
                       defaultValue={queryData.Avance.observaciones}
                       onClick={() => setAviso(false)}
+                      onChange={() => setCambios(true)}
                       required
                     ></textarea>
                   </div>
@@ -329,12 +336,22 @@ const ActualizarAvance = () => {
               >
                 Cancelar
               </Link>
-              <button
-                className="btn-general-submit mt-6 text-2xl"
-                type="submit"
-              >
-                Actualizar
-              </button>
+              {cambios ? (
+                <button
+                  className="btn-general-submit mt-6 text-2xl"
+                  type="submit"
+                >
+                  Actualizar
+                </button>
+              ) : (
+                <button
+                  className="btn-general-submit mt-6 text-2xl"
+                  type="submit"
+                  disabled
+                >
+                  Actualizar
+                </button>
+              )}
             </div>
           </div>
         </form>

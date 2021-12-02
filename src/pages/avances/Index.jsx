@@ -67,7 +67,7 @@ const IndexAvances = () => {
           </div>
           <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
             <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
-              <Link to="registrar" className="btn-general text-xl">
+              <Link to="registrar" className="btn-general-submit text-xl">
                 Registrar Avance
               </Link>
             </PrivateComponent>
@@ -94,7 +94,31 @@ const IndexAvances = () => {
                           return (
                             <tr key={u._id}>
                               <td>{u._id.slice(19)}</td>
-                              <td>{u.proyecto.nombre}</td>
+                              <td>
+                                <Accordion
+                                  TransitionProps={{ unmountOnExit: true }}
+                                >
+                                  <AccordionSummary
+                                    expandIcon={
+                                      <i className="fas fa-chevron-down"></i>
+                                    }
+                                    aria-controls="accordion"
+                                    id="accordion"
+                                  >
+                                    <Typography className="pr-2">
+                                      {u.proyecto.nombre}
+                                    </Typography>
+                                  </AccordionSummary>
+                                  <AccordionDetails>
+                                    <Typography>
+                                      <div>
+                                        Fase: {u.proyecto.fase} <br />
+                                        Estado: {u.proyecto.estado}
+                                      </div>
+                                    </Typography>
+                                  </AccordionDetails>
+                                </Accordion>
+                              </td>
                               <td>{u.fechaAvance.slice(0, 10)}</td>
                               <td>{u.descripcion}</td>
                               <td>
@@ -112,6 +136,7 @@ const IndexAvances = () => {
                                       Observaciones
                                     </Typography>
                                   </AccordionSummary>
+
                                   <AccordionDetails>
                                     <Typography>{u.observaciones}</Typography>
                                   </AccordionDetails>
@@ -158,7 +183,31 @@ const IndexAvances = () => {
                             return (
                               <tr key={u._id}>
                                 <td>{u._id.slice(19)}</td>
-                                <td>{u.proyecto.nombre}</td>
+                                <td>
+                                  <Accordion
+                                    TransitionProps={{ unmountOnExit: true }}
+                                  >
+                                    <AccordionSummary
+                                      expandIcon={
+                                        <i className="fas fa-chevron-down"></i>
+                                      }
+                                      aria-controls="accordion"
+                                      id="accordion"
+                                    >
+                                      <Typography className="pr-2">
+                                        {u.proyecto.nombre}
+                                      </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                      <Typography>
+                                        <div>
+                                          Fase: {u.proyecto.fase} <br />
+                                          Estado: {u.proyecto.estado}
+                                        </div>
+                                      </Typography>
+                                    </AccordionDetails>
+                                  </Accordion>
+                                </td>
                                 <td>{u.fechaAvance.slice(0, 10)}</td>
                                 <td>{u.descripcion}</td>
                                 <td>
@@ -243,7 +292,31 @@ const IndexAvances = () => {
                           return (
                             <tr key={u._id}>
                               <td>{u._id.slice(19)}</td>
-                              <td>{u.proyecto.nombre}</td>
+                              <td>
+                                <Accordion
+                                  TransitionProps={{ unmountOnExit: true }}
+                                >
+                                  <AccordionSummary
+                                    expandIcon={
+                                      <i className="fas fa-chevron-down"></i>
+                                    }
+                                    aria-controls="accordion"
+                                    id="accordion"
+                                  >
+                                    <Typography className="pr-2">
+                                      {u.proyecto.nombre}
+                                    </Typography>
+                                  </AccordionSummary>
+                                  <AccordionDetails>
+                                    <Typography>
+                                      <div>
+                                        Fase: {u.proyecto.fase} <br />
+                                        Estado: {u.proyecto.estado}
+                                      </div>
+                                    </Typography>
+                                  </AccordionDetails>
+                                </Accordion>
+                              </td>
                               <td>{u.fechaAvance.slice(0, 10)}</td>
                               <td>{u.descripcion}</td>
                               <td>
