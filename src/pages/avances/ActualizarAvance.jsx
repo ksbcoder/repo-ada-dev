@@ -324,7 +324,7 @@ const ActualizarAvance = () => {
             <Link to="/avances" className="btn-general-cancelar mt-6 text-2xl">
               Cancelar
             </Link>
-            <button className="btn-general mt-6 text-2xl" type="submit">
+            <button className="btn-general-submit mt-6 text-2xl" type="submit">
               Actualizar
             </button>
           </div>
