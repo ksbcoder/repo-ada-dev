@@ -12,10 +12,18 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import { OBTENER_AVANCES_POR_LIDER } from "graphql/avances/queries";
 
 const IndexAvances = () => {
   const { userData } = useUser();
-  const [avancesFiltradosArray, setAvancesFiltradosArray] = useState([]);
+
+  const {
+    data: queryAvances,
+    error: errorAvances,
+    loading: loadingAvances,
+    refetch: refetchAvances,
+  } = useQuery(OBTENER_AVANCES);
+
   const {
     data: queryAvanceProyecto,
     error: errorAvanceProyecto,
@@ -28,42 +36,29 @@ const IndexAvances = () => {
   });
 
   const {
-    data: queryAvances,
-    error: errorAvances,
-    loading: loadingAvances,
-    refetch: refetchAvances,
-  } = useQuery(OBTENER_AVANCES);
-
-  useEffect(() => {
-    console.log("todos avances", queryAvanceProyecto);
-    if (avancesFiltradosArray.length !== 0) {
-      avancesFiltradosArray.length = 0;
-      console.log("array", avancesFiltradosArray);
-    }
-    refetchAvanceProyecto();
-    if (avancesFiltradosArray.length === 0 && queryAvanceProyecto) {
-      queryAvanceProyecto.AvancePorProyecto.map((u) => {
-        u.proyecto.inscripciones.forEach((element) => {
-          if (element.estudiante._id === userData._id) {
-            avancesFiltradosArray.push(u);
-          }
-        });
-      });
-    }
-    console.log("array llenado", avancesFiltradosArray);
-  }, [queryAvanceProyecto, refetchAvanceProyecto]);
+    data: queryAvancesLider,
+    error: errorAvancesLider,
+    loading: loadingAvancesLider,
+    refetch: refetchAvancesLider,
+  } = useQuery(OBTENER_AVANCES_POR_LIDER, {
+    variables: {
+      _id: userData._id,
+    },
+  });
 
   useEffect(() => {
     refetchAvances();
-  }, [refetchAvances]);
+    refetchAvanceProyecto();
+    refetchAvancesLider();
+  }, [refetchAvanceProyecto, refetchAvancesLider, refetchAvances]);
 
   useEffect(() => {
-    if (errorAvances || errorAvanceProyecto) {
+    if (errorAvancesLider || errorAvanceProyecto || errorAvances) {
       toast.error("Error consultando los avances :(");
     }
-  }, [errorAvances, errorAvanceProyecto]);
+  }, [errorAvancesLider, errorAvanceProyecto, errorAvances]);
 
-  if (loadingAvances || loadingAvanceProyecto) {
+  if (loadingAvancesLider || loadingAvanceProyecto || loadingAvances) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
@@ -190,75 +185,69 @@ const IndexAvances = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {queryAvances &&
-                      queryAvances.Avances.map((u) => {
-                        if (u.proyecto.lider._id === userData._id) {
-                          return (
-                            <tr key={u._id}>
-                              <td>{u._id.slice(19)}</td>
-                              <td>
-                                <Accordion
-                                  TransitionProps={{ unmountOnExit: true }}
+                    {queryAvancesLider &&
+                      queryAvancesLider.AvancesPorLider.map((u) => {
+                        return (
+                          <tr key={u._id}>
+                            <td>{u._id.slice(19)}</td>
+                            <td>
+                              <Accordion
+                                TransitionProps={{ unmountOnExit: true }}
+                              >
+                                <AccordionSummary
+                                  expandIcon={
+                                    <i className="fas fa-chevron-down"></i>
+                                  }
+                                  aria-controls="accordion"
+                                  id="accordion"
                                 >
-                                  <AccordionSummary
-                                    expandIcon={
-                                      <i className="fas fa-chevron-down"></i>
-                                    }
-                                    aria-controls="accordion"
-                                    id="accordion"
-                                  >
-                                    <Typography className="pr-2">
-                                      {u.proyecto.nombre}
-                                    </Typography>
-                                  </AccordionSummary>
-                                  <AccordionDetails>
-                                    <Typography>
-                                      <div>
-                                        Fase: {u.proyecto.fase} <br />
-                                        Estado: {u.proyecto.estado}
-                                      </div>
-                                    </Typography>
-                                  </AccordionDetails>
-                                </Accordion>
-                              </td>
-                              <td>{u.fechaAvance.slice(0, 10)}</td>
-                              <td>{u.descripcion}</td>
-                              <td>
-                                <Accordion
-                                  TransitionProps={{ unmountOnExit: true }}
+                                  <Typography className="pr-2">
+                                    {u.proyecto.nombre}
+                                  </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                  <Typography>
+                                    <div>
+                                      Fase: {u.proyecto.fase} <br />
+                                      Estado: {u.proyecto.estado}
+                                    </div>
+                                  </Typography>
+                                </AccordionDetails>
+                              </Accordion>
+                            </td>
+                            <td>{u.fechaAvance.slice(0, 10)}</td>
+                            <td>{u.descripcion}</td>
+                            <td>
+                              <Accordion
+                                TransitionProps={{ unmountOnExit: true }}
+                              >
+                                <AccordionSummary
+                                  expandIcon={
+                                    <i className="fas fa-chevron-down"></i>
+                                  }
+                                  aria-controls="accordion"
+                                  id="accordion"
                                 >
-                                  <AccordionSummary
-                                    expandIcon={
-                                      <i className="fas fa-chevron-down"></i>
-                                    }
-                                    aria-controls="accordion"
-                                    id="accordion"
-                                  >
-                                    <Typography className="pr-2">
-                                      Ver
-                                    </Typography>
-                                  </AccordionSummary>
-                                  <AccordionDetails>
-                                    <Typography>{u.observaciones}</Typography>
-                                  </AccordionDetails>
-                                </Accordion>
-                              </td>
-                              <td>
-                                {u.creadoPor.nombre +
-                                  " " +
-                                  u.creadoPor.apellido}
-                              </td>
-                              <td>
-                                <Link
-                                  to={`actualizar/${u._id}`}
-                                  className="btn-general-editar"
-                                >
-                                  Modificar
-                                </Link>
-                              </td>
-                            </tr>
-                          );
-                        }
+                                  <Typography className="pr-2">Ver</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                  <Typography>{u.observaciones}</Typography>
+                                </AccordionDetails>
+                              </Accordion>
+                            </td>
+                            <td>
+                              {u.creadoPor.nombre + " " + u.creadoPor.apellido}
+                            </td>
+                            <td>
+                              <Link
+                                to={`actualizar/${u._id}`}
+                                className="btn-general-editar"
+                              >
+                                Modificar
+                              </Link>
+                            </td>
+                          </tr>
+                        );
                       })}
                   </tbody>
                 </table>
@@ -298,9 +287,8 @@ const IndexAvances = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {avancesFiltradosArray &&
-                      avancesFiltradosArray.map((i) => {
-                        console.log(avancesFiltradosArray.indexOf(i), i._id);
+                    {queryAvanceProyecto &&
+                      queryAvanceProyecto.AvancesPorProyecto.map((i) => {
                         return (
                           <tr key={i._id}>
                             <td>{i._id.slice(19)}</td>
