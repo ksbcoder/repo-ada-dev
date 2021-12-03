@@ -166,7 +166,6 @@ const ActualizarAvance = () => {
                     placeholder="Escribe aquí tus observaciones"
                     className="input-general text-lg"
                     defaultValue={queryData.Avance.observaciones}
-                    onClick={() => setAviso(false)}
                     onChange={() => setCambios(true)}
                     required
                   ></textarea>
@@ -231,7 +230,6 @@ const ActualizarAvance = () => {
                     placeholder="Escribe aquí tu descripción"
                     className="input-general text-lg"
                     defaultValue={queryData.Avance.descripcion}
-                    onClick={() => setAviso(false)}
                     onChange={() => setCambios(true)}
                     readOnly
                   ></textarea>
