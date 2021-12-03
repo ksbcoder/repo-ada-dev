@@ -70,6 +70,35 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
   }
 `;
 
+const OBTENER_AVANCES_POR_PROYECTO = gql`
+  query AvancePorProyecto {
+    AvancePorProyecto {
+      _id
+      descripcion
+      observaciones
+      fechaAvance
+      proyecto {
+        _id
+        nombre
+        fase
+        estado
+        inscripciones {
+          _id
+          estado
+          estudiante {
+            _id
+          }
+        }
+      }
+      creadoPor {
+        _id
+        nombre
+        apellido
+      }
+    }
+  }
+`;
+
 const OBTENER_PROYECTOS = gql`
   query Proyectos {
     Proyectos {
@@ -101,6 +130,7 @@ export {
   OBTENER_AVANCES,
   OBTENER_AVANCE,
   OBTENER_AVANCES_POR_USUARIO,
+  OBTENER_AVANCES_POR_PROYECTO,
   OBTENER_PROYECTOS,
   OBTENER_PROYECTOS_LITE,
 };
