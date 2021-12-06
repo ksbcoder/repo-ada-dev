@@ -84,10 +84,13 @@ const IndexAvances = () => {
             </Link>
           </PrivateComponent>
         </div>
-        <div className="flex flex-col justify-center items-center">
-          <div className="table-container">
-            {userData.rol === "ADMINISTRADOR" && (
-              <>
+        {userData.rol === "ADMINISTRADOR" && (
+          <>
+            <div className="flex mx-7 p-3 bg-blue-200 text-blue-800 max-w-max rounded-lg shadow-md">
+              Avances: {queryAvances.Avances.length}
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <div className="table-container">
                 <table id="table-list">
                   <thead>
                     <tr>
@@ -168,10 +171,17 @@ const IndexAvances = () => {
                       })}
                   </tbody>
                 </table>
-              </>
-            )}
-            {userData.rol === "LIDER" && (
-              <>
+              </div>
+            </div>
+          </>
+        )}
+        {userData.rol === "LIDER" && (
+          <>
+            <div className="flex mx-7 p-3 bg-blue-200 text-blue-800 max-w-max rounded-lg shadow-md">
+              Avances: {queryAvancesLider.AvancesPorLider.length}
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <div className="table-container">
                 <table id="table-list">
                   <thead>
                     <tr>
@@ -251,10 +261,10 @@ const IndexAvances = () => {
                       })}
                   </tbody>
                 </table>
-              </>
-            )}
-          </div>
-        </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     );
   } else if (userData.rol === "ESTUDIANTE") {
@@ -265,100 +275,102 @@ const IndexAvances = () => {
         </div>
         <div className="flex flex-row-reverse flex-nowrap mr-8 mt-9 gap-2">
           <PrivateComponent roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
-            <Link to="registrar" className="btn-general-submit text-xl">
+            <Link
+              to="registrar"
+              className="btn-general-submit text-xl shadow-xl"
+            >
               Registrar Avance
             </Link>
           </PrivateComponent>
         </div>
+        <div className="flex mx-7 p-3 bg-blue-200 text-blue-800 max-w-max rounded-lg shadow-md">
+          Avances: {queryAvanceProyecto.AvancesPorProyecto.length}
+        </div>
         <div className="flex flex-col justify-center items-center">
           <div className="table-container">
-            {userData.rol === "ESTUDIANTE" && (
-              <>
-                <table id="table-list">
-                  <thead>
-                    <tr>
-                      <th>Id Avance</th>
-                      <th>Proyecto</th>
-                      <th>Fecha</th>
-                      <th>Descripción</th>
-                      <th>Observaciones</th>
-                      <th>Creado por</th>
-                      <th>Opciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {queryAvanceProyecto &&
-                      queryAvanceProyecto.AvancesPorProyecto.map((i) => {
-                        return (
-                          <tr key={i._id}>
-                            <td>{i._id.slice(19)}</td>
-                            <td>
-                              <Accordion
-                                TransitionProps={{
-                                  unmountOnExit: true,
-                                }}
-                              >
-                                <AccordionSummary
-                                  expandIcon={
-                                    <i className="fas fa-chevron-down"></i>
-                                  }
-                                  aria-controls="accordion"
-                                  id="accordion"
-                                >
-                                  <Typography className="pr-2">
-                                    {i.proyecto.nombre}
-                                  </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                  <Typography>
-                                    <div>
-                                      Fase: {i.proyecto.fase} <br />
-                                      Estado: {i.proyecto.estado}
-                                    </div>
-                                  </Typography>
-                                </AccordionDetails>
-                              </Accordion>
-                            </td>
-                            <td>{i.fechaAvance.slice(0, 10)}</td>
-                            <td>{i.descripcion}</td>
-                            <td>
-                              <Accordion
-                                TransitionProps={{
-                                  unmountOnExit: true,
-                                }}
-                              >
-                                <AccordionSummary
-                                  expandIcon={
-                                    <i className="fas fa-chevron-down"></i>
-                                  }
-                                  aria-controls="accordion"
-                                  id="accordion"
-                                >
-                                  <Typography className="pr-2">Ver</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                  <Typography>{i.observaciones}</Typography>
-                                </AccordionDetails>
-                              </Accordion>
-                            </td>
-                            <td>
-                              {i.creadoPor.nombre + " " + i.creadoPor.apellido}
-                            </td>
-                            <td>
-                              <Link
-                                to={`actualizar/${i._id}`}
-                                className="btn-general-editar"
-                              >
-                                Actualizar
-                              </Link>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </>
-            )}
+            <table id="table-list">
+              <thead>
+                <tr>
+                  <th>Id Avance</th>
+                  <th>Proyecto</th>
+                  <th>Fecha</th>
+                  <th>Descripción</th>
+                  <th>Observaciones</th>
+                  <th>Creado por</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {queryAvanceProyecto &&
+                  queryAvanceProyecto.AvancesPorProyecto.map((i) => {
+                    return (
+                      <tr key={i._id}>
+                        <td>{i._id.slice(19)}</td>
+                        <td>
+                          <Accordion
+                            TransitionProps={{
+                              unmountOnExit: true,
+                            }}
+                          >
+                            <AccordionSummary
+                              expandIcon={
+                                <i className="fas fa-chevron-down"></i>
+                              }
+                              aria-controls="accordion"
+                              id="accordion"
+                            >
+                              <Typography className="pr-2">
+                                {i.proyecto.nombre}
+                              </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              <Typography>
+                                <div>
+                                  Fase: {i.proyecto.fase} <br />
+                                  Estado: {i.proyecto.estado}
+                                </div>
+                              </Typography>
+                            </AccordionDetails>
+                          </Accordion>
+                        </td>
+                        <td>{i.fechaAvance.slice(0, 10)}</td>
+                        <td>{i.descripcion}</td>
+                        <td>
+                          <Accordion
+                            TransitionProps={{
+                              unmountOnExit: true,
+                            }}
+                          >
+                            <AccordionSummary
+                              expandIcon={
+                                <i className="fas fa-chevron-down"></i>
+                              }
+                              aria-controls="accordion"
+                              id="accordion"
+                            >
+                              <Typography className="pr-2">Ver</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              <Typography>{i.observaciones}</Typography>
+                            </AccordionDetails>
+                          </Accordion>
+                        </td>
+                        <td>
+                          {i.creadoPor.nombre + " " + i.creadoPor.apellido}
+                        </td>
+                        <td>
+                          <Link
+                            to={`actualizar/${i._id}`}
+                            className="btn-general-editar"
+                          >
+                            Actualizar
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
