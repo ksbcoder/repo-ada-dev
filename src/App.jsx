@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import PrivateLayout from "layouts/PrivateLayout";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContext } from "context/userContext";
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import {
+  ApolloProvider,
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import Index from "pages/Index";
 import IndexProyectos from "pages/proyectos/Index";
 import IndexInscripciones from "pages/inscripciones/Index";
@@ -21,18 +26,18 @@ import jwt_decode from 'jwt-decode';
 
 
 const httpLink = createHttpLink({
-  //uri: "https://adasoft-server.herokuapp.com/graphql", 
-  uri: 'http://localhost:4000/graphql',  
+  //uri: "https://adasoft-server.herokuapp.com/graphql",
+  uri: "http://localhost:4000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = JSON.parse(localStorage.getItem("token"));
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -44,18 +49,17 @@ const client = new ApolloClient({
 
 function App() {
   const [userData, setUserData] = useState({});
-  const [authToken, setAuthToken] = useState('');
+  const [authToken, setAuthToken] = useState("");
 
   const setToken = (token) => {
     setAuthToken(token);
     if (token) {
-      localStorage.setItem('token', JSON.stringify(token));
+      localStorage.setItem("token", JSON.stringify(token));
     } else {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
     }
   };
 
-  
   useEffect(() => {
     if (authToken) {
       const decoded = jwt_decode(authToken);
@@ -85,7 +89,10 @@ function App() {
                   path="usuarios/gestionUsuarios"
                   element={<GestionUsuarios />}
                 />
-                <Route path="usuarios/editar/:_id" element={<EditarUsuario/>}/>
+                <Route
+                  path="usuarios/editar/:_id"
+                  element={<EditarUsuario />}
+                />
 
                 <Route path="perfil" element={<Perfil />} />
 

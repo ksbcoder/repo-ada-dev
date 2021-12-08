@@ -1,5 +1,28 @@
 import { gql } from '@apollo/client';
 
+const CREAR_USUARIO = gql`
+  mutation CrearUsuario(
+    $nombre: String!
+    $apellido: String!
+    $identificacion: String! 
+    $rol: Enum_Rol!
+    $correo: String!
+    $password: String!
+    
+  ){
+    crearUsuario(
+      nombre: $nombre
+      apellido: $apellido
+      identificacion: $identificacion
+      rol: $rol
+      correo: $correo      
+      password: $password
+    ){
+      _id
+    }
+  }
+`;
+
 const EDITAR_USUARIO = gql`
   mutation EditarUsuario(
     $_id: String!
@@ -43,4 +66,4 @@ mutation ActualizarPassword(
   }
 }
 `;
-export { EDITAR_USUARIO, ACTUALIZAR_PASSWORD };
+export { CREAR_USUARIO, EDITAR_USUARIO, ACTUALIZAR_PASSWORD };

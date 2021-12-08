@@ -37,6 +37,7 @@ const GestionUsuarios = () => {
                     <thead>
                         <tr>
                             <th>Nombre</th>
+                            <th>Apellido</th>
                             <th>Identificación</th>
                             <th>Tipo de Usuario</th>
                             <th>Correo</th>
@@ -50,6 +51,7 @@ const GestionUsuarios = () => {
                             return(
                                 <tr key={u._id}>
                                     <td>{u.nombre}</td>
+                                    <td>{u.apellido}</td>
                                     <td>{u.identificacion}</td>
                                     <td>{u.rol}</td>
                                     <td>{u.correo}</td>                                  
