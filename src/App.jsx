@@ -15,7 +15,7 @@ import Perfil from "pages/usuarios/Perfil";
 import GestionUsuarios from "pages/usuarios/GestionUsuarios";
 import EditarUsuario from "pages/usuarios/Editar";
 import Login from "pages/login/Login";
-import InfoProyectos from "pages/proyectos/InfoProyectos";
+import RegistroProyectos from "pages/proyectos/RegistroProyectos";
 import { AuthContext } from 'context/authContext';
 import jwt_decode from 'jwt-decode';
 
@@ -90,7 +90,7 @@ function App() {
                 <Route path="perfil" element={<Perfil />} />
 
                 <Route path="proyectos" element={<IndexProyectos />} />
-                <Route path="proyectos/infoProyectos" element={<InfoProyectos />} />
+                <Route path="proyectos/RegistroProyectos" element={<RegistroProyectos />} />
                 <Route path="inscripciones" element={<IndexInscripciones />} />
                 <Route path="avances" element={<IndexAvances />} />
                 <Route path="avances/registrar" element={<RegistrarAvance />} />

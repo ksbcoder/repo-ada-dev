@@ -9,14 +9,15 @@ const GET_PROYECTOS = gql`
             fechaInicio
             estado
             fase
-            lider {
-              _id  
-              }
             objetivos {
               _id
+              tipo
+              descripcion
             }
             avances {
               _id
+              descripcion
+              fechaAvance
             }
             
         }

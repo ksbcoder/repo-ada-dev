@@ -1,3 +1,5 @@
+@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 .sidebar {
   background-color: #003b46;
   @apply w-64 shadow flex-col;
@@ -99,5 +101,11 @@ tr:hover {
   @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 mx-2 text-gray-500 bg-red-500 hover:bg-red-700 
   hover:text-white transition-all shadow-xl;
 }
+
+.btn-actualizar {
+  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 mx-2 text-gray-500 bg-yellow-400 hover:bg-yellow-700 
+  hover:text-white transition-all shadow-xl;
+}
+
 
 /*ESTILOS DE USUARIO FIN*/

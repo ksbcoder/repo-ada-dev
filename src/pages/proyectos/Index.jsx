@@ -1,77 +1,97 @@
-import { useMutation } from "@apollo/client";
-import { CREAR_PROYECTO } from "graphql/proyectos/mutations";
-import useFormData from "hooks/useFormData";
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from 'react';
+import {useQuery} from '@apollo/client';
+import { GET_PROYECTOS } from 'graphql/proyectos/queries';
+import { ToastContainer, toast } from 'react-toastify';
+import RegistroProyectos from './RegistroProyectos';
 import { Link } from "react-router-dom";
-import {InfoProyectos} from "./InfoProyectos"
+import ModalObj from 'components/ModalObj';
+import ModalAvan from 'components/ModalAvan';
+import PrivateComponent from 'components/PrivateComponent'
+import {Enum_TipoObjetivo} from './../.././utils/enums'
 
 
 const IndexProyectos = () => {
 
-  const {form, formData, updateFormData}=useFormData(null);
+  const{data, error, loading}=useQuery(GET_PROYECTOS);
 
-  const [crearProyecto, {data, loading, error}] = useMutation(CREAR_PROYECTO);
+
   
-  const submitForm= (e)=>{
-    e.preventDefault();
-    console.log('fd:', formData);
-    formData.presupuesto=parseFloat(formData.presupuesto)
-    crearProyecto({
-      variables:{...formData}
-    });
-  };
+  const [show, setShow] = useState(false);
+
 
   useEffect(()=>{
-    console.log('mutacion crear', data);
-  }, [data]);
+    console.log('datos de los proyectos', data);
+  }, [data]); 
+
+  useEffect(()=>{
+    if(error){
+      toast.error('error consultando los proyectos')
+    }
+  },[error])
+
+  if (loading) return <div>cargando</div>
 
   return (
-    <div className='flew flex-col w-full h-full items-center justify-center p-10'>
+  <div>
+    <h2>Crear proyectos</h2>
+    <table className='tabla'>
+        <thead>
+          <tr>
+          
+            <th>Nombre</th>
+            <th>Presupuesto</th>
+            <th>fechaInicio</th>
+            <th>estado </th>
+            <th>fase </th>
+            <th>objetivos</th>
+            <th>avances</th>
+            <th>actualizar</th>
+            <th>inscribirse</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data &&
+            data.Proyectos.map((u) => {
+              {console.log('objetivos', u.objetivos)}
+              return (
+                
+                <tr key={u._id}>
+                  <td>{u.nombre}</td>
+                  <td>{u.presupuesto}</td>
+                  <td>{u.fechaInicio}</td>
+                  <td>{u.estado}</td>
+                  <td>{u.fase}</td>
+               
+                  <td key={u._id}><ModalObj id={`exampleModelObjetivos-${u._id}`} titulo="Objetivos" objetivos={u.
+                    objetivos}></ModalObj>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target={`#exampleModelObjetivos-${u._id}`}>
+                    ver
+                    </button>
+                  </td>
 
-      <Link to='/usuarios'>
-        <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
+                  <td key={u._id}><ModalAvan id={`exampleModalAvances-${u._id}`} titulo="Avances"  avances={u.avances}></ModalAvan>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target={`#exampleModalAvances-${u._id}`}>
+                    ver
+                    </button>
+                  </td>
+
+                  <td><button type="button" class="btn btn-primary"> actualizar </button></td>
+                  <td><button type="button" class="btn btn-primary"> inscripciones </button></td>
+            
+                </tr>
+                
+              );
+              
+            })}
+        </tbody>
+      </table>
+      <Link to="/proyectos/RegistroProyectos" className="btn-general-cancelar mt-6 text-2xl">
+              Registrar 
       </Link>
-      <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Crear proyecto</h1>
-      <form
-        onSubmit={submitForm}
-        onChange={updateFormData}
-        ref={form}
-        className='flex flex-col items-center justify-center'
-      >
-      <div class="text-gray-700">
-        <label class="block mb-1" for="forms-labelOverInputCode">Nombre del proyecto</label>
-        <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name="nombre" placeholder="Regular input" />
-      </div>
-      <div class="text-gray-700">
-        <label class="block mb-1" for="forms-labelOverInputCode">Presupuesto</label>
-        <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="number" name="presupuesto" placeholder="Regular input" />
-      </div>
-      <div class="text-gray-700">
-        <label class="block mb-1" for="forms-labelOverInputCode">Fecha de inicio</label>
-        <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="date" name="fechaInicio" placeholder="Regular input" />
-      </div>
-      <div class="text-gray-700">
-        <label class="block mb-1" for="forms-labelOverInputCode">Estado</label>
-        <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name="estado" placeholder="Regular input" />
-      </div>
-      <div class="text-gray-700">
-        <label class="block mb-1" for="forms-labelOverInputCode">Fase</label>
-        <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name="fase" placeholder="Regular input" />
-      </div>
-      <div class="text-gray-700">
-        <label class="block mb-1" for="forms-labelOverInputCode">Lider</label>
-        <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name="lider" placeholder="Regular input" />
-      </div>
-      
-      <div className="form-general">
-          <button className="btn-general mt-4 text-xl">Registrar</button>
-      </div>
+  </div>  
      
-      </form>
-    
-  
-    </div>
-  );
+  )
 };
+
 
 export default IndexProyectos;
