@@ -13,9 +13,6 @@ import {Enum_TipoObjetivo} from './../.././utils/enums'
 const IndexProyectos = () => {
 
   const{data, error, loading}=useQuery(GET_PROYECTOS);
-
-
-  
   const [show, setShow] = useState(false);
 
 

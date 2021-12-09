@@ -4,7 +4,7 @@ import useFormData from "hooks/useFormData";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {InfoProyectos} from "./RegistroProyectos"
-import { useUser } from "context/userContext"
+import { useUser } from "context/userContext";
 import DropDown from "components/Dropdown";
 import { Enum_TipoObjetivo } from "utils/enums";
 import { nanoid } from 'nanoid'
@@ -23,11 +23,12 @@ const RegistroProyectos = () => {
   
   const submitForm= (e)=>{
     e.preventDefault();
-    console.log('fd:', formData);
     formData.presupuesto=parseFloat(formData.presupuesto)
+    formData.objetivos = Object.values(formData.objetivos);
     crearProyecto({
       variables:{...formData, lider:userData._id}
     });
+    console.log('fd:', formData);
   };
 
   useEffect(()=>{
@@ -62,6 +63,7 @@ const RegistroProyectos = () => {
             <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="date" name="fechaInicio" placeholder="Regular input" />
           </div>
           <Objetivos/>
+     
           
           <div className="form-general">
               <button className="btn-general mt-4 text-xl">Registrar</button>
@@ -82,22 +84,37 @@ const RegistroProyectos = () => {
 
 const Objetivos = () =>{
 
-
   const [listaObjetivos, setListaObjetivos]=useState([]);
+  const [maxObjetivos, setMaxObjetivos] = useState(false);
+
 
   const eliminarObjetivo=(id)=>{
     setListaObjetivos(listaObjetivos.filter((el)=> el.props.id !== id));
-  }
+  };
 
   const componenteObjetivoAgregado = () =>{
     const id=nanoid();
     return <FormObjetivo key={id} id={id}/>;
-  }
+  };
+
+  useEffect(()=>{
+    if(listaObjetivos.length>4){
+      setMaxObjetivos(true)
+    }
+    else{
+      setMaxObjetivos(false)
+    }
+  }, [listaObjetivos]);
+
   return (
     <ObjContext.Provider value={{eliminarObjetivo}}>
     <div>
       <spam>Objetivos del proyecto</spam>
-      <i onClick = {()=> setListaObjetivos([...listaObjetivos, componenteObjetivoAgregado()])} className='fas fa-plus rounded-full bg-green-500 hover:bg-green-400 text-white p-2 mx-2 cursor-pointer'></i>
+      {
+        !maxObjetivos && (
+          <i onClick = {()=> setListaObjetivos([...listaObjetivos, componenteObjetivoAgregado()])} className='fas fa-plus rounded-full bg-green-500 hover:bg-green-400 text-white p-2 mx-2 cursor-pointer'></i>
+        )
+      }
       {listaObjetivos.map((u)=>{
         return u;
       })}
@@ -111,9 +128,9 @@ const FormObjetivo = ({id})=>{
   return (
     <div className="text-gray-700 flex">
     <label class="block mb-1" for="forms-labelOverInputCode">Descripcion</label>
-    <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name={`objetivo_${id}_descripcion`} placeholder="Regular input" />
+    <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name={`nested||objetivos||${id}||descripcion`} placeholder="Regular input" />
     <DropDown
-      name={`objetivo_${id}_descripcion`} 
+      name={`nested||objetivos||${id}||tipo`} 
       options={Enum_TipoObjetivo} 
       label='Tipo de objetivo' 
       required={true}>
@@ -121,6 +138,8 @@ const FormObjetivo = ({id})=>{
     <i onClick = {()=>eliminarObjetivo(id)} className='fas fa-minus rounded-full bg-red-500 hover:bg-red-400 text-white p-2 mx-2 mt-6 cursor-pointer'></i>
   </div>
   )
+  
 }
+
 
 export default RegistroProyectos;
