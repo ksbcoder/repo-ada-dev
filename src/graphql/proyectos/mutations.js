@@ -21,6 +21,11 @@ const CREAR_PROYECTO=gql`
           nombre    
     }
   }
+`;
+const EDITAR_PROYECTO = gql`
+  mutation EditarProyecto(
+    
+  )
 `
 
 export {CREAR_PROYECTO}
