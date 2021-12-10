@@ -22,7 +22,7 @@
 }
 
 .btn-general {
-  @apply w-auto h-auto bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
+  @apply w-auto h-auto bg-red-800 hover:bg-red-600 text-white hover:text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
 
 .btn-general-submit {
@@ -40,6 +40,8 @@
 .navbar {
   @apply flex items-center bg-green-700 justify-center flex-wrap p-6 text-4xl text-white font-bold;
 }
+
+
 
 #accordion {
   @apply bg-green-300 bg-opacity-20 hover:bg-green-300 hover:bg-opacity-40 rounded-md transition-all;
@@ -61,7 +63,7 @@
 }
 
 th {
-  @apply border border-solid border-gray-300 bg-green-500 bg-opacity-75 p-4 py-2 text-white rounded-sm;
+  @apply border border-solid border-gray-300 bg-yellow-600 bg-opacity-75 p-4 py-2 mt-20 text-white rounded-sm;
 }
 
 td {

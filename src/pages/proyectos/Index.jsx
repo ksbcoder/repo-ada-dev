@@ -2,11 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {useQuery} from '@apollo/client';
 import { GET_PROYECTOS, GET_PROYECTOS_LIDERADOS } from 'graphql/proyectos/queries';
 import { ToastContainer, toast } from 'react-toastify';
-import RegistroProyectos from './RegistroProyectos';
 import { Link } from "react-router-dom";
 import ModalObj from 'components/ModalObj';
 import ModalAvan from 'components/ModalAvan';
-import PrivateComponent from 'components/PrivateComponent'
 import {Enum_TipoObjetivo} from './../.././utils/enums'
 import useFormData from 'hooks/useFormData';
 import { useUser } from "context/userContext";
@@ -24,7 +22,6 @@ const IndexProyectos = () => {
     },
   });
 
-
   useEffect(()=>{
     console.log('datos de los proyectos Liderados', dataLideres);
   }, [dataLideres]); 
@@ -39,9 +36,12 @@ const IndexProyectos = () => {
 
   return (
   <div>
-    <h2>Crear proyectos</h2>
+      <div className="navbar">
+          <span>Proyectos</span>
+      </div>
     {userData.rol=='ADMINISTRADOR' || userData.rol=='ESTUDIANTE'?
-    <table className='tabla'>
+    <div className='flew flex-col w-full h-full items-center justify-center p-10'>
+    <table className='tabla' >
         <thead>
           <tr>
           
@@ -91,22 +91,32 @@ const IndexProyectos = () => {
               
             })}
         </tbody>
-      </table>: ""
+      </table>
+      </div>:""
     }
     {userData.rol=='LIDER' ?
-      <div>
-        <table className='tabla'>
+
+    <div>
+    <div className='flex flex-row-reverse mx-10'>
+        <Link to="/proyectos/RegistroProyectos" className="btn-general mt-20  text-2xl">
+          Registrar Proyecto
+        </Link>
+    </div>
+  
+    <div className='flex flex-col justify-center items-center'>
+      <div className='table-container'>
+        <table id='table-list'>
         <thead>
           <tr>
           
             <th>Nombre</th>
             <th>Presupuesto</th>
-            <th>fechaInicio</th>
-            <th>estado </th>
-            <th>fase </th>
-            <th>objetivos</th>
+            <th>Fecha Inicio</th>
+            <th>Estado </th>
+            <th>Fase </th>
+            <th>Objetivos</th>
             <th>avances</th>
-            <th>actualizar</th>
+            <th>Editar</th>
             <th>inscribirse</th>
           </tr>
         </thead>
@@ -125,31 +135,32 @@ const IndexProyectos = () => {
               
                   <td key={u._id}><ModalObj id={`exampleModelObjetivos-${u._id}`} titulo="Objetivos" objetivos={u.
                     objetivos}></ModalObj>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target={`#exampleModelObjetivos-${u._id}`}>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target={`#exampleModelObjetivos-${u._id}`}>
                     ver
                     </button>
                   </td>
 
                   <td key={u._id}><ModalAvan id={`exampleModalAvances-${u._id}`} titulo="Avances"  avances={u.avances}></ModalAvan>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target={`#exampleModalAvances-${u._id}`}>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target={`#exampleModalAvances-${u._id}`}>
                     ver
                     </button>
+                    
                   </td>
 
-                  <td><button type="button" class="btn btn-primary"> actualizar </button></td>
-                  <td><button type="button" class="btn btn-primary"> inscripciones </button></td>
-            
+                  <td><button type="button" className="btn btn-primary">  Editar </button></td>
+                  <td><Link to="/inscripciones" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Inscribirse
+                  </Link></td>
                 </tr>
                 
               );
               
             })
           }
-        </tbody>
-      </table>
-        <Link to="/proyectos/RegistroProyectos" className="btn-general-cancelar mt-6 text-2xl">
-          Registrar Proyecto
-        </Link>
+          </tbody>
+        </table>
+        </div>
+        </div> 
       </div>: ""
     }  
   </div>  
