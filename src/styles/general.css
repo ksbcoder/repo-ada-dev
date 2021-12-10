@@ -5,7 +5,7 @@
   @apply w-64 shadow flex-col;
 }
 .sidebar-route {
-  @apply rounded-md flex w-full justify-between cursor-pointer items-center m-3 p-3;
+  @apply rounded-md flex w-auto justify-between cursor-pointer items-center m-3 p-3;
 }
 
 .titulo-general {
@@ -22,19 +22,19 @@
 }
 
 .btn-general {
-  @apply w-auto h-auto bg-red-800 hover:bg-red-600 text-white hover:text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
+  @apply w-auto h-auto bg-green-700 hover:bg-green-600 hover:text-white text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
 
 .btn-general-submit {
-  @apply w-auto h-auto bg-indigo-700 hover:bg-indigo-900 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
+  @apply w-auto h-auto bg-red-500 hover:bg-red-800 hover:text-white text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
 
 .btn-general-cancelar {
-  @apply w-auto h-auto bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
+  @apply w-auto h-auto bg-gray-500 hover:bg-gray-600 hover:text-white text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
 
 .btn-general-editar {
-  @apply w-auto h-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
+  @apply w-auto h-auto bg-yellow-600 bg-opacity-80 hover:bg-yellow-700 hover:text-white text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
 
 .navbar {
@@ -63,7 +63,7 @@
 }
 
 th {
-  @apply border border-solid border-gray-300 bg-yellow-600 bg-opacity-75 p-4 py-2 mt-20 text-white rounded-sm;
+  @apply border border-solid border-gray-300 bg-yellow-600 bg-opacity-75 p-4 py-2 text-white rounded-sm;
 }
 
 td {
@@ -113,6 +113,5 @@ tr:hover {
   @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 mx-2 text-gray-500 bg-yellow-400 hover:bg-yellow-700 
   hover:text-white transition-all shadow-xl;
 }
-
 
 /*ESTILOS DE USUARIO FIN*/

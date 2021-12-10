@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useUser } from "../../context/userContext";
@@ -34,6 +34,10 @@ const IndexAvances = () => {
       _id: userData._id,
     },
   });
+
+  useEffect(() => {
+    console.log("ud", userData);
+  }, [userData]);
 
   const {
     data: queryAvancesLider,
@@ -87,7 +91,7 @@ const IndexAvances = () => {
         {userData.rol === "ADMINISTRADOR" && (
           <>
             <div className="flex mx-7 p-3 bg-blue-200 text-blue-800 max-w-max rounded-lg shadow-md">
-              Avances: {queryAvances.Avances.length}
+              Total de avances: {queryAvances.Avances.length}
             </div>
             <div className="flex flex-col justify-center items-center">
               <div className="table-container">
@@ -178,7 +182,8 @@ const IndexAvances = () => {
         {userData.rol === "LIDER" && (
           <>
             <div className="flex mx-7 p-3 bg-blue-200 text-blue-800 max-w-max rounded-lg shadow-md">
-              Avances: {queryAvancesLider.AvancesPorLider.length}
+              Avances de proyectos que lideras:{" "}
+              {queryAvancesLider.AvancesPorLider.length}
             </div>
             <div className="flex flex-col justify-center items-center">
               <div className="table-container">
@@ -284,7 +289,8 @@ const IndexAvances = () => {
           </PrivateComponent>
         </div>
         <div className="flex mx-7 p-3 bg-blue-200 text-blue-800 max-w-max rounded-lg shadow-md">
-          Avances: {queryAvanceProyecto.AvancesPorProyecto.length}
+          Avances de proyectos inscritos:{" "}
+          {queryAvanceProyecto.AvancesPorProyecto.length}
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="table-container">
