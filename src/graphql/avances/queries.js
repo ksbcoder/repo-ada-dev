@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const OBTENER_AVANCES = gql`
-  query QAvances {
+  query Avances {
     Avances {
       _id
       descripcion
@@ -10,6 +10,8 @@ const OBTENER_AVANCES = gql`
       proyecto {
         _id
         nombre
+        fase
+        estado
         lider {
           _id
           nombre
@@ -34,6 +36,34 @@ const OBTENER_AVANCE = gql`
       proyecto {
         _id
         nombre
+        fase
+        estado
+      }
+      creadoPor {
+        _id
+        nombre
+        apellido
+      }
+    }
+  }
+`;
+
+const OBTENER_AVANCES_POR_LIDER = gql`
+  query AvancesPorLider {
+    AvancesPorLider {
+      _id
+      descripcion
+      observaciones
+      fechaAvance
+      proyecto {
+        _id
+        nombre
+        fase
+        estado
+        lider {
+          _id
+          nombre
+        }
       }
       creadoPor {
         _id
@@ -45,8 +75,8 @@ const OBTENER_AVANCE = gql`
 `;
 
 const OBTENER_AVANCES_POR_USUARIO = gql`
-  query AvancePorUsuario($_id: String!) {
-    AvancePorUsuario(_id: $_id) {
+  query AvancesPorUsuario($_id: String!) {
+    AvancesPorUsuario(_id: $_id) {
       _id
       descripcion
       observaciones
@@ -54,6 +84,37 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
       proyecto {
         _id
         nombre
+        fase
+        estado
+      }
+      creadoPor {
+        _id
+        nombre
+        apellido
+      }
+    }
+  }
+`;
+
+const OBTENER_AVANCES_POR_PROYECTO = gql`
+  query AvancesPorProyecto {
+    AvancesPorProyecto {
+      _id
+      descripcion
+      observaciones
+      fechaAvance
+      proyecto {
+        _id
+        nombre
+        fase
+        estado
+        inscripciones {
+          _id
+          estado
+          estudiante {
+            _id
+          }
+        }
       }
       creadoPor {
         _id
@@ -65,7 +126,7 @@ const OBTENER_AVANCES_POR_USUARIO = gql`
 `;
 
 const OBTENER_PROYECTOS = gql`
-  query QProyectos {
+  query Proyectos {
     Proyectos {
       _id
       nombre
@@ -82,9 +143,21 @@ const OBTENER_PROYECTOS = gql`
   }
 `;
 
+const OBTENER_PROYECTOS_LITE = gql`
+  query ProyectosRegistrar {
+    ProyectosRegistrar {
+      _id
+      nombre
+    }
+  }
+`;
+
 export {
   OBTENER_AVANCES,
   OBTENER_AVANCE,
+  OBTENER_AVANCES_POR_LIDER,
   OBTENER_AVANCES_POR_USUARIO,
+  OBTENER_AVANCES_POR_PROYECTO,
   OBTENER_PROYECTOS,
+  OBTENER_PROYECTOS_LITE,
 };

@@ -5,17 +5,15 @@ const CREAR_PROYECTO=gql`
         $nombre: String!
         $presupuesto: Float!
         $fechaInicio: Date!
-        $estado: Enum_EstadoProyecto!
-        $fase: Enum_FaseProyecto!
         $lider: String!
+        $objetivos:[crearObjetivo]
     ) {
         crearProyecto(
             nombre: $nombre
             presupuesto: $presupuesto
             fechaInicio: $fechaInicio
-            estado: $estado
-            fase: $fase
             lider: $lider
+            objetivos: $objetivos
         ) {
           _id  
           nombre    
