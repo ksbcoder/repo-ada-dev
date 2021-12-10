@@ -5,7 +5,7 @@
   @apply w-64 shadow flex-col;
 }
 .sidebar-route {
-  @apply rounded-md flex w-full justify-between cursor-pointer items-center m-3 p-3;
+  @apply rounded-md flex w-auto justify-between cursor-pointer items-center m-3 p-3;
 }
 
 .titulo-general {
