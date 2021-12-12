@@ -26,4 +26,4 @@ const EDITAR_PROYECTO = gql`
   )
 `
 
-export {CREAR_PROYECTO}
+export {CREAR_PROYECTO, EDITAR_PROYECTO}

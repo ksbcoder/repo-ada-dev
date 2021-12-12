@@ -47,13 +47,13 @@ const IndexProyectos = () => {
           
             <th>Nombre</th>
             <th>Presupuesto</th>
-            <th>fechaInicio</th>
-            <th>estado </th>
-            <th>fase </th>
-            <th>objetivos</th>
-            <th>avances</th>
-            <th>actualizar</th>
-            <th>inscribirse</th>
+            <th>FechaInicio</th>
+            <th>Estado </th>
+            <th>Fase </th>
+            <th>Objetivos</th>
+            <th>Avances</th>
+            <th>Actualizar</th>
+            <th>Inscribirse</th>
           </tr>
         </thead>
         <tbody>
@@ -82,7 +82,12 @@ const IndexProyectos = () => {
                     </button>
                   </td>
 
-                  <td><button type="button" class="btn btn-primary"> actualizar </button></td>
+                  <td>
+                    
+                    <Link to={`ActualizarProyectos/${u._id}`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Actualizar
+                    </Link>
+                    </td>
                   <td><button type="button" class="btn btn-primary"> inscripciones </button></td>
             
                 </tr>
@@ -115,9 +120,9 @@ const IndexProyectos = () => {
             <th>Estado </th>
             <th>Fase </th>
             <th>Objetivos</th>
-            <th>avances</th>
+            <th>Avances</th>
             <th>Editar</th>
-            <th>inscribirse</th>
+            <th>Inscribirse</th>
           </tr>
         </thead>
         <tbody>
