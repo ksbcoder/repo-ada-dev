@@ -19,6 +19,7 @@ const CREAR_USUARIO = gql`
       password: $password
     ){
       _id
+      nombre
     }
   }
 `;
