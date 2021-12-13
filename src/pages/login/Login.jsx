@@ -102,7 +102,7 @@ const Login = () => {
                     </form>
                     <div className="flex flex-wrap mt-6 items-center justify-center">
                       <div className="w-1/2 text-center">
-                        <Link className="text-blue-500" to="/usuarios">
+                        <Link className="text-blue-500" to="/registro">
                           <small className="text-base">Registrarse</small>
                         </Link>
                       </div>

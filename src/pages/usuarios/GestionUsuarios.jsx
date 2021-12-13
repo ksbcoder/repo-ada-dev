@@ -2,13 +2,24 @@ import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from "react-router-dom";
 import { GET_USUARIOS } from 'graphql/usuarios/queries';
+import { GET_USUARIOS_ESTUDIANTES} from 'graphql/usuarios/queries';
 import { toast } from 'react-toastify';
+import { useUser } from 'context/userContext';
 
 const GestionUsuarios = () => {
-    const{data,error,loading} = useQuery(GET_USUARIOS)
+    const{userData} = useUser();    
+
+    console.log("Usuario rol:" + userData.rol);
+    let peticion1 = GET_USUARIOS; 
+    let peticion2 = GET_USUARIOS_ESTUDIANTES;
+          
+  
+    
+    const{data,error,loading} = useQuery(userData.rol == "ADMINISTRADOR" ? peticion1: peticion2);  
+    
 
     useEffect(() => {
-        console.log("data servidor",data)
+        console.log("data servidor",data)        
     }, [data])
 
     useEffect(() => {
@@ -28,10 +39,7 @@ const GestionUsuarios = () => {
         <><nav className="navbar">
             <h1>Gestión de Usuarios</h1>
         </nav>
-            <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-            <Link to='../usuarios'>
-                <i className='fas fa-chevron-circle-left text-blue-400 cursor-pointer font-bold text-xl hover:text-green-400' />
-            </Link>
+            <div className='flew flex-col w-full h-full items-center justify-center p-10'>            
             <div className="table-container">
                 <table className="table-list">
                     <thead>
@@ -45,9 +53,9 @@ const GestionUsuarios = () => {
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>                        
-                        {data &&
-                         data.Usuarios.map((u) => {
+                    <tbody>                                                
+                        {(userData.rol == "ADMINISTRADOR") && data &&
+                            data.Usuarios.map((u) => {
                             return(
                                 <tr key={u._id}>
                                     <td>{u.nombre}</td>
@@ -56,16 +64,37 @@ const GestionUsuarios = () => {
                                     <td>{u.rol}</td>
                                     <td>{u.correo}</td>                                  
                                     <td>{u.estado}</td>
-                                    <td>
+                                    <td className="flex">
                                         <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-user-edit"></i></Link>
-                                        <button className="btn-eliminar"><i className="fas fa-user-minus"></i></button> 
+                                        <Link className="btn-project" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>                                         
                                     </td>
                                 </tr>
                             )
-                        })}                        
+                        })}
+                        {(userData.rol == "LIDER") && data &&
+                            data.UsuariosEstudiantes.map((u) => {
+                            return(
+                                <tr key={u._id}>
+                                    <td>{u.nombre}</td>
+                                    <td>{u.apellido}</td>
+                                    <td>{u.identificacion}</td>
+                                    <td>{u.rol}</td>
+                                    <td>{u.correo}</td>                                  
+                                    <td>{u.estado}</td>
+                                    <td className="flex">
+                                        <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-user-edit"></i></Link>
+                                        <Link className="btn-project" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>
+                                        
+                                    </td>
+                                </tr>
+                            )
+                        })} 
+                                               
                     </tbody>
 
-                </table>
+                </table> 
+                
+                
 
             </div>
             </div></>

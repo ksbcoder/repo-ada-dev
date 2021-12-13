@@ -20,9 +20,12 @@ import Perfil from "pages/usuarios/Perfil";
 import GestionUsuarios from "pages/usuarios/GestionUsuarios";
 import EditarUsuario from "pages/usuarios/Editar";
 import Login from "pages/login/Login";
+import Registro from "pages/login/Registro";
+import InfoProyectos from "pages/proyectos/InfoProyectos";
 import RegistroProyectos from "pages/proyectos/RegistroProyectos";
 import { AuthContext } from 'context/authContext';
 import jwt_decode from 'jwt-decode';
+
 
 
 const httpLink = createHttpLink({
@@ -81,6 +84,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/registro" element={<Registro />} />
               <Route path="/" element={<PrivateLayout />}>
                 <Route path="" element={<Index />} />
                 <Route path="usuarios" element={<IndexUsuarios />} />
