@@ -16,4 +16,10 @@ const Enum_Rol = {
     AUTORIZADO: 'AUTORIZADO',   
   };
   
-  export { Enum_Rol, Enum_EstadoUsuario, Enum_EstadoLider};
+  const Enum_TipoObjetivo = {
+    GENERAL: 'General',
+    ESPECIFICO: 'Especifico'
+  };
+  
+  export { Enum_Rol, Enum_EstadoUsuario, Enum_EstadoLider, Enum_TipoObjetivo };
+
