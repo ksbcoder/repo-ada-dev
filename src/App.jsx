@@ -11,6 +11,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import Index from "pages/Index";
 import IndexProyectos from "pages/proyectos/Index";
+import ActualizarProyectos from "pages/proyectos/ActualizarProyectos"
 import IndexInscripciones from "pages/inscripciones/Index";
 import IndexUsuarios from "pages/usuarios/Index";
 import IndexAvances from "pages/avances/Index";
@@ -102,6 +103,7 @@ function App() {
 
                 <Route path="proyectos" element={<IndexProyectos />} />
                 <Route path="proyectos/RegistroProyectos" element={<RegistroProyectos />} />
+                <Route path= "proyectos/ActualizarProyectos/:_id" element={<ActualizarProyectos/>}/>
                 <Route path="inscripciones" element={<IndexInscripciones />} />
                 <Route path="avances" element={<IndexAvances />} />
                 <Route path="avances/registrar" element={<RegistrarAvance />} />

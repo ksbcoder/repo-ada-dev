@@ -7,7 +7,15 @@
 .sidebar-route {
   @apply rounded-md flex w-auto justify-between cursor-pointer items-center m-3 p-3;
 }
-
+.color{
+  background-color: #07575B;
+}
+.letra{
+  color: #07575B;
+}
+.poppins{
+  font-family: Poppins;
+}
 .titulo-general {
   @apply text-gray-900 text-4xl font-semibold;
 }
@@ -47,6 +55,9 @@
   @apply bg-green-300 bg-opacity-20 hover:bg-green-300 hover:bg-opacity-40 rounded-md transition-all;
 }
 
+#accordion2 {
+  @apply bg-yellow-600 bg-opacity-75 hover:bg-yellow-600 hover:bg-opacity-60 rounded-md transition-all text-white font-bold;
+}
 /* ESTILOS DE TABLAS INICIO */
 .formSubmitList {
   @apply text-center pb-5 mb-5;

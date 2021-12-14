@@ -14,13 +14,18 @@ const IndexProyectos = () => {
 
   const { userData } = useUser();
 
-  const{data, error, loading}=useQuery(GET_PROYECTOS);
+  const{data, error, loading, refetch: refetchProyectos,}=useQuery(GET_PROYECTOS);
 
-  const{data: dataLideres, error: errorLideres, loading: loadingLideres}=useQuery(GET_PROYECTOS_LIDERADOS, {
+  const{data: dataLideres, error: errorLideres, loading: loadingLideres, refetch: refetchProyectosLiderados,}=useQuery(GET_PROYECTOS_LIDERADOS, {
     variables: {
       idLider: userData._id,
     },
   });
+
+  useEffect(() => {
+    refetchProyectos();
+    refetchProyectosLiderados();
+}, [refetchProyectos, refetchProyectosLiderados]);
 
   useEffect(()=>{
     console.log('datos de los proyectos Liderados', dataLideres);
@@ -47,13 +52,13 @@ const IndexProyectos = () => {
           
             <th>Nombre</th>
             <th>Presupuesto</th>
-            <th>fechaInicio</th>
-            <th>estado </th>
-            <th>fase </th>
-            <th>objetivos</th>
-            <th>avances</th>
-            <th>actualizar</th>
-            <th>inscribirse</th>
+            <th>FechaInicio</th>
+            <th>Estado </th>
+            <th>Fase </th>
+            <th>Objetivos</th>
+            <th>Avances</th>
+            <th>Actualizar</th>
+            <th>Inscribirse</th>
           </tr>
         </thead>
         <tbody>
@@ -82,7 +87,11 @@ const IndexProyectos = () => {
                     </button>
                   </td>
 
-                  <td><button type="button" class="btn btn-primary"> actualizar </button></td>
+                  <td>
+                    <Link to={`ActualizarProyectos/${u._id}`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Actualizar
+                    </Link>
+                    </td>
                   <td><button type="button" class="btn btn-primary"> inscripciones </button></td>
             
                 </tr>
@@ -115,9 +124,9 @@ const IndexProyectos = () => {
             <th>Estado </th>
             <th>Fase </th>
             <th>Objetivos</th>
-            <th>avances</th>
+            <th>Avances</th>
             <th>Editar</th>
-            <th>inscribirse</th>
+            <th>Inscribirse</th>
           </tr>
         </thead>
         <tbody>
@@ -147,7 +156,9 @@ const IndexProyectos = () => {
                     
                   </td>
 
-                  <td><button type="button" className="btn btn-primary">  Editar </button></td>
+                  <td><Link to={`ActualizarProyectos/${u._id}`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Editar
+                    </Link></td>
                   <td><Link to="/inscripciones" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Inscribirse
                   </Link></td>

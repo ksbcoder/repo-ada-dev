@@ -7,6 +7,7 @@ const GET_PROYECTOS = gql`
             nombre
             presupuesto
             fechaInicio
+            fechaFin
             estado
             fase
             objetivos {
@@ -48,4 +49,23 @@ const GET_PROYECTOS_LIDERADOS = gql`
     }
   }
 `;
-export {GET_PROYECTOS, GET_PROYECTOS_LIDERADOS};
+
+const GET_PROYECTO = gql`
+query LeerProyecto($_id: String!) {
+  LeerProyecto(_id: $_id) {
+    _id
+    nombre
+    presupuesto
+    fechaInicio
+    fechaFin
+    estado
+    fase
+    objetivos {
+      _id
+      descripcion
+      tipo
+    }
+  }
+}
+`;
+export {GET_PROYECTOS, GET_PROYECTOS_LIDERADOS, GET_PROYECTO};
