@@ -9,10 +9,13 @@ import { toast } from 'react-toastify';
 import { EDITAR_USUARIO } from 'graphql/usuarios/mutations';
 import DropDown from 'components/Dropdown';
 import { Enum_EstadoUsuario } from 'utils/enums';
+import { Enum_EstadoLider } from 'utils/enums';
+import { useUser } from 'context/userContext';
 
 const EditarUsuario = () => {
     const { form, formData, updateFormData } = useFormData(null);
     const { _id } = useParams();
+    const{userData} = useUser();    
 
     const {
         data: queryData,
@@ -71,31 +74,36 @@ const EditarUsuario = () => {
                         type='text'
                         name='nombre'
                         defaultValue={queryData.Usuario.nombre}
-                        required={true} />
+                        required={true}
+                        isDisabled={true}/>
                     <Input
                         label='Apellido:'
                         type='text'
                         name='apellido'
                         defaultValue={queryData.Usuario.apellido}
-                        required={true} />
+                        required={true} 
+                        isDisabled={true}/>
                     <Input
                         label='Correo:'
                         type='email'
                         name='correo'
                         defaultValue={queryData.Usuario.correo}
-                        required={true} />
+                        required={true} 
+                        isDisabled={true}/>
                     <Input
                         label='Identificación:'
                         type='text'
                         name='identificacion'
                         defaultValue={queryData.Usuario.identificacion}
-                        required={true} />                  
+                        required={true} 
+                        isDisabled={true}/>                  
                     <DropDown
                         label='Estado:'
                         name='estado'
                         defaultValue={queryData.Usuario.estado}
-                        required={true}
-                        options={Enum_EstadoUsuario} />
+                        required={true}                        
+                        options={userData.rol=="LIDER" ? Enum_EstadoLider: Enum_EstadoUsuario}                        
+                         />
                     <span>Rol: {queryData.Usuario.rol}</span>
                     <ButtonLoading
                         disabled={Object.keys(formData).length === 0}
