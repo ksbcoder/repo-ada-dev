@@ -8,36 +8,35 @@ import { CREAR_USUARIO } from 'graphql/usuarios/mutations';
 import useFormData from 'hooks/useFormData';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
-const IndexUsuarios = () => {
+const RegistroUsuarios = () => {
+    const { form, formData, updateFormData } = useFormData(null); 
 
-  const { form, formData, updateFormData } = useFormData(null); 
+    const [crearUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] =
+        useMutation(CREAR_USUARIO); 
+    const navigate = useNavigate();
 
-  const [crearUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] =
-        useMutation(CREAR_USUARIO);  
-
-  const submitForm = (e) => {
-    e.preventDefault(); 
+    const submitForm = (e) => {
+        e.preventDefault(); 
     
     if( formData.password !== formData.confirmPassword){
-      toast.warning('Las contraseñas no coiciden')
-      console.log('las contraseñas no coinciden'+ formData.password + ' -- ' + formData.confirmPassword)
-     
+        toast.warning('Las contraseñas no coiciden')
+        console.log('las contraseñas no coinciden'+ formData.password + ' -- ' + formData.confirmPassword)     
     }else{
-      toast.success('las contraseñas coinciden');
-      console.log('las contraseñas coinciden'+ formData.password + ' -- ' + formData.confirmPassword);
-      crearUsuario({
+        toast.success('las contraseñas coinciden');
+        console.log('las contraseñas coinciden'+ formData.password + ' -- ' + formData.confirmPassword);
+        crearUsuario({
         variables: {...formData },
-      });
-      document.getElementById("formularioRegistro").reset();
-      
-    }   
+        });
+        document.getElementById("formularioRegistro").reset();
+        navigate('/');         
+    }      
     
-    
-  };
+    };
 
   useEffect(() => {
     if (mutationData && mutationData.crearUsuario === null){
@@ -53,28 +52,37 @@ const IndexUsuarios = () => {
     
   }, [mutationData, mutationError]); 
   
-  // useEffect(() => {
-  //   if (mutationLoading){
-  //     toast.loading('...cargando')
-  //   }
+//   useEffect(() => {
+//     if (mutationLoading){
+//       toast.loading('...cargando')
+//     }
    
-  // }, [mutationLoading])
+//   }, [mutationLoading])
 
   return(
-    <><nav className="navbar">
-      <h1>Registro de Usuario</h1>
-    </nav>
-      <div className="flex flex-row-reverse flex-nowrap mr-8 mt-5 gap-2">
-        <Link to="GestionUsuarios" className="btn-general">
-          Gestionar Usuarios
-        </Link>
-      </div>
+    
+        <div
+            className="absolute top-0 w-full h-full z-0 bg-blue-200"
+            style={{
+                backgroundImage:
+                    "url(" + require("./img/Fondo.png").default + ")",
+                backgroundSize: "100%",
+                backgroundRepeat: "no-repeat"
+            }}>
+        
+        <><nav className="navbar">
+            <h1>Registro de Usuario</h1>
+        </nav>
+        
+        <Link to='../login'>
+            <i className='fas fa-chevron-circle-left mx-40 mt-2 text-blue-600 cursor-pointer font-bold text-xl hover:text-green-400' />
+        </Link>     
       <form
         onSubmit={submitForm}
         onChange={updateFormData}
         ref={form}
         id= "formularioRegistro"
-        className='flex flex-col items-center justify-center'>
+        className='flex flex-col items-center justify-center z-20'>
         <Input
           label='Nombre:'
           type='text'
@@ -114,12 +122,11 @@ const IndexUsuarios = () => {
           required={true} />
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}
-          //loading={mutationLoading}
+          loading={mutationLoading}
           text='Registrar' />
       </form>
-
-        </>
+      </></div>        
   );
 };
 
-export default IndexUsuarios;
+export default RegistroUsuarios;

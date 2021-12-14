@@ -10,8 +10,14 @@ import blanco_60 from "./img/blanco_60.png";
 const SidebarLinks = () => {
   return (
     <ul className="mt-12">
-      <SidebarRoute to="" title="Inicio" icon="fas fa-home" />
-      <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-user" />
+      <SidebarRoute 
+        to="" 
+        title="Inicio" 
+        icon="fas fa-home" />
+      <SidebarRoute 
+        to="/usuarios/GestionUsuarios" 
+        title="Usuarios" 
+        icon="fas fa-user" />
       <SidebarRoute
         to="/proyectos"
         title="Proyectos"

@@ -7,7 +7,15 @@
 .sidebar-route {
   @apply rounded-md flex w-auto justify-between cursor-pointer items-center m-3 p-3;
 }
-
+.color{
+  background-color: #07575B;
+}
+.letra{
+  color: #07575B;
+}
+.poppins{
+  font-family: Poppins;
+}
 .titulo-general {
   @apply text-gray-900 text-4xl font-semibold;
 }
@@ -45,6 +53,9 @@
   @apply bg-green-300 bg-opacity-20 hover:bg-green-300 hover:bg-opacity-40 rounded-md transition-all;
 }
 
+#accordion2 {
+  @apply bg-yellow-600 bg-opacity-75 hover:bg-yellow-600 hover:bg-opacity-60 rounded-md transition-all text-white font-bold;
+}
 /* ESTILOS DE TABLAS INICIO */
 .formSubmitList {
   @apply text-center pb-5 mb-5;
@@ -80,7 +91,7 @@ tr:hover {
 
 /*ESTILOS DE USUARIO INICIO*/
 .form-usuario {
-  @apply mt-9 flex flex-col items-center;
+  @apply mt-2 flex flex-col items-center;
 }
 
 .form-campo {
@@ -104,6 +115,11 @@ tr:hover {
 
 .btn-eliminar {
   @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 m-2 text-gray-500 bg-red-500 hover:bg-red-700 
+  hover:text-white transition-all shadow-xl;
+}
+
+.btn-project {
+  @apply w-auto h-auto rounded-md cursor-pointer px-3 py-2 m-2 text-gray-500 bg-green-300 hover:bg-green-500 
   hover:text-white transition-all shadow-xl;
 }
 

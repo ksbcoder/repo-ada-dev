@@ -15,6 +15,20 @@ const GET_USUARIOS = gql`
   }
 `;
 
+const GET_USUARIOS_ESTUDIANTES = gql`
+  query UsuariosEstudiantes{
+    UsuariosEstudiantes {
+      _id
+      nombre
+      apellido
+      identificacion
+      correo
+      rol
+      estado
+    }
+  }
+`;
+
 const GET_USUARIO = gql`
   query Usuario($_id: String!) {
     Usuario(_id: $_id) {
@@ -30,4 +44,4 @@ const GET_USUARIO = gql`
   }
 `;
 
-export { GET_USUARIOS, GET_USUARIO };
+export { GET_USUARIOS, GET_USUARIOS_ESTUDIANTES, GET_USUARIO };
