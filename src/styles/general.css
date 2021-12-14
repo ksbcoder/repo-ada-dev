@@ -55,6 +55,9 @@
   @apply bg-green-300 bg-opacity-20 hover:bg-green-300 hover:bg-opacity-40 rounded-md transition-all;
 }
 
+#accordion2 {
+  @apply bg-yellow-600 bg-opacity-75 hover:bg-yellow-600 hover:bg-opacity-60 rounded-md transition-all text-white font-bold;
+}
 /* ESTILOS DE TABLAS INICIO */
 .formSubmitList {
   @apply text-center pb-5 mb-5;

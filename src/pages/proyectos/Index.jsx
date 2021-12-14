@@ -14,13 +14,18 @@ const IndexProyectos = () => {
 
   const { userData } = useUser();
 
-  const{data, error, loading}=useQuery(GET_PROYECTOS);
+  const{data, error, loading, refetch: refetchProyectos,}=useQuery(GET_PROYECTOS);
 
-  const{data: dataLideres, error: errorLideres, loading: loadingLideres}=useQuery(GET_PROYECTOS_LIDERADOS, {
+  const{data: dataLideres, error: errorLideres, loading: loadingLideres, refetch: refetchProyectosLiderados,}=useQuery(GET_PROYECTOS_LIDERADOS, {
     variables: {
       idLider: userData._id,
     },
   });
+
+  useEffect(() => {
+    refetchProyectos();
+    refetchProyectosLiderados();
+}, [refetchProyectos, refetchProyectosLiderados]);
 
   useEffect(()=>{
     console.log('datos de los proyectos Liderados', dataLideres);
@@ -83,7 +88,6 @@ const IndexProyectos = () => {
                   </td>
 
                   <td>
-                    
                     <Link to={`ActualizarProyectos/${u._id}`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                       Actualizar
                     </Link>
@@ -152,7 +156,9 @@ const IndexProyectos = () => {
                     
                   </td>
 
-                  <td><button type="button" className="btn btn-primary">  Editar </button></td>
+                  <td><Link to={`ActualizarProyectos/${u._id}`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Editar
+                    </Link></td>
                   <td><Link to="/inscripciones" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Inscribirse
                   </Link></td>
