@@ -1,5 +1,5 @@
-import { useUser } from 'context/userContext';
-import React from 'react';
+import { useUser } from "context/userContext";
+import React from "react";
 
 const PrivateComponent = ({ roleList, children }) => {
   const { userData } = useUser();
@@ -8,7 +8,11 @@ const PrivateComponent = ({ roleList, children }) => {
     return children;
   }
 
-  return <></>;
+  return (
+    <>
+      <div data-testid="no-autorizado"></div>
+    </>
+  );
 };
 
 export default PrivateComponent;
