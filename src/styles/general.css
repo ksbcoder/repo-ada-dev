@@ -49,8 +49,6 @@
   @apply flex items-center bg-green-700 justify-center flex-wrap p-6 text-4xl text-white font-bold;
 }
 
-
-
 #accordion {
   @apply bg-green-300 bg-opacity-20 hover:bg-green-300 hover:bg-opacity-40 rounded-md transition-all;
 }
