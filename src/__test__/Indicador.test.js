@@ -4,7 +4,7 @@ import Indicador from "components/Indicador";
 
 afterEach(cleanup);
 
-it("Renderiza el coomponente", ()=>{
+it("Renderiza el componente", ()=>{
     render(
         <Indicador password="12345"/>
     );
