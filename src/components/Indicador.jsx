@@ -44,12 +44,12 @@ const Indicador=({password})=> {
     })
     return (
         <>
-            <div className="progress" style={{height:'7px'}}>
+            <div data-testid='Progress-bar' className="progress" style={{height:'7px'}}>
                 <div className="progress-bar" style={changePasswordColor()}>
 
                 </div>
             </div>
-            <p style={{color:color()}}>{Letrero()}</p>
+            <p data-testid='Color-label' style={{color:color()}}>{Letrero()}</p>
         </>
     );
 }
