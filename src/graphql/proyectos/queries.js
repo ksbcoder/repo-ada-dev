@@ -45,6 +45,9 @@ const GET_PROYECTOS_LIDERADOS = gql`
       avances {
         _id
         descripcion
+        creadoPor {
+          nombre
+        }
       }
     }
   }

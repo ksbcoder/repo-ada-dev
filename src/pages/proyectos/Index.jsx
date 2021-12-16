@@ -5,8 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import ModalObj from 'components/ModalObj';
 import ModalAvan from 'components/ModalAvan';
-import {Enum_TipoObjetivo} from './../.././utils/enums'
-import useFormData from 'hooks/useFormData';
 import { useUser } from "context/userContext";
 import {CREAR_INSCRIPCION} from "graphql/proyectos/mutations";
 import { useMutation } from "@apollo/client";
@@ -16,11 +14,17 @@ const IndexProyectos = () => {
 
   const { userData } = useUser();
 
-  const[crearInscripcion, {dataInscripcion, loadingInscripcion, errorInscripcion}]=useMutation(CREAR_INSCRIPCION);
+  const[crearInscripcion, {data: dataInscripcion, loading: loadingInscripcion, error: errorInscripcion}]=useMutation(CREAR_INSCRIPCION);
 
   useEffect(()=>{
-    console.log('mutacion crear inscripcion', dataInscripcion);
-  }, [dataInscripcion]);
+    if (dataInscripcion){
+      console.log(dataInscripcion)
+      toast.success('Inscripción realizada');
+    }
+    if(errorInscripcion){
+      toast.error('Error en la inscripción')
+    }
+  }, [dataInscripcion, errorInscripcion]);
 
   const{data, error, loading, refetch: refetchProyectos,}=useQuery(GET_PROYECTOS);
 
@@ -65,8 +69,7 @@ const IndexProyectos = () => {
             <th>Fase </th>
             <th>Objetivos</th>
             <th>Avances</th>
-            <th>Actualizar</th>
-            <th>Inscribirse</th>
+            <th>Inscripciones</th>
           </tr>
         </thead>
         <tbody>
@@ -94,14 +97,9 @@ const IndexProyectos = () => {
                     ver
                     </button>
                   </td>
-
-                  <td>
-                    <Link to={`ActualizarProyectos/${u._id}`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                      Actualizar
-                    </Link>
-                    </td>
                   <td><button type="button" class="btn btn-primary"  onClick = {()=> crearInscripcion({
-      variables:{proyecto: u._id, estudiante:userData._id}})}> inscripciones </button></td>
+                  variables:{proyecto: u._id, estudiante:userData._id}})}> Inscribirse </button>
+                  </td>
                 </tr>
                 
               );
@@ -168,7 +166,7 @@ const IndexProyectos = () => {
                       Editar
                     </Link></td>
                   <td><Link to="/inscripciones" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Inscribirse
+                    Ver
                   </Link></td>
                 </tr>
                 

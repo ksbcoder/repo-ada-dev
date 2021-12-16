@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ModalObj = ({id, titulo,objetivos}) => {
-    console.log('objetivos modal', objetivos)
+
     return (
         <div>
         
@@ -9,7 +9,7 @@ const ModalObj = ({id, titulo,objetivos}) => {
         <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
             <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLongTitle">{titulo}</h5>
+                <h5 className="modal-title" id="exampleModalLongTitle" className='text-lg font-semibold'>{titulo}</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,10 +17,12 @@ const ModalObj = ({id, titulo,objetivos}) => {
             <div className="modal-body">
                 {objetivos && objetivos.map((u)=>{
                     return(
-                        <div className='flex flex-col justify-evenly mb-2'>
+                        <div className='mb-3 bg-green-100 p-3 rounded-lg flex flex-col items-center justify-center shadow-sm'>
                             
-                            <div>Tipo Objetivo: {u.tipo}</div>
-                            <div>Descripcion: {u.descripcion}</div>    
+                            <div className='text-lg font-semibold'>Tipo Objetivo:</div> 
+                                <div>{u.tipo}</div>
+                            <div className='text-lg font-semibold'>Descripcion: </div>
+                                <div >{u.descripcion}</div>    
                             
                         </div>
                     )
