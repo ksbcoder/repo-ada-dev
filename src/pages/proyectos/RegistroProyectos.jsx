@@ -37,10 +37,11 @@ const RegistroProyectos = () => {
 
   return (
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-
-      <Link to='/proyectos'>
-        <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
-      </Link>
+      <div className="flex justify-start ml-10 mt-10">
+            <Link to="/proyectos" className="btn-general">
+              <i className="fas fa-arrow-left"></i>
+            </Link>
+      </div>      
       <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Crear proyecto</h1>
       <form
         onSubmit={submitForm}
@@ -126,16 +127,16 @@ const Objetivos = () =>{
 const FormObjetivo = ({id})=>{
   const{eliminarObjetivo}=useObj();
   return (
-    <div className="text-gray-700 flex">
-    <label class="block mb-1" for="forms-labelOverInputCode">Descripcion</label>
-    <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name={`nested||objetivos||${id}||descripcion`} placeholder="Regular input" />
-    <DropDown
-      name={`nested||objetivos||${id}||tipo`} 
-      options={Enum_TipoObjetivo} 
-      label='Tipo de objetivo' 
-      required={true}>
-    </DropDown>
-    <i onClick = {()=>eliminarObjetivo(id)} className='fas fa-minus rounded-full bg-red-500 hover:bg-red-400 text-white p-2 mx-2 mt-6 cursor-pointer'></i>
+    <div className='flex items-center'>
+        <label class="block mb-1" for="forms-labelOverInputCode">Descripcion</label>
+        <input class="w-full h-10 px-3 text-base bg-light-brown placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" name={`nested||objetivos||${id}||descripcion`} placeholder="Regular input" />
+        <DropDown
+          name={`nested||objetivos||${id}||tipo`} 
+          options={Enum_TipoObjetivo} 
+          label='Tipo de objetivo' 
+          required={true}>
+        </DropDown>
+        <i onClick = {()=>eliminarObjetivo(id)} className='fas fa-minus rounded-full bg-red-500 hover:bg-red-400 text-white p-2 mx-2 mt-9 mb-3 cursor-pointer'></i>
   </div>
   )
   

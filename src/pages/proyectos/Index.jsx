@@ -8,11 +8,19 @@ import ModalAvan from 'components/ModalAvan';
 import {Enum_TipoObjetivo} from './../.././utils/enums'
 import useFormData from 'hooks/useFormData';
 import { useUser } from "context/userContext";
+import {CREAR_INSCRIPCION} from "graphql/proyectos/mutations";
+import { useMutation } from "@apollo/client";
 
 
 const IndexProyectos = () => {
 
   const { userData } = useUser();
+
+  const[crearInscripcion, {dataInscripcion, loadingInscripcion, errorInscripcion}]=useMutation(CREAR_INSCRIPCION);
+
+  useEffect(()=>{
+    console.log('mutacion crear inscripcion', dataInscripcion);
+  }, [dataInscripcion]);
 
   const{data, error, loading, refetch: refetchProyectos,}=useQuery(GET_PROYECTOS);
 
@@ -44,7 +52,7 @@ const IndexProyectos = () => {
       <div className="navbar">
           <span>Proyectos</span>
       </div>
-    {userData.rol=='ADMINISTRADOR' || userData.rol=='ESTUDIANTE'?
+    {userData.rol=='ESTUDIANTE'?
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
     <table className='tabla' >
         <thead>
@@ -92,8 +100,8 @@ const IndexProyectos = () => {
                       Actualizar
                     </Link>
                     </td>
-                  <td><button type="button" class="btn btn-primary"> inscripciones </button></td>
-            
+                  <td><button type="button" class="btn btn-primary"  onClick = {()=> crearInscripcion({
+      variables:{proyecto: u._id, estudiante:userData._id}})}> inscripciones </button></td>
                 </tr>
                 
               );

@@ -18,8 +18,10 @@ const ModalObj = ({id, titulo,objetivos}) => {
                 {objetivos && objetivos.map((u)=>{
                     return(
                         <div className='flex flex-col justify-evenly mb-2'>
-                            <div>{u.tipo}</div>
-                            <div>{u.descripcion}</div>
+                            
+                            <div>Tipo Objetivo: {u.tipo}</div>
+                            <div>Descripcion: {u.descripcion}</div>    
+                            
                         </div>
                     )
                 })}

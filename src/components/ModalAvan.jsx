@@ -13,14 +13,17 @@ const ModalAvan = ({id, titulo, avances}) => {
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div className="modal-body">
-                {avances && avances.map((u)=>{
-                    return(
-                        <div className='flex flex-col justify-evenly mb-2'>
-                            <div>{u.descripcion}</div>
-                        </div>
-                    )
-                })}
+                {avances.length!==0 ? <>
+                    {avances && avances.map((u)=>{
+                        return(
+                            <div className='flex flex-col justify-evenly mb-2'>
+                                <div>{u.descripcion}</div>
+                            </div>
+                        )
+                    })}
+            </>: <div data-testid='sin-avances' > No hay avances que mostrar</div>}
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" >Close</button>
