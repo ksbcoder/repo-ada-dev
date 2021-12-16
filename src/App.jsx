@@ -13,6 +13,7 @@ import Index from "pages/Index";
 import IndexProyectos from "pages/proyectos/Index";
 import ActualizarProyectos from "pages/proyectos/ActualizarProyectos";
 import IndexInscripciones from "pages/inscripciones/Index";
+import ActualizarInscripcion from "pages/inscripciones/ActualizarInscripcion";
 import IndexUsuarios from "pages/usuarios/Index";
 import IndexAvances from "pages/avances/Index";
 import InfoInscripcionUsuario from "pages/usuarios/InfoInscripcionUsuarios";
@@ -113,6 +114,9 @@ function App() {
                   element={<ActualizarProyectos />}
                 />
                 <Route path="inscripciones" element={<IndexInscripciones />} />
+                <Route
+                  path="inscripciones/ActualizarInscripcion/:_id" element={<ActualizarInscripcion/>}
+                />
                 <Route path="avances" element={<IndexAvances />} />
                 <Route path="avances/registrar" element={<RegistrarAvance />} />
                 <Route
