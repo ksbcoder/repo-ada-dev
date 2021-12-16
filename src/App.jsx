@@ -15,6 +15,7 @@ import ActualizarProyectos from "pages/proyectos/ActualizarProyectos";
 import IndexInscripciones from "pages/inscripciones/Index";
 import IndexUsuarios from "pages/usuarios/Index";
 import IndexAvances from "pages/avances/Index";
+import InfoInscripcionUsuario from "pages/usuarios/InfoInscripcionUsuarios";
 import RegistrarAvance from "pages/avances/RegistrarAvance";
 import ActualizarAvance from "pages/avances/ActualizarAvance";
 import Perfil from "pages/usuarios/Perfil";
@@ -94,6 +95,10 @@ function App() {
                 <Route
                   path="usuarios/editar/:_id"
                   element={<EditarUsuario />}
+                />
+                <Route
+                  path="usuarios/infoInscripcionUsuario/:_id"
+                  element={<InfoInscripcionUsuario />}
                 />
 
                 <Route path="perfil" element={<Perfil />} />

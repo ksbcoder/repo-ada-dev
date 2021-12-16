@@ -66,7 +66,7 @@ const GestionUsuarios = () => {
                                     <td>{u.estado}</td>
                                     <td className="flex">
                                         <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-user-edit"></i></Link>
-                                        <Link className="btn-project" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>                                         
+                                        {u.rol =='ESTUDIANTE'? <Link className="btn-project" to={`/usuarios/infoInscripcionUsuario/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>:<span/> }                                            
                                     </td>
                                 </tr>
                             )
@@ -83,7 +83,7 @@ const GestionUsuarios = () => {
                                     <td>{u.estado}</td>
                                     <td className="flex">
                                         <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-user-edit"></i></Link>
-                                        <Link className="btn-project" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>
+                                        <Link className="btn-project" to={`/usuarios/infoInscripcionUsuario/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>                                  
                                         
                                     </td>
                                 </tr>
