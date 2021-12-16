@@ -24,6 +24,26 @@ const OBTENER_INSCRIPCIONES = gql `
     }
 `;
 
+const OBTENER_INSCRIPCION = gql `
+    query ConsultarInscripcionPorId($id: String!) {
+        consultarInscripcionPorId(_id: $id) {
+        _id
+        estado
+        fechaInscripcion
+        fechaIngreso
+        fechaEgreso
+        proyecto {
+            nombre
+        }
+        estudiante {
+            nombre
+            apellido
+        }
+        }
+    }
+
+`;
+
 const OBTENER_INSCRIPCIONES_PROYECTO = gql`
 query ConsultarInscripcionesPorProyecto($projectId: String!) {
     consultarInscripcionesPorProyecto(projectId: $projectId) {
@@ -64,6 +84,7 @@ const OBTENER_INSCRIPCIONES_ESTUDIANTE = gql `
     }
 `;
 
-export{OBTENER_INSCRIPCIONES, 
+export{OBTENER_INSCRIPCIONES,
+        OBTENER_INSCRIPCION, 
         OBTENER_INSCRIPCIONES_PROYECTO, 
         OBTENER_INSCRIPCIONES_ESTUDIANTE}
