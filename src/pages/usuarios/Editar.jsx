@@ -11,6 +11,7 @@ import DropDown from 'components/Dropdown';
 import { Enum_EstadoUsuario } from 'utils/enums';
 import { Enum_EstadoLider } from 'utils/enums';
 import { useUser } from 'context/userContext';
+import ReactLoading from "react-loading";
 
 const EditarUsuario = () => {
     const { form, formData, updateFormData } = useFormData(null);
@@ -21,9 +22,14 @@ const EditarUsuario = () => {
         data: queryData,
         error: queryError,
         loading: queryLoading,
+        refetch: refetchUsuario
     } = useQuery(GET_USUARIO, {
         variables: { _id },
-    });   
+    }); 
+    
+    useEffect(() => {
+        refetchUsuario();
+    }, [refetchUsuario]);
 
 
     const [editarUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] =
@@ -53,7 +59,18 @@ const EditarUsuario = () => {
         }
     }, [queryError, mutationError]);
 
-    if (queryLoading) return <div>Cargando....</div>;
+    if (queryLoading){
+        return (
+            <div className="w-full h-full flex flex-col justify-center items-center">
+                <ReactLoading
+                    type="spinningBubbles"
+                    color="#7fffd4"
+                    height={150}
+                    width={150}
+                />
+            </div>
+        );
+    } ;
 
     return (
         <><nav className="navbar">

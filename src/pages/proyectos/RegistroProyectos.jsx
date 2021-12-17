@@ -10,12 +10,12 @@ import { Enum_TipoObjetivo } from "utils/enums";
 import { nanoid } from "nanoid";
 import { ObjContext } from "context/objContext";
 import { useObj } from "context/objContext";
+import { toast } from "react-toastify";
 
 const RegistroProyectos = () => {
   const { form, formData, updateFormData } = useFormData(null);
 
   const { userData } = useUser();
-  console.log("id", userData._id, "rol", userData.rol);
 
   const [crearProyecto, { data, loading, error }] = useMutation(CREAR_PROYECTO);
 
@@ -26,12 +26,16 @@ const RegistroProyectos = () => {
     crearProyecto({
       variables: { ...formData, lider: userData._id },
     });
-    console.log("fd:", formData);
   };
 
   useEffect(() => {
-    console.log("mutacion crear", data);
-  }, [data]);
+    if(data){
+      toast.success('Proyecto creado con éxito')
+    }
+    if(error){
+      toast.error('Error creando el proyecto')
+    }
+  }, [data, error]);
 
   return (
     <div className="flew flex-col w-full h-full items-center justify-center p-10">

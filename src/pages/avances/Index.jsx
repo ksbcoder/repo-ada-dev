@@ -365,12 +365,16 @@ const IndexAvances = () => {
                           {i.creadoPor.nombre + " " + i.creadoPor.apellido}
                         </td>
                         <td>
-                          <Link
-                            to={`actualizar/${i._id}`}
-                            className="btn-general-editar"
-                          >
-                            Actualizar
-                          </Link>
+                          {userData._id !== i.creadoPor._id ? (
+                            <div className="flex justify-center">--</div>
+                          ) : (
+                            <Link
+                              to={`actualizar/${i._id}`}
+                              className="btn-general-editar"
+                            >
+                              Actualizar
+                            </Link>
+                          )}
                         </td>
                       </tr>
                     );
