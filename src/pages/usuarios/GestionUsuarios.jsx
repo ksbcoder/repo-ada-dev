@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { GET_USUARIOS } from 'graphql/usuarios/queries';
 import { GET_USUARIOS_ESTUDIANTES} from 'graphql/usuarios/queries';
 import { toast } from 'react-toastify';
+import ReactLoading from "react-loading";
 import { useUser } from 'context/userContext';
+
 
 const GestionUsuarios = () => {
     const{userData} = useUser();    
@@ -15,8 +17,11 @@ const GestionUsuarios = () => {
           
   
     
-    const{data,error,loading} = useQuery(userData.rol == "ADMINISTRADOR" ? peticion1: peticion2);  
+    const{data,error,loading, refetch:refetchUsuarios} = useQuery(userData.rol == "ADMINISTRADOR" ? peticion1: peticion2);  
     
+    useEffect(() => {
+        refetchUsuarios();    
+    }, [refetchUsuarios]);
 
     useEffect(() => {
         console.log("data servidor",data)        
@@ -28,7 +33,17 @@ const GestionUsuarios = () => {
         }
      }, [error])
 
-    if(loading){ return <div>Cargando</div>
+    if(loading){ 
+        return (
+            <div className="w-full h-full flex flex-col justify-center items-center">
+                <ReactLoading
+                    type="spinningBubbles"
+                    color="#7fffd4"
+                    height={150}
+                    width={150}
+                />
+            </div>
+        );
     }
 
     
