@@ -11,7 +11,6 @@ const CREAR_PROYECTO=gql`
       _id
       nombre
     }
-  }
 `;
 const EDITAR_PROYECTO_ADMIN = gql`
   mutation EditarProyectoAdmin(
