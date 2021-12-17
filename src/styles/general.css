@@ -49,6 +49,10 @@
   @apply w-auto h-auto bg-green-600 bg-opacity-80 hover:bg-green-700 hover:text-white text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all shadow-xl;
 }
 
+.btn-general-rechazar {
+  @apply w-auto h-auto bg-red-600 bg-opacity-80 hover:bg-red-700 hover:text-white text-white font-bold py-2 px-5 rounded-md cursor-pointer transition-all shadow-xl;
+}
+
 .navbar {
   @apply flex items-center bg-green-700 justify-center flex-wrap p-6 text-4xl text-white font-bold;
 }

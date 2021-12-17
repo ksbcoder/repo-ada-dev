@@ -6,6 +6,7 @@ import { APROBAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 import { toast } from "react-toastify";
 import { useUser } from "context/userContext";
 import ReactLoading from "react-loading";
+import { RECHAZAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 
 const IndexInscripciones = () => {
   const { userData } = useUser();
@@ -23,9 +24,17 @@ const IndexInscripciones = () => {
       data: dataAprobarInscripcion,
       error: errorAprobarInscripcion,
       loading: loadingAprobarInscripcion,
-      refetch: refetchAprobarInscripcion,
     },
   ] = useMutation(APROBAR_INSCRIPCION);
+
+  const [
+    RechazarInscripcion,
+    {
+      data: dataRechazarInscripcion,
+      error: errorRechazarInscripcion,
+      loading: loadingRechazarInscripcion,
+    },
+  ] = useMutation(RECHAZAR_INSCRIPCION);
 
   useEffect(() => {
     refetchInscripciones();
@@ -35,7 +44,10 @@ const IndexInscripciones = () => {
     if (dataAprobarInscripcion) {
       toast.success("¡Inscripción Aprobada!");
     }
-  }, [dataAprobarInscripcion]);
+    if (dataRechazarInscripcion) {
+      toast.warning("¡Inscripción Rechazada!");
+    }
+  }, [dataAprobarInscripcion, dataRechazarInscripcion]);
 
   useEffect(() => {
     if (errorInscripciones) {
@@ -44,9 +56,16 @@ const IndexInscripciones = () => {
     if (errorAprobarInscripcion) {
       toast.error("Error al aprobar la inscripción");
     }
+    if (errorRechazarInscripcion) {
+      toast.error("Error al rechazar la inscripción");
+    }
   }, [errorInscripciones, errorAprobarInscripcion]);
 
-  if (loadingInscripciones) {
+  if (
+    loadingInscripciones ||
+    loadingAprobarInscripcion ||
+    loadingRechazarInscripcion
+  ) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
         <ReactLoading
@@ -105,21 +124,36 @@ const IndexInscripciones = () => {
                         {userData.rol === "LIDER" ? (
                           <td>
                             {/* <Link className="btn-editar" to={`/inscripciones/ActualizarInscripcion/${u._id}`} ><i className="fas fa-edit"></i></Link>*/}
-                            <div className="flex justify-evenly gap-2">
-                              <button
-                                className="btn-general-aprobar"
-                                onClick={() =>
-                                  AprobarInscripcion({
-                                    variables: { aprobarInscripcionId: u._id },
-                                  })
-                                }
-                              >
-                                Aprobar
-                              </button>
-                              <button className="btn-general-submit">
-                                Rechazar
-                              </button>
-                            </div>
+                            {u.estado === "PENDIENTE" ? (
+                              <div className="flex justify-evenly gap-2">
+                                <button
+                                  className="btn-general-aprobar"
+                                  onClick={() =>
+                                    AprobarInscripcion({
+                                      variables: {
+                                        aprobarInscripcionId: u._id,
+                                      },
+                                    })
+                                  }
+                                >
+                                  <i className="fas fa-check"></i>
+                                </button>
+                                <button
+                                  className="btn-general-rechazar"
+                                  onClick={() =>
+                                    RechazarInscripcion({
+                                      variables: {
+                                        rechazarInscripcionId: u._id,
+                                      },
+                                    })
+                                  }
+                                >
+                                  <i className="fas fa-times"></i>
+                                </button>
+                              </div>
+                            ) : (
+                              "--"
+                            )}
                           </td>
                         ) : (
                           ""
