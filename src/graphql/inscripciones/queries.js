@@ -1,90 +1,91 @@
 import { gql } from "@apollo/client";
 
-const OBTENER_INSCRIPCIONES = gql `
-    query ConsultarInscripciones {
-        consultarInscripciones {
+const OBTENER_INSCRIPCIONES = gql`
+  query ConsultarInscripciones {
+    consultarInscripciones {
+      _id
+      estado
+      fechaInscripcion
+      fechaIngreso
+      fechaEgreso
+      proyecto {
         _id
-        estado
-        fechaInscripcion
-        fechaIngreso
-        fechaEgreso
-        proyecto {
-            _id
-            nombre
-            lider {
-            _id        
-            }
+        nombre
+        lider {
+          _id
         }
-        estudiante {
-            _id
-            nombre
-            apellido
-        }
-        }
+      }
+      estudiante {
+        _id
+        nombre
+        apellido
+      }
     }
+  }
 `;
 
-const OBTENER_INSCRIPCION = gql `
-    query ConsultarInscripcionPorId($id: String!) {
-        consultarInscripcionPorId(_id: $id) {
-        _id
-        estado
-        fechaInscripcion
-        fechaIngreso
-        fechaEgreso
-        proyecto {
-            nombre
-        }
-        estudiante {
-            nombre
-            apellido
-        }
-        }
+const OBTENER_INSCRIPCION = gql`
+  query ConsultarInscripcionPorId($id: String!) {
+    consultarInscripcionPorId(_id: $id) {
+      _id
+      estado
+      fechaInscripcion
+      fechaIngreso
+      fechaEgreso
+      proyecto {
+        nombre
+      }
+      estudiante {
+        nombre
+        apellido
+      }
     }
-
+  }
 `;
 
 const OBTENER_INSCRIPCIONES_PROYECTO = gql`
-query ConsultarInscripcionesPorProyecto($projectId: String!) {
+  query ConsultarInscripcionesPorProyecto($projectId: String!) {
     consultarInscripcionesPorProyecto(projectId: $projectId) {
+      _id
+      estado
+      fechaInscripcion
+      fechaIngreso
+      fechaEgreso
+      proyecto {
         _id
-        estado
-        fechaInscripcion
-        fechaIngreso
-        fechaEgreso
-        proyecto {
-            _id
-            nombre
-            lider {
-            _id
-            }
+        nombre
+        lider {
+          _id
         }
-        estudiante {
-            _id
-            nombre
-            apellido
-        }
-        }
+      }
+      estudiante {
+        _id
+        nombre
+        apellido
+      }
     }
+  }
 `;
 
-const OBTENER_INSCRIPCIONES_ESTUDIANTE = gql `
-    query ConsultarInscripcionesPorEstudiante($estudianteId: String!) {
-        consultarInscripcionesPorEstudiante(estudianteId: $estudianteId) {
+const OBTENER_INSCRIPCIONES_ESTUDIANTE = gql`
+  query ConsultarInscripcionesPorEstudiante($estudianteId: String!) {
+    consultarInscripcionesPorEstudiante(estudianteId: $estudianteId) {
+      _id
+      estado
+      proyecto {
         _id
-        estado
-        proyecto {
-            _id
-            nombre
-            lider {
-                _id        
-                }      
-            }
+        nombre
+        lider {
+          _id
         }
+      }
     }
+  }
 `;
 
-export{OBTENER_INSCRIPCIONES,
-        OBTENER_INSCRIPCION, 
-        OBTENER_INSCRIPCIONES_PROYECTO, 
-        OBTENER_INSCRIPCIONES_ESTUDIANTE}
+export {
+  OBTENER_INSCRIPCIONES,
+  OBTENER_INSCRIPCION,
+  OBTENER_INSCRIPCIONES_PROYECTO,
+  OBTENER_INSCRIPCIONES_ESTUDIANTE,
+};
