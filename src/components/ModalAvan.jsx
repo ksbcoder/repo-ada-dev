@@ -9,7 +9,7 @@ const ModalAvan = ({id, titulo, avances}) => {
         <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
             <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLongTitle">{titulo}</h5>
+                <h5 className="modal-title" id="exampleModalLongTitle"  className='text-lg font-semibold'>{titulo}</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,6 +20,7 @@ const ModalAvan = ({id, titulo, avances}) => {
                     {avances && avances.map((u)=>{
                         return(
                             <div className='mb-2 bg-green-100 p-1 rounded-lg flex flex-col items-center justify-center shadow-sm'>
+                                   <div  className='text-lg font-semibold'>Descripcion de los avances</div>
                                    <div>{u.descripcion}</div> 
                                    
                             </div>
@@ -30,7 +31,7 @@ const ModalAvan = ({id, titulo, avances}) => {
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal" >Close</button>
                 {<a href={'/avances'} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                      Registrar Avance
+                      Gestionar Avance
                 </a>}
             </div>
             </div>

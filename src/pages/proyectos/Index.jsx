@@ -81,7 +81,7 @@ const IndexProyectos = () => {
                 <tr key={u._id}>
                   <td>{u.nombre}</td>
                   <td>{u.presupuesto}</td>
-                  <td>{u.fechaInicio}</td>
+                  <td>{u.fechaInicio.slice(0, 10)}</td>
                   <td>{u.estado}</td>
                   <td>{u.fase}</td>
                
@@ -144,7 +144,7 @@ const IndexProyectos = () => {
                 <tr key={u._id}>
                   <td>{u.nombre}</td>
                   <td>{u.presupuesto}</td>
-                  <td>{u.fechaInicio}</td>
+                  <td>{u.fechaInicio.slice(0, 10)}</td>
                   <td>{u.estado}</td>
                   <td>{u.fase}</td>
               
@@ -205,7 +205,7 @@ const IndexProyectos = () => {
                 <tr key={u._id}>
                   <td>{u.nombre}</td>
                   <td>{u.presupuesto}</td>
-                  <td>{u.fechaInicio}</td>
+                  <td>{u.fechaInicio.slice(0, 10)}</td>
                   <td>{u.estado}</td>
                   <td>{u.fase}</td>
                
