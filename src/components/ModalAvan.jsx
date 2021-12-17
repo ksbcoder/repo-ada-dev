@@ -19,10 +19,9 @@ const ModalAvan = ({id, titulo, avances}) => {
                 {avances.length!==0 ? <>
                     {avances && avances.map((u)=>{
                         return(
-                            <div className='flex flex-col justify-evenly mb-2'>
-                                <ul>
-                                    <li>{u.descripcion}</li>
-                                </ul>
+                            <div className='mb-2 bg-green-100 p-1 rounded-lg flex flex-col items-center justify-center shadow-sm'>
+                                   <div>{u.descripcion}</div> 
+                                   
                             </div>
                         )
                     })}
