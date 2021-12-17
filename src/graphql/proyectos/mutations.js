@@ -6,7 +6,7 @@ const CREAR_PROYECTO=gql`
         $presupuesto: Float!
         $fechaInicio: Date!
         $lider: String!
-        $objetivos:[crearObjetivo]
+        $objetivos:[crearObjetivo]!
     ) {
         crearProyecto(
             nombre: $nombre
