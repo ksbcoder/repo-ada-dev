@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
-import { OBTENER_INSCRIPCIONES } from "graphql/inscripciones/queries";
-import { APROBAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 import { toast } from "react-toastify";
 import { useUser } from "context/userContext";
 import ReactLoading from "react-loading";
+import { APROBAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 import { RECHAZAR_INSCRIPCION } from "graphql/inscripciones/mutations";
+import { OBTENER_INSCRIPCIONES_LIDER } from "graphql/inscripciones/queries";
 
 const IndexInscripciones = () => {
   const { userData } = useUser();
@@ -16,7 +15,7 @@ const IndexInscripciones = () => {
     error: errorInscripciones,
     loading: loadingInscripciones,
     refetch: refetchInscripciones,
-  } = useQuery(OBTENER_INSCRIPCIONES);
+  } = useQuery(OBTENER_INSCRIPCIONES_LIDER);
 
   const [
     AprobarInscripcion,
@@ -35,6 +34,12 @@ const IndexInscripciones = () => {
       loading: loadingRechazarInscripcion,
     },
   ] = useMutation(RECHAZAR_INSCRIPCION);
+
+  useEffect(() => {
+    if (dataInscripciones) {
+      console.log(`dataInscripciones`, dataInscripciones);
+    }
+  }, [dataInscripciones]);
 
   useEffect(() => {
     refetchInscripciones();
@@ -101,7 +106,7 @@ const IndexInscripciones = () => {
               </thead>
               <tbody>
                 {dataInscripciones &&
-                  dataInscripciones.consultarInscripciones.map((u) => {
+                  dataInscripciones.consultarInscripcionesPorLider.map((u) => {
                     return (
                       <tr key={u._id}>
                         <td>{u._id.slice(19)}</td>
