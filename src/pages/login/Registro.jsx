@@ -9,6 +9,7 @@ import useFormData from 'hooks/useFormData';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import ReactLoading from "react-loading";
 
 
 
@@ -16,8 +17,10 @@ import { useNavigate } from 'react-router-dom';
 const RegistroUsuarios = () => {
     const { form, formData, updateFormData } = useFormData(null); 
 
-    const [crearUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] =
+    const [crearUsuario, { data: mutationData, loading: mutationLoading, error: mutationError}] =
         useMutation(CREAR_USUARIO); 
+       
+
     const navigate = useNavigate();
 
     const submitForm = (e) => {
@@ -44,20 +47,24 @@ const RegistroUsuarios = () => {
     }else if (mutationData && mutationData.crearUsuario !== null) {
     toast.success('Usuario creado correctamente');
     }
-
     if (mutationError) {
       toast.error('Error creando el usuario');      
-      }  
-
-    
+      }      
   }, [mutationData, mutationError]); 
   
-//   useEffect(() => {
-//     if (mutationLoading){
-//       toast.loading('...cargando')
-//     }
-   
-//   }, [mutationLoading])
+  if (mutationLoading) {
+    return (
+      <div className="w-full h-full flex flex-col justify-center items-center">
+        <ReactLoading
+          type="spinningBubbles"
+          color="#7fffd4"
+          height={150}
+          width={150}
+        />
+      </div>
+    );
+  }
+
 
   return(
     
