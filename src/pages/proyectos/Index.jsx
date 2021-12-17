@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import {
   GET_PROYECTOS,
@@ -14,7 +14,6 @@ import { useMutation } from "@apollo/client";
 
 const IndexProyectos = () => {
   const { userData } = useUser();
-
   const [
     crearInscripcion,
     {
@@ -56,10 +55,6 @@ const IndexProyectos = () => {
     refetchProyectos();
     refetchProyectosLiderados();
   }, [refetchProyectos, refetchProyectosLiderados]);
-
-  useEffect(() => {
-    console.log("datos de los proyectos Liderados", dataLideres);
-  }, [dataLideres]);
 
   useEffect(() => {
     if (error || errorLideres) {

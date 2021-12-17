@@ -1,28 +1,37 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const GET_PROYECTOS = gql`
-    query Proyectos {
-        Proyectos {
-            _id
-            nombre
-            presupuesto
-            fechaInicio
-            fechaFin
-            estado
-            fase
-            objetivos {
-              _id
-              tipo
-              descripcion
-            }
-            avances {
-              _id
-              descripcion
-              fechaAvance
-            }
-            
+  query Proyectos {
+    Proyectos {
+      _id
+      nombre
+      presupuesto
+      fechaInicio
+      fechaFin
+      estado
+      fase
+      objetivos {
+        _id
+        tipo
+        descripcion
+      }
+      avances {
+        _id
+        descripcion
+        fechaAvance
+      }
+      inscripciones {
+        _id
+        estado
+        proyecto {
+          _id
         }
+        estudiante {
+          _id
+        }
+      }
     }
+  }
 `;
 
 const GET_PROYECTOS_LIDERADOS = gql`
@@ -54,21 +63,21 @@ const GET_PROYECTOS_LIDERADOS = gql`
 `;
 
 const GET_PROYECTO = gql`
-query LeerProyecto($_id: String!) {
-  LeerProyecto(_id: $_id) {
-    _id
-    nombre
-    presupuesto
-    fechaInicio
-    fechaFin
-    estado
-    fase
-    objetivos {
+  query LeerProyecto($_id: String!) {
+    LeerProyecto(_id: $_id) {
       _id
-      descripcion
-      tipo
+      nombre
+      presupuesto
+      fechaInicio
+      fechaFin
+      estado
+      fase
+      objetivos {
+        _id
+        descripcion
+        tipo
+      }
     }
   }
-}
 `;
-export {GET_PROYECTOS, GET_PROYECTOS_LIDERADOS, GET_PROYECTO};
+export { GET_PROYECTOS, GET_PROYECTOS_LIDERADOS, GET_PROYECTO };
