@@ -6,6 +6,7 @@ import { useUser } from "context/userContext";
 import "../styles/general.css";
 // import Logito_completo from "./img/Logito_completo.png";
 import blanco_60 from "./img/blanco_60.png";
+import PrivateComponent from "components/PrivateComponent";
 
 const SidebarLinks = () => {
   return (
@@ -14,20 +15,24 @@ const SidebarLinks = () => {
         to="" 
         title="Inicio" 
         icon="fas fa-home" />
-      <SidebarRoute 
-        to="/usuarios/GestionUsuarios" 
-        title="Usuarios" 
-        icon="fas fa-user" />
+      <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
+        <SidebarRoute 
+          to="/usuarios/GestionUsuarios" 
+          title="Usuarios" 
+          icon="fas fa-user" />
+      </PrivateComponent>  
       <SidebarRoute
         to="/proyectos"
         title="Proyectos"
         icon="fas fa-folder-open"
       />
-      <SidebarRoute
-        to="/inscripciones"
-        title="Inscripciones"
-        icon="fas fa-user-plus"
-      />
+      <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
+        <SidebarRoute
+          to="/inscripciones"
+          title="Inscripciones"
+          icon="fas fa-user-plus"
+        />
+      </PrivateComponent>
       <SidebarRoute to="/avances" title="Avances" icon="fas fa-tasks" />
     </ul>
   );

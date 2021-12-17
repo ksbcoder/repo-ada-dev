@@ -74,4 +74,18 @@ mutation EditarObjetivo(
 
 //`
 
-export {CREAR_PROYECTO, EDITAR_PROYECTO_LIDER, EDITAR_PROYECTO_ADMIN, EDITAR_OBJETIVO}
+const CREAR_INSCRIPCION=gql`
+  mutation CrearInscripcion(
+    $proyecto: String!, 
+    $estudiante: String!) {
+    crearInscripcion(
+      proyecto: $proyecto, 
+      estudiante: $estudiante) {
+      _id
+      estado
+      fechaInscripcion
+    }
+  }
+`;
+
+export {CREAR_PROYECTO, EDITAR_PROYECTO_LIDER, EDITAR_PROYECTO_ADMIN, EDITAR_OBJETIVO, CREAR_INSCRIPCION}

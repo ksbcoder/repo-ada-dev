@@ -23,7 +23,7 @@ const EditarUsuario = () => {
         loading: queryLoading,
     } = useQuery(GET_USUARIO, {
         variables: { _id },
-    });
+    });   
 
 
     const [editarUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] =

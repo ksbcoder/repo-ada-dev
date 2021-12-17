@@ -11,10 +11,12 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import Index from "pages/Index";
 import IndexProyectos from "pages/proyectos/Index";
-import ActualizarProyectos from "pages/proyectos/ActualizarProyectos"
+import ActualizarProyectos from "pages/proyectos/ActualizarProyectos";
 import IndexInscripciones from "pages/inscripciones/Index";
+import ActualizarInscripcion from "pages/inscripciones/ActualizarInscripcion";
 import IndexUsuarios from "pages/usuarios/Index";
 import IndexAvances from "pages/avances/Index";
+import InfoInscripcionUsuario from "pages/usuarios/InfoInscripcionUsuarios";
 import RegistrarAvance from "pages/avances/RegistrarAvance";
 import ActualizarAvance from "pages/avances/ActualizarAvance";
 import Perfil from "pages/usuarios/Perfil";
@@ -22,12 +24,9 @@ import GestionUsuarios from "pages/usuarios/GestionUsuarios";
 import EditarUsuario from "pages/usuarios/Editar";
 import Login from "pages/login/Login";
 import Registro from "pages/login/Registro";
-//import InfoProyectos from "pages/proyectos/InfoProyectos";
 import RegistroProyectos from "pages/proyectos/RegistroProyectos";
-import { AuthContext } from 'context/authContext';
-import jwt_decode from 'jwt-decode';
-
-
+import { AuthContext } from "context/authContext";
+import jwt_decode from "jwt-decode";
 
 const httpLink = createHttpLink({
   //uri: "https://adasoft-server.herokuapp.com/graphql",
@@ -98,13 +97,26 @@ function App() {
                   path="usuarios/editar/:_id"
                   element={<EditarUsuario />}
                 />
+                <Route
+                  path="usuarios/infoInscripcionUsuario/:_id"
+                  element={<InfoInscripcionUsuario />}
+                />
 
                 <Route path="perfil" element={<Perfil />} />
 
                 <Route path="proyectos" element={<IndexProyectos />} />
-                <Route path="proyectos/RegistroProyectos" element={<RegistroProyectos />} />
-                <Route path= "proyectos/ActualizarProyectos/:_id" element={<ActualizarProyectos/>}/>
+                <Route
+                  path="proyectos/RegistroProyectos"
+                  element={<RegistroProyectos />}
+                />
+                <Route
+                  path="proyectos/ActualizarProyectos/:_id"
+                  element={<ActualizarProyectos />}
+                />
                 <Route path="inscripciones" element={<IndexInscripciones />} />
+                <Route
+                  path="inscripciones/ActualizarInscripcion/:_id" element={<ActualizarInscripcion/>}
+                />
                 <Route path="avances" element={<IndexAvances />} />
                 <Route path="avances/registrar" element={<RegistrarAvance />} />
                 <Route
