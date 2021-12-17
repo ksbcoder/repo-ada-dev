@@ -36,12 +36,6 @@ const IndexInscripciones = () => {
   ] = useMutation(RECHAZAR_INSCRIPCION);
 
   useEffect(() => {
-    if (dataInscripciones) {
-      console.log(`dataInscripciones`, dataInscripciones);
-    }
-  }, [dataInscripciones]);
-
-  useEffect(() => {
     refetchInscripciones();
   }, [refetchInscripciones]);
 
@@ -64,7 +58,7 @@ const IndexInscripciones = () => {
     if (errorRechazarInscripcion) {
       toast.error("Error al rechazar la inscripción");
     }
-  }, [errorInscripciones, errorAprobarInscripcion]);
+  }, [errorInscripciones, errorAprobarInscripcion, errorRechazarInscripcion]);
 
   if (
     loadingInscripciones ||
