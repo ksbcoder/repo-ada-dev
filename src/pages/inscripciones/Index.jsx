@@ -197,7 +197,6 @@ const IndexInscripciones = () => {
                               <div className="flex justify-evenly gap-2">
                                 <button
                                   className="btn-general-aprobar"
-                                  data-testid="aprobar-inscripcion"
                                   onClick={() =>
                                     AprobarInscripcion({
                                       variables: {
