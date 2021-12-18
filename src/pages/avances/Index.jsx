@@ -35,10 +35,6 @@ const IndexAvances = () => {
     },
   });
 
-  useEffect(() => {
-    console.log("ud", userData);
-  }, [userData]);
-
   const {
     data: queryAvancesLider,
     error: errorAvancesLider,
