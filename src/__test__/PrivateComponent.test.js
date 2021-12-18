@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PrivateComponent from "components/PrivateComponent";
 import { render, screen, cleanup } from "@testing-library/react";
 import { UserContext } from "context/userContext";
