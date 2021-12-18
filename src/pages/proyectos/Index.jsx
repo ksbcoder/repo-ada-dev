@@ -56,7 +56,7 @@ const IndexProyectos = () => {
       <div className="navbar">
           <span>Proyectos</span>
       </div>
-      {userData.rol=='ESTUDIANTE'?
+      {userData.rol=='ESTUDIANTE'?(
       <div className='flew flex-col w-full h-full items-center justify-center p-10'>
         <table className='tabla' >
           <thead>
@@ -107,9 +107,10 @@ const IndexProyectos = () => {
             })}
         </tbody>
       </table>
-      </div>:""
+      </div> 
+      ):("")
     }
-    {userData.rol=='LIDER' ?
+    {userData.rol=='LIDER' ?(
 
     <div>
     <div className='flex flex-row-reverse mx-10'>
@@ -178,9 +179,9 @@ const IndexProyectos = () => {
         </table>
         </div>
         </div> 
-      </div>: ""
+      </div>):("")
     }  
-    {userData.rol=='ADMINISTRADOR'?
+    {userData.rol=='ADMINISTRADOR'?(
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
     <table className='tabla' >
         <thead>
@@ -234,7 +235,7 @@ const IndexProyectos = () => {
             })}
         </tbody>
       </table>
-      </div>:""
+      </div>):("")
     }
   </div> 
  
