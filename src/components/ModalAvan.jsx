@@ -21,7 +21,6 @@ const ModalAvan = ({id, titulo, avances}) => {
                         return(
                             <div className='mb-2 bg-green-100 p-1 rounded-lg flex flex-col items-center justify-center shadow-sm'>
                                    <div>{u.descripcion}</div> 
-                                   
                             </div>
                         )
                     })}
