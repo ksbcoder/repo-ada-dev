@@ -55,7 +55,7 @@ const EditarProyecto = () => {
   
       {userData.rol==='LIDER' ?
       <div>
-        <FormEditProyecto proyecto={queryData.LeerProyecto} />
+        <FormEditProyecto proyecto={queryData.LeerProyecto} estado={queryData.LeerProyecto.estado}/>
       </div>: ""
       }
       </div>
