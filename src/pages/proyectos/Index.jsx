@@ -69,7 +69,7 @@ const IndexProyectos = () => {
       <div className="navbar">
         <span>Proyectos</span>
       </div>
-      {userData.rol === "ESTUDIANTE" ? (
+      {userData.rol == "ESTUDIANTE" ? (
         <div className="flew flex-col w-full h-full items-center justify-center p-10">
           <table className="tabla">
             <thead>
@@ -91,7 +91,7 @@ const IndexProyectos = () => {
                     <tr key={u._id}>
                       <td>{u.nombre}</td>
                       <td>{u.presupuesto}</td>
-                      <td>{u.fechaInicio}</td>
+                      <td>{u.fechaInicio.slice(0, 10)}</td>
                       <td>{u.estado}</td>
                       <td>{u.fase}</td>
 
@@ -111,21 +111,37 @@ const IndexProyectos = () => {
                         </button>
                       </td>
 
-                      <td>
-                        <Link
-                          to={`ActualizarProyectos/${u._id}`}
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      <td key={u._id}>
+                        <ModalAvan
+                          id={`exampleModalAvances-${u._id}`}
+                          titulo="Avances"
+                          avances={u.avances}
+                        ></ModalAvan>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-toggle="modal"
+                          data-target={`#exampleModalAvances-${u._id}`}
                         >
-                          Editar
-                        </Link>
+                          ver
+                        </button>
                       </td>
                       <td>
-                        <Link
-                          to={`ProyectoInscripciones/${u._id}`}
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          onClick={() =>
+                            crearInscripcion({
+                              variables: {
+                                proyecto: u._id,
+                                estudiante: userData._id,
+                              },
+                            })
+                          }
                         >
-                          Ver
-                        </Link>
+                          {" "}
+                          Inscribirse{" "}
+                        </button>
                       </td>
                     </tr>
                   );
@@ -136,7 +152,7 @@ const IndexProyectos = () => {
       ) : (
         ""
       )}
-      {userData.rol === "LIDER" ? (
+      {userData.rol == "LIDER" ? (
         <div>
           <div className="flex flex-row-reverse mx-10">
             <Link
@@ -170,7 +186,7 @@ const IndexProyectos = () => {
                         <tr key={u._id}>
                           <td>{u.nombre}</td>
                           <td>{u.presupuesto}</td>
-                          <td>{u.fechaInicio}</td>
+                          <td>{u.fechaInicio.slice(0, 10)}</td>
                           <td>{u.estado}</td>
                           <td>{u.fase}</td>
 
@@ -191,16 +207,16 @@ const IndexProyectos = () => {
                           </td>
 
                           <td key={u._id}>
-                            <ModalAvan
-                              id={`exampleModalAvances-${u._id}`}
-                              titulo="Avances"
-                              avances={u.avances}
-                            ></ModalAvan>
+                            <ModalObj
+                              id={`exampleModelObjetivos-${u._id}`}
+                              titulo="Objetivos"
+                              objetivos={u.objetivos}
+                            ></ModalObj>
                             <button
                               type="button"
-                              className="btn btn-primary"
+                              class="btn btn-primary"
                               data-toggle="modal"
-                              data-target={`#exampleModalAvances-${u._id}`}
+                              data-target={`#exampleModelObjetivos-${u._id}`}
                             >
                               ver
                             </button>
