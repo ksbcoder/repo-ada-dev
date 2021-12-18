@@ -178,21 +178,20 @@ const IndexProyectos = () => {
                           </td>
 
                           <td key={u._id}>
-                            <ModalObj
-                              id={`exampleModelObjetivos-${u._id}`}
-                              titulo="Objetivos"
-                              objetivos={u.objetivos}
-                            ></ModalObj>
+                            <ModalAvan
+                              id={`exampleModalAvances-${u._id}`}
+                              titulo="Avances"
+                              avances={u.avances}
+                            ></ModalAvan>
                             <button
                               type="button"
                               class="btn btn-primary"
                               data-toggle="modal"
-                              data-target={`#exampleModelObjetivos-${u._id}`}
+                              data-target={`#exampleModalAvances-${u._id}`}
                             >
-                              ver
+                            ver
                             </button>
                           </td>
-
                           <td>
                             <Link
                               to={`ActualizarProyectos/${u._id}`}
