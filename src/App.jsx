@@ -87,7 +87,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/" element={<PrivateLayout />}>
-                <Route path="" element={<Index />} />
+                <Route path="" element={<Index />}/>
                 <Route path="usuarios" element={<IndexUsuarios />} />
 
                 <Route
