@@ -221,7 +221,6 @@ const IndexInscripciones = () => {
                         </td>
                         {userData.rol === "LIDER" ? (
                           <td>
-                            {/* <Link className="btn-editar" to={`/inscripciones/ActualizarInscripcion/${u._id}`} ><i className="fas fa-edit"></i></Link>*/}
                             {u.estado === "PENDIENTE" ? (
                               <div className="flex justify-evenly gap-2">
                                 <button

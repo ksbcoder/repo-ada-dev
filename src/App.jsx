@@ -25,12 +25,13 @@ import EditarUsuario from "pages/usuarios/Editar";
 import Login from "pages/login/Login";
 import Registro from "pages/login/Registro";
 import RegistroProyectos from "pages/proyectos/RegistroProyectos";
+import ProyectoInscripciones from "pages/proyectos/ProyectoInscripciones";
 import { AuthContext } from "context/authContext";
 import jwt_decode from "jwt-decode";
 
 const httpLink = createHttpLink({
-  // uri: "http://localhost:4000/graphql",
-  uri: "https://server-ada-project-manager.herokuapp.com/graphql",
+  uri: "http://localhost:4000/graphql",
+  // uri: "https://server-ada-project-manager.herokuapp.com/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -112,6 +113,10 @@ function App() {
                 <Route
                   path="proyectos/ActualizarProyectos/:_id"
                   element={<ActualizarProyectos />}
+                />
+                <Route
+                  path="proyectos/ProyectoInscripciones/:_id"
+                  element={<ProyectoInscripciones />}
                 />
                 <Route path="inscripciones" element={<IndexInscripciones />} />
                 <Route

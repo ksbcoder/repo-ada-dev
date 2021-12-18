@@ -111,37 +111,21 @@ const IndexProyectos = () => {
                         </button>
                       </td>
 
-                      <td key={u._id}>
-                        <ModalAvan
-                          id={`exampleModalAvances-${u._id}`}
-                          titulo="Avances"
-                          avances={u.avances}
-                        ></ModalAvan>
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          data-toggle="modal"
-                          data-target={`#exampleModalAvances-${u._id}`}
+                      <td>
+                        <Link
+                          to={`ActualizarProyectos/${u._id}`}
+                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         >
-                          ver
-                        </button>
+                          Editar
+                        </Link>
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          onClick={() =>
-                            crearInscripcion({
-                              variables: {
-                                proyecto: u._id,
-                                estudiante: userData._id,
-                              },
-                            })
-                          }
+                        <Link
+                          to={`ProyectoInscripciones/${u._id}`}
+                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         >
-                          {" "}
-                          Inscribirse{" "}
-                        </button>
+                          Ver
+                        </Link>
                       </td>
                     </tr>
                   );
@@ -232,7 +216,7 @@ const IndexProyectos = () => {
                           </td>
                           <td>
                             <Link
-                              to="/inscripciones"
+                              to={`ProyectoInscripciones/${u._id}`}
                               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
                               Ver
@@ -262,7 +246,6 @@ const IndexProyectos = () => {
                 <th>Objetivos</th>
                 <th>Avances</th>
                 <th>Editar</th>
-                <th>Inscripciones</th>
               </tr>
             </thead>
             <tbody>
@@ -313,14 +296,6 @@ const IndexProyectos = () => {
                           className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         >
                           Editar
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          to="/inscripciones"
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                          Ver
                         </Link>
                       </td>
                     </tr>
