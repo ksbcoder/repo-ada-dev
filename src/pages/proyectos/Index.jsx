@@ -56,22 +56,22 @@ const IndexProyectos = () => {
       <div className="navbar">
           <span>Proyectos</span>
       </div>
-    {userData.rol=='ESTUDIANTE'?
-    <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-    <table className='tabla' >
-        <thead>
-          <tr>
+      {userData.rol=='ESTUDIANTE'?
+      <div className='flew flex-col w-full h-full items-center justify-center p-10'>
+        <table className='tabla' >
+          <thead>
+            <tr>
           
-            <th>Nombre</th>
-            <th>Presupuesto</th>
-            <th>FechaInicio</th>
-            <th>Estado </th>
-            <th>Fase </th>
-            <th>Objetivos</th>
-            <th>Avances</th>
-            <th>Inscripciones</th>
-          </tr>
-        </thead>
+              <th>Nombre</th>
+              <th>Presupuesto</th>
+              <th>FechaInicio</th>
+              <th>Estado </th>
+              <th>Fase </th>
+              <th>Objetivos</th>
+              <th>Avances</th>
+              <th>Inscripciones</th>
+            </tr>
+          </thead>
         <tbody>
           {data &&
             data.Proyectos.map((u) => {
@@ -236,7 +236,8 @@ const IndexProyectos = () => {
       </table>
       </div>:""
     }
-  </div>  
+  </div> 
+ 
      
   )
 };
