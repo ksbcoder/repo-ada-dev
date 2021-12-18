@@ -11,6 +11,7 @@ const DropDown = ({ label, name, defaultValue = '', required, options }) => {
     <label htmlFor={name} className='flex flex-col my-3'>
       <span>{label}</span>
       <select
+      data-testid="select-option"
         required={required}
         name={name}
         className='input-usuario'
