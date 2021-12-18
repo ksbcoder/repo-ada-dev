@@ -362,7 +362,7 @@ const IndexAvances = () => {
                         </td>
                         <td>
                           {userData._id !== i.creadoPor._id ? (
-                            <div className="flex justify-center">--</div>
+                            <div className="flex justify-center"></div>
                           ) : (
                             <Link
                               to={`actualizar/${i._id}`}
