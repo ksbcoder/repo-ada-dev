@@ -28,6 +28,7 @@ const RegistroProyectos = () => {
     crearProyecto({
       variables: { ...formData, lider: userData._id },
     });
+    console.log(`formData`, formData);
   };
 
   useEffect(() => {

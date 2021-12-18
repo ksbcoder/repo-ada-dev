@@ -55,7 +55,7 @@ const EditarProyecto = () => {
   
       {userData.rol==='LIDER' ?
       <div>
-        <FormEditProyecto proyecto={queryData.LeerProyecto} />
+        <FormEditProyecto proyecto={queryData.LeerProyecto} estado={queryData.LeerProyecto.estado}/>
       </div>: ""
       }
       </div>
@@ -128,7 +128,7 @@ const FormEditProyectoAdmin = ({ proyecto }) =>{
   );
 };
 
-const FormEditProyecto = ({ proyecto }) => {
+const FormEditProyecto = ({ proyecto, estado }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   return (
     <div className='p-4'>
@@ -155,6 +155,7 @@ const FormEditProyecto = ({ proyecto }) => {
       nombre={proyecto.nombre}
       presupuesto={proyecto.presupuesto}
       _id={proyecto._id}
+      estado = {estado}
       setShowEditDialog={setShowEditDialog}
       />
     </Dialog>
@@ -182,7 +183,7 @@ const FormEditProyecto = ({ proyecto }) => {
   );
   };
 
-const Edit = ({nombre, presupuesto, _id, setShowEditDialog}) => {
+const Edit = ({nombre, presupuesto, _id, setShowEditDialog, estado}) => {
   const { form, formData, updateFormData } = useFormData();
   const [editarProyectoLider, { data: dataMutation, loading, error }] = useMutation(EDITAR_PROYECTO_LIDER, {
     refetchQueries: [{ query: GET_PROYECTO }],
@@ -237,7 +238,7 @@ const Edit = ({nombre, presupuesto, _id, setShowEditDialog}) => {
             defaultValue={presupuesto}
             required={true} />
 <ButtonLoading
-            disabled={Object.keys(formData).length === 0}
+            disabled={estado=== 'INACTIVO'}
             loading={loading}
             text='Confirmar' />
 </form>
