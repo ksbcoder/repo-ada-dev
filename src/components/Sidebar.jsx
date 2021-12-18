@@ -42,9 +42,6 @@ const Dropdownuser = () => {
   };
   return (
     <>
-      <span className="text-center text-white font-semibold mb-3">
-        ¡Bienvenido! <br /> {userData.nombre + " " + userData.apellido}
-      </span>
       <div className="w-auto flex justify-center top-16">
         <Menu as="div" className="relative inline-block text-right">
           <div>
@@ -111,7 +108,7 @@ const Logo = () => {
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src={blanco_60} alt="Logo" className="h-16" />
       <span className="my-3 text-2xl text-white font-bold text-center">
-        AdaSoft Proyects
+        AdaSoft Projects
       </span>
     </div>
   );
