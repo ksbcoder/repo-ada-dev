@@ -72,6 +72,7 @@ const OBTENER_INSCRIPCIONES_ESTUDIANTE = gql`
     consultarInscripcionesPorEstudiante(estudianteId: $estudianteId) {
       _id
       estado
+      fechaInscripcion
       proyecto {
         _id
         nombre
