@@ -7,6 +7,7 @@ import { APROBAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 import { RECHAZAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 import { OBTENER_INSCRIPCIONES_LIDER } from "graphql/inscripciones/queries";
 import { OBTENER_INSCRIPCIONES } from "graphql/inscripciones/queries";
+import { OBTENER_INSCRIPCIONES_ESTUDIANTE } from "graphql/inscripciones/queries";
 
 const IndexInscripciones = () => {
   const { userData } = useUser();
@@ -24,6 +25,17 @@ const IndexInscripciones = () => {
     loading: loadingInscripciones,
     refetch: refetchInscripciones,
   } = useQuery(OBTENER_INSCRIPCIONES_LIDER);
+
+  const {
+    data: dataInscripcionesEstudiante,
+    error: errorInscripcionesEstudiante,
+    loading: loadingInscripcionesEstudiante,
+    refetch: refetchInscripcionesEstudiante,
+  } = useQuery(OBTENER_INSCRIPCIONES_ESTUDIANTE, {
+    variables: {
+      estudianteId: userData._id,
+    },
+  });
 
   const [
     AprobarInscripcion,
@@ -44,9 +56,10 @@ const IndexInscripciones = () => {
   ] = useMutation(RECHAZAR_INSCRIPCION);
 
   useEffect(() => {
-    refetchInscripciones();
     refetch();
-  }, [refetchInscripciones, refetch]);
+    refetchInscripciones();
+    refetchInscripcionesEstudiante();
+  }, [refetchInscripciones, refetch, refetchInscripcionesEstudiante]);
 
   useEffect(() => {
     if (dataAprobarInscripcion) {
@@ -61,18 +74,27 @@ const IndexInscripciones = () => {
     if (errorInscripciones) {
       toast.error("Error al consultar las inscripciones");
     }
+    if (errorInscripcionesEstudiante) {
+      toast.error("Error al consultar las inscripciones");
+    }
     if (errorAprobarInscripcion) {
       toast.error("Error al aprobar la inscripción");
     }
     if (errorRechazarInscripcion) {
       toast.error("Error al rechazar la inscripción");
     }
-  }, [errorInscripciones, errorAprobarInscripcion, errorRechazarInscripcion]);
+  }, [
+    errorInscripciones,
+    errorAprobarInscripcion,
+    errorRechazarInscripcion,
+    errorInscripcionesEstudiante,
+  ]);
 
   if (
     loadingInscripciones ||
     loadingAprobarInscripcion ||
-    loadingRechazarInscripcion
+    loadingRechazarInscripcion ||
+    loadingInscripcionesEstudiante
   ) {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
@@ -86,6 +108,46 @@ const IndexInscripciones = () => {
     );
   }
 
+  if (userData.rol === "ESTUDIANTE") {
+    return (
+      <>
+        <nav className="navbar">
+          <h1>Inscripciones</h1>
+        </nav>
+        <div className="flew flex-col w-full h-full items-center justify-center p-10">
+          <div className="table-container">
+            <table className="table-list">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Estado</th>
+                  <th>Fecha Inscripcion</th>
+                  <th>Proyecto</th>
+                  <th>Estudiante</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dataInscripcionesEstudiante &&
+                  dataInscripcionesEstudiante.consultarInscripcionesPorEstudiante.map(
+                    (u) => {
+                      return (
+                        <tr key={u._id}>
+                          <td>{u._id.slice(19)}</td>
+                          <td>{u.estado}</td>
+                          <td>{u.fechaInscripcion.slice(0, 10)}</td>
+                          <td>{u.proyecto.nombre}</td>
+                          <td>{userData.nombre + " " + userData.apellido}</td>
+                        </tr>
+                      );
+                    }
+                  )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </>
+    );
+  }
   if (userData.rol === "LIDER") {
     return (
       <>
@@ -131,7 +193,6 @@ const IndexInscripciones = () => {
                         </td>
                         {userData.rol === "LIDER" ? (
                           <td>
-                            {/* <Link className="btn-editar" to={`/inscripciones/ActualizarInscripcion/${u._id}`} ><i className="fas fa-edit"></i></Link>*/}
                             {u.estado === "PENDIENTE" ? (
                               <div className="flex justify-evenly gap-2">
                                 <button

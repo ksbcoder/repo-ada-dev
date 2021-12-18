@@ -91,7 +91,7 @@ const IndexProyectos = () => {
                     <tr key={u._id}>
                       <td>{u.nombre}</td>
                       <td>{u.presupuesto}</td>
-                      <td>{u.fechaInicio.slice(0, 10)}</td>
+                      <td>{u.fechaInicio}</td>
                       <td>{u.estado}</td>
                       <td>{u.fase}</td>
 
@@ -127,6 +127,7 @@ const IndexProyectos = () => {
                         </button>
                       </td>
                       <td>
+                      {u.estado === "ACTIVO" ? (
                         <button
                           type="button"
                           class="btn btn-primary"
@@ -142,6 +143,9 @@ const IndexProyectos = () => {
                           {" "}
                           Inscribirse{" "}
                         </button>
+                        ) : (
+                          <span/>
+                        )}
                       </td>
                     </tr>
                   );
@@ -207,28 +211,31 @@ const IndexProyectos = () => {
                           </td>
 
                           <td key={u._id}>
-                            <ModalObj
-                              id={`exampleModelObjetivos-${u._id}`}
-                              titulo="Objetivos"
-                              objetivos={u.objetivos}
-                            ></ModalObj>
+                            <ModalAvan
+                              id={`exampleModalAvances-${u._id}`}
+                              titulo="Avances"
+                              avances={u.avances}
+                            ></ModalAvan>
                             <button
                               type="button"
                               class="btn btn-primary"
                               data-toggle="modal"
-                              data-target={`#exampleModelObjetivos-${u._id}`}
+                              data-target={`#exampleModalAvances-${u._id}`}
                             >
                               ver
                             </button>
                           </td>
-
                           <td>
-                            <Link
-                              to={`ActualizarProyectos/${u._id}`}
-                              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            >
-                              Editar
-                            </Link>
+                            {u.estado === "ACTIVO" ? (
+                              <Link
+                                to={`ActualizarProyectos/${u._id}`}
+                                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                              >
+                                Editar
+                              </Link>
+                            ) : (
+                              <span/>
+                            )}
                           </td>
                           <td>
                             <Link

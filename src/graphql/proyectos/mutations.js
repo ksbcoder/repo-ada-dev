@@ -15,7 +15,6 @@ const CREAR_PROYECTO = gql`
       lider: $lider
       objetivos: $objetivos
     ) {
-      _id
       nombre
     }
   }

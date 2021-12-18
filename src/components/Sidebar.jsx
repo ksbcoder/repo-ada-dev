@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuth } from "context/authContext";
@@ -24,29 +24,23 @@ const SidebarLinks = () => {
         title="Proyectos"
         icon="fas fa-folder-open"
       />
-      <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
-        <SidebarRoute
-          to="/inscripciones"
-          title="Inscripciones"
-          icon="fas fa-user-plus"
-        />
-      </PrivateComponent>
+      <SidebarRoute
+        to="/inscripciones"
+        title="Inscripciones"
+        icon="fas fa-user-plus"
+      />
       <SidebarRoute to="/avances" title="Avances" icon="fas fa-tasks" />
     </ul>
   );
 };
 
 const Dropdownuser = () => {
-  const { userData } = useUser();
   const { setToken } = useAuth();
   const deleteToken = () => {
     setToken(null);
   };
   return (
     <>
-      <span className="text-center text-white font-semibold mb-3">
-        ¡Bienvenido! <br /> {userData.nombre + " " + userData.apellido}
-      </span>
       <div className="w-auto flex justify-center top-16">
         <Menu as="div" className="relative inline-block text-right">
           <div>
@@ -113,13 +107,14 @@ const Logo = () => {
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src={blanco_60} alt="Logo" className="h-16" />
       <span className="my-3 text-2xl text-white font-bold text-center">
-        AdaSoft Proyects
+        AdaSoft Projects
       </span>
     </div>
   );
 };
 
 const Sidebar = () => {
+  const { userData } = useUser();
   const [open, setOpen] = useState(true);
   return (
     <div className="flex flex-col md:flex-row flex-no-wrap md:h-full">
@@ -127,6 +122,9 @@ const Sidebar = () => {
 
       <div className="sidebar hidden md:flex py-8">
         <Logo />
+        <span className="flex justify-center text-gray-50 text-lg font-semibold mb-2">
+          {userData.nombre + " " + userData.apellido}
+        </span>
         <Dropdownuser />
         <div className="px-2 pr-8">
           <SidebarLinks />
