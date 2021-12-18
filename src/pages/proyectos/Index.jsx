@@ -223,12 +223,15 @@ const IndexProyectos = () => {
                           </td>
 
                           <td>
+                            {
+                              u.estado =='INACTIVO'?
                             <Link
                               to={`ActualizarProyectos/${u._id}`}
                               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
                               Editar
-                            </Link>
+                            </Link>:<span/>
+                            }
                           </td>
                           <td>
                             <Link
