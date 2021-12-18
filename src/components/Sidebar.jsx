@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuth } from "context/authContext";
@@ -35,7 +35,6 @@ const SidebarLinks = () => {
 };
 
 const Dropdownuser = () => {
-  const { userData } = useUser();
   const { setToken } = useAuth();
   const deleteToken = () => {
     setToken(null);
@@ -115,6 +114,7 @@ const Logo = () => {
 };
 
 const Sidebar = () => {
+  const { userData } = useUser();
   const [open, setOpen] = useState(true);
   return (
     <div className="flex flex-col md:flex-row flex-no-wrap md:h-full">
@@ -122,6 +122,9 @@ const Sidebar = () => {
 
       <div className="sidebar hidden md:flex py-8">
         <Logo />
+        <span className="flex justify-center text-gray-50 text-lg font-semibold mb-2">
+          {userData.nombre + " " + userData.apellido}
+        </span>
         <Dropdownuser />
         <div className="px-2 pr-8">
           <SidebarLinks />
