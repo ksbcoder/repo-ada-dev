@@ -24,13 +24,11 @@ const SidebarLinks = () => {
         title="Proyectos"
         icon="fas fa-folder-open"
       />
-      <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
-        <SidebarRoute
-          to="/inscripciones"
-          title="Inscripciones"
-          icon="fas fa-user-plus"
-        />
-      </PrivateComponent>
+      <SidebarRoute
+        to="/inscripciones"
+        title="Inscripciones"
+        icon="fas fa-user-plus"
+      />
       <SidebarRoute to="/avances" title="Avances" icon="fas fa-tasks" />
     </ul>
   );
