@@ -127,6 +127,7 @@ const IndexProyectos = () => {
                         </button>
                       </td>
                       <td>
+                      {u.estado === "ACTIVO" ? (
                         <button
                           type="button"
                           class="btn btn-primary"
@@ -142,6 +143,9 @@ const IndexProyectos = () => {
                           {" "}
                           Inscribirse{" "}
                         </button>
+                        ) : (
+                          <span/>
+                        )}
                       </td>
                     </tr>
                   );
@@ -230,7 +234,7 @@ const IndexProyectos = () => {
                                 Editar
                               </Link>
                             ) : (
-                              <span className="flex justify-center">--</span>
+                              <span/>
                             )}
                           </td>
                           <td>
