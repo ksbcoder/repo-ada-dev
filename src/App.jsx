@@ -29,8 +29,8 @@ import { AuthContext } from "context/authContext";
 import jwt_decode from "jwt-decode";
 
 const httpLink = createHttpLink({
-  //uri: "https://adasoft-server.herokuapp.com/graphql",
-  uri: "http://localhost:4000/graphql",
+  // uri: "http://localhost:4000/graphql",
+  uri: "https://server-ada-project-manager.herokuapp.com/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -115,7 +115,8 @@ function App() {
                 />
                 <Route path="inscripciones" element={<IndexInscripciones />} />
                 <Route
-                  path="inscripciones/ActualizarInscripcion/:_id" element={<ActualizarInscripcion/>}
+                  path="inscripciones/ActualizarInscripcion/:_id"
+                  element={<ActualizarInscripcion />}
                 />
                 <Route path="avances" element={<IndexAvances />} />
                 <Route path="avances/registrar" element={<RegistrarAvance />} />
