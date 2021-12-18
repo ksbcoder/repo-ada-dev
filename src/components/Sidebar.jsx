@@ -113,7 +113,7 @@ const Logo = () => {
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src={blanco_60} alt="Logo" className="h-16" />
       <span className="my-3 text-2xl text-white font-bold text-center">
-        AdaSoft Proyects
+        AdaSoft Projects
       </span>
     </div>
   );
