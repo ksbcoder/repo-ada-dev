@@ -74,7 +74,6 @@ const IndexProyectos = () => {
         <table className='tabla' >
           <thead>
             <tr>
-          
               <th>Nombre</th>
               <th>Presupuesto</th>
               <th>FechaInicio</th>
@@ -88,9 +87,7 @@ const IndexProyectos = () => {
         <tbody>
           {data &&
             data.Proyectos.map((u) => {
-              
               return (
-                
                 <tr key={u._id}>
                   <td>{u.nombre}</td>
                   <td>{u.presupuesto}</td>
@@ -193,12 +190,14 @@ const IndexProyectos = () => {
                             </button>
                           </td>
                           <td>
+                          {u.estado ==='ACTIVO'?
                             <Link
                               to={`ActualizarProyectos/${u._id}`}
                               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
                               Editar
                             </Link>
+                            :<span>--</span> } 
                           </td>
                           <td>
                             <Link
