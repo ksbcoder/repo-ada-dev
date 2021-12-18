@@ -30,8 +30,8 @@ import { AuthContext } from "context/authContext";
 import jwt_decode from "jwt-decode";
 
 const httpLink = createHttpLink({
-  // uri: "http://localhost:4000/graphql",
-  uri: "https://adasoft-server-backend.herokuapp.com/graphql",
+   uri: "http://localhost:4000/graphql",
+  //uri: "https://adasoft-server-backend.herokuapp.com/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {

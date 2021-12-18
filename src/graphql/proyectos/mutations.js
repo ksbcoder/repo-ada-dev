@@ -8,7 +8,6 @@ const CREAR_PROYECTO=gql`
         $lider: String!
         $objetivos:[crearObjetivo]!
     ) {
-      _id
       nombre
     }
 `;
