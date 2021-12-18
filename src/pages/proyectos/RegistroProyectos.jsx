@@ -22,9 +22,13 @@ const RegistroProyectos = () => {
     e.preventDefault();
     formData.presupuesto = parseFloat(formData.presupuesto);
     formData.objetivos = Object.values(formData.objetivos);
+    console.log('fd',formData)
+    console.log('id lider', userData._id)
+    console.log('rol usuario', userData.rol)
     crearProyecto({
       variables: { ...formData, lider: userData._id },
     });
+    console.log(`formData`, formData);
   };
 
   useEffect(() => {
