@@ -3,7 +3,6 @@ import { CREAR_PROYECTO } from "graphql/proyectos/mutations";
 import useFormData from "hooks/useFormData";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { InfoProyectos } from "./RegistroProyectos";
 import { useUser } from "context/userContext";
 import DropDown from "components/Dropdown";
 import { Enum_TipoObjetivo } from "utils/enums";
@@ -29,11 +28,11 @@ const RegistroProyectos = () => {
   };
 
   useEffect(() => {
-    if(data){
-      toast.success('Proyecto creado con éxito')
+    if (data) {
+      toast.success("Proyecto creado con éxito");
     }
-    if(error){
-      toast.error('Error creando el proyecto')
+    if (error) {
+      toast.error("Error creando el proyecto");
     }
   }, [data, error]);
 
@@ -53,7 +52,7 @@ const RegistroProyectos = () => {
         ref={form}
         className="flex flex-col items-center justify-center w-full"
       >
-        {userData.rol == "LIDER" ? (
+        {userData.rol === "LIDER" ? (
           <div class="w-3/5">
             <div class="text-gray-700">
               <label class="block mb-1" for="forms-labelOverInputCode">
@@ -97,7 +96,7 @@ const RegistroProyectos = () => {
         ) : (
           ""
         )}
-        {userData.rol == "ADMINISTRADOR" || userData.rol == "ESTUDIANTE" ? (
+        {userData.rol === "ADMINISTRADOR" || userData.rol === "ESTUDIANTE" ? (
           <div>SOLO LOS LIDERES PUEDEN REGISTRAR PROYECTOS</div>
         ) : (
           ""

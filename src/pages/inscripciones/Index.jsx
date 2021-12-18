@@ -6,9 +6,17 @@ import ReactLoading from "react-loading";
 import { APROBAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 import { RECHAZAR_INSCRIPCION } from "graphql/inscripciones/mutations";
 import { OBTENER_INSCRIPCIONES_LIDER } from "graphql/inscripciones/queries";
+import { OBTENER_INSCRIPCIONES } from "graphql/inscripciones/queries";
 
 const IndexInscripciones = () => {
   const { userData } = useUser();
+
+  const {
+    data: data,
+    error: error,
+    loading: loading,
+    refetch: refetch,
+  } = useQuery(OBTENER_INSCRIPCIONES);
 
   const {
     data: dataInscripciones,
@@ -36,14 +44,9 @@ const IndexInscripciones = () => {
   ] = useMutation(RECHAZAR_INSCRIPCION);
 
   useEffect(() => {
-    if (dataInscripciones) {
-      console.log(`dataInscripciones`, dataInscripciones);
-    }
-  }, [dataInscripciones]);
-
-  useEffect(() => {
     refetchInscripciones();
-  }, [refetchInscripciones]);
+    refetch();
+  }, [refetchInscripciones, refetch]);
 
   useEffect(() => {
     if (dataAprobarInscripcion) {
@@ -64,7 +67,7 @@ const IndexInscripciones = () => {
     if (errorRechazarInscripcion) {
       toast.error("Error al rechazar la inscripción");
     }
-  }, [errorInscripciones, errorAprobarInscripcion]);
+  }, [errorInscripciones, errorAprobarInscripcion, errorRechazarInscripcion]);
 
   if (
     loadingInscripciones ||
@@ -83,7 +86,7 @@ const IndexInscripciones = () => {
     );
   }
 
-  if (userData.rol === "LIDER" || userData.rol === "ADMINISTRADOR") {
+  if (userData.rol === "LIDER") {
     return (
       <>
         <nav className="navbar">
@@ -129,6 +132,95 @@ const IndexInscripciones = () => {
                         {userData.rol === "LIDER" ? (
                           <td>
                             {/* <Link className="btn-editar" to={`/inscripciones/ActualizarInscripcion/${u._id}`} ><i className="fas fa-edit"></i></Link>*/}
+                            {u.estado === "PENDIENTE" ? (
+                              <div className="flex justify-evenly gap-2">
+                                <button
+                                  className="btn-general-aprobar"
+                                  onClick={() =>
+                                    AprobarInscripcion({
+                                      variables: {
+                                        aprobarInscripcionId: u._id,
+                                      },
+                                    })
+                                  }
+                                >
+                                  <i className="fas fa-check"></i>
+                                </button>
+                                <button
+                                  className="btn-general-rechazar"
+                                  onClick={() =>
+                                    RechazarInscripcion({
+                                      variables: {
+                                        rechazarInscripcionId: u._id,
+                                      },
+                                    })
+                                  }
+                                >
+                                  <i className="fas fa-times"></i>
+                                </button>
+                              </div>
+                            ) : (
+                              "--"
+                            )}
+                          </td>
+                        ) : (
+                          ""
+                        )}
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </>
+    );
+  }
+  if (userData.rol === "ADMINISTRADOR") {
+    return (
+      <>
+        <nav className="navbar">
+          <h1>Inscripciones</h1>
+        </nav>
+        <div className="flew flex-col w-full h-full items-center justify-center p-10">
+          <div className="table-container">
+            <table className="table-list">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Estado</th>
+                  <th>Fecha Inscripcion</th>
+                  <th>Fecha Ingreso</th>
+                  <th>Fecha Egreso</th>
+                  <th>Proyecto</th>
+                  <th>Estudiante</th>
+                  {userData.rol === "LIDER" ? <th>Acciones</th> : ""}
+                </tr>
+              </thead>
+              <tbody>
+                {data &&
+                  data.consultarInscripciones.map((u) => {
+                    return (
+                      <tr key={u._id}>
+                        <td>{u._id.slice(19)}</td>
+                        <td>{u.estado}</td>
+                        <td>{u.fechaInscripcion.slice(0, 10)}</td>
+                        <td>
+                          {u.fechaIngreso
+                            ? u.fechaIngreso.slice(0, 10)
+                            : "Sin fecha de ingreso registrada"}
+                        </td>
+                        <td>
+                          {u.fechaEgreso
+                            ? u.fechaEgreso.slice(0, 10)
+                            : "Sin fecha de egreso establecida"}
+                        </td>
+                        <td>{u.proyecto.nombre}</td>
+                        <td>
+                          {u.estudiante.nombre + " " + u.estudiante.apellido}
+                        </td>
+                        {userData.rol === "LIDER" ? (
+                          <td>
                             {u.estado === "PENDIENTE" ? (
                               <div className="flex justify-evenly gap-2">
                                 <button

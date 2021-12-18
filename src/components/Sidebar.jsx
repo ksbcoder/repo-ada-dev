@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuth } from "context/authContext";
@@ -11,16 +11,14 @@ import PrivateComponent from "components/PrivateComponent";
 const SidebarLinks = () => {
   return (
     <ul className="mt-12">
-      <SidebarRoute 
-        to="" 
-        title="Inicio" 
-        icon="fas fa-home" />
+      <SidebarRoute to="" title="Inicio" icon="fas fa-home" />
       <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
-        <SidebarRoute 
-          to="/usuarios/GestionUsuarios" 
-          title="Usuarios" 
-          icon="fas fa-user" />
-      </PrivateComponent>  
+        <SidebarRoute
+          to="/usuarios/GestionUsuarios"
+          title="Usuarios"
+          icon="fas fa-user"
+        />
+      </PrivateComponent>
       <SidebarRoute
         to="/proyectos"
         title="Proyectos"
