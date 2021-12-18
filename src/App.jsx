@@ -25,6 +25,7 @@ import EditarUsuario from "pages/usuarios/Editar";
 import Login from "pages/login/Login";
 import Registro from "pages/login/Registro";
 import RegistroProyectos from "pages/proyectos/RegistroProyectos";
+import ProyectoInscripciones from "pages/proyectos/ProyectoInscripciones";
 import { AuthContext } from "context/authContext";
 import jwt_decode from "jwt-decode";
 
@@ -112,6 +113,9 @@ function App() {
                 <Route
                   path="proyectos/ActualizarProyectos/:_id"
                   element={<ActualizarProyectos />}
+                />
+                <Route
+                  path="proyectos/ProyectoInscripciones/:_id" element={<ProyectoInscripciones/>}
                 />
                 <Route path="inscripciones" element={<IndexInscripciones />} />
                 <Route
