@@ -46,9 +46,6 @@ const Dropdownuser = () => {
   };
   return (
     <>
-      <span className="text-center text-white font-semibold mb-3">
-        ¡Bienvenido! <br /> {userData.nombre + " " + userData.apellido}
-      </span>
       <div className="w-auto flex justify-center top-16">
         <Menu as="div" className="relative inline-block text-right">
           <div>
