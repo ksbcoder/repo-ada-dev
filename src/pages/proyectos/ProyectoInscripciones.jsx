@@ -120,9 +120,13 @@ const ProyectoInscripciones = () => {
                             <tr key={u._id}>
                               <td>{u._id.slice(19)}</td>
                               <td>{u.estado}</td>
-                              <td>{u.fechaInscripcion}</td>
-                              <td>{u.fechaIngreso}</td>
-                              <td>{u.fechaEgreso}</td>
+                              <td>{u.fechaInscripcion.slice(0, 10)}</td>
+                              <td>
+                                {u.fechaIngreso && u.fechaIngreso.slice(0, 10)}
+                              </td>
+                              <td>
+                                {u.fechaEgreso && u.fechaEgreso.slice(0, 10)}
+                              </td>
                               <td>{u.proyecto.nombre}</td>
                               <td>{u.estudiante.nombre}</td>
                               <td>
