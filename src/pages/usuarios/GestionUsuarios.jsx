@@ -35,8 +35,10 @@ const GestionUsuarios = () => {
 
     if(loading){ 
         return (
-            <div className="w-full h-full flex flex-col justify-center items-center">
+            <div className="w-full h-full flex flex-col justify-center items-center" data-testid="loading">
+                Loading...
                 <ReactLoading
+                    data-testid="reactLoading"
                     type="spinningBubbles"
                     color="#7fffd4"
                     height={150}
@@ -52,11 +54,11 @@ const GestionUsuarios = () => {
 
     return (
         <><nav className="navbar">
-            <h1>Gestión de Usuarios</h1>
+            <h1 data-testid="gestionUsuarios">Gestión de Usuarios</h1>
         </nav>
             <div className='flew flex-col w-full h-full items-center justify-center p-10'>            
             <div className="table-container">
-                <table className="table-list">
+                <table className="table-list" data-testid='tabla'>
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -80,7 +82,7 @@ const GestionUsuarios = () => {
                                     <td>{u.correo}</td>                                  
                                     <td>{u.estado}</td>
                                     <td className="flex">
-                                        <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-user-edit"></i></Link>
+                                        <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} data-testid="link" ><i className="fas fa-user-edit"></i></Link>
                                         {u.rol =='ESTUDIANTE'? <Link className="btn-project" to={`/usuarios/infoInscripcionUsuario/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>:<span/> }                                            
                                     </td>
                                 </tr>
@@ -97,7 +99,7 @@ const GestionUsuarios = () => {
                                     <td>{u.correo}</td>                                  
                                     <td>{u.estado}</td>
                                     <td className="flex">
-                                        <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} ><i className="fas fa-user-edit"></i></Link>
+                                        <Link className="btn-editar" to={`/usuarios/editar/${u._id}`} data-testid="link"><i className="fas fa-user-edit"></i></Link>
                                         <Link className="btn-project" to={`/usuarios/infoInscripcionUsuario/${u._id}`} ><i className="fas fa-project-diagram"></i></Link>                                  
                                         
                                     </td>
